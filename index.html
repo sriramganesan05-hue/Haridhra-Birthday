@@ -6,6 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+/* --- BODY & ZOOM --- */
 body {
   margin:0;
   padding:0;
@@ -14,8 +15,15 @@ body {
   overflow: hidden;
   text-align: center;
   color: #f5e6c8;
+
+  /* Zoom out 50% */
+  transform: scale(0.5);
+  transform-origin: top left;
+  width: 200%;
+  height: 200%;
 }
 
+/* --- HEADINGS --- */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 60px;
@@ -29,6 +37,7 @@ h2 {
   color: #ffe9b0;
 }
 
+/* --- COUNTDOWN --- */
 #countdown {
   font-size: 26px;
   margin: 10px 0 20px;
@@ -36,6 +45,7 @@ h2 {
   text-shadow: 0 0 10px rgba(255,215,140,0.6);
 }
 
+/* --- CARD --- */
 .card {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,215,140,0.3);
@@ -50,52 +60,45 @@ h2 {
   z-index: 1;
 }
 
-/* IMAGE EFFECTS */
 .card img {
   width: 320px;
   height: 320px;
   border-radius: 50%;
   object-fit: cover;
-
   opacity: 0;
   animation:
     fadeIn 1.8s ease forwards,
     glow 3s ease-in-out infinite alternate,
     float 4s ease-in-out infinite,
     rotate 12s linear infinite;
-
   border: 4px solid rgba(255, 215, 140, 0.85);
   box-shadow: 0 0 25px rgba(255,215,140,0.5);
   position: relative;
   z-index: 2;
 }
 
-/* Fade-in */
+/* IMAGE ANIMATIONS */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.85); }
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* Golden glow */
 @keyframes glow {
   from { box-shadow: 0 0 15px rgba(255,215,140,0.3); }
   to   { box-shadow: 0 0 35px rgba(255,215,140,0.9); }
 }
 
-/* Gentle floating motion */
 @keyframes float {
   0%   { transform: translateY(0px); }
   50%  { transform: translateY(-12px); }
   100% { transform: translateY(0px); }
 }
 
-/* Slow rotation */
 @keyframes rotate {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
-/* Sparkle halo */
 .card img::after {
   content: "";
   position: absolute;
@@ -151,6 +154,7 @@ canvas {
   z-index: 0;
 }
 
+/* RESPONSIVE */
 @media (max-width:600px){
   h1{font-size:40px;}
   .card p{font-size:16px;}
@@ -171,10 +175,8 @@ canvas {
 <div id="countdown"></div>
 
 <div class="card">
-
   <img src="https://raw.githubusercontent.com/sriramganesan05-hue/Haridhra-Birthday/main/Haridhra.jpg"
        alt="Haridhra and Sriram">
-
   <p id="message"></p>
   <p class="signature">— With all my love, Your Big Brother, Sriram</p>
   <button onclick="startShow(); this.disabled=true;">Celebrate 🎉</button>
@@ -183,7 +185,7 @@ canvas {
 <audio id="voice" src="https://www.soundjay.com/human/sounds/happy-birthday-01.mp3"></audio>
 
 <script>
-/* COUNTDOWN */
+/* --- COUNTDOWN --- */
 const countdown = document.getElementById("countdown");
 let birthday = new Date(new Date().getFullYear(), 5, 21);
 
@@ -202,14 +204,13 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000);
 
-/* MESSAGE */
+/* --- TYPEWRITER MESSAGE --- */
 const text = `I’m really grateful to have you in my life.
 
 Hope today brings you lots of smiles and happiness.
 
 Wishing you a wonderful year ahead.`;
 
-/* TYPEWRITER */
 let i = 0;
 const speed = 25;
 
@@ -222,7 +223,7 @@ function typeWriter() {
   }
 }
 
-/* FIREWORKS */
+/* --- FIREWORKS --- */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -233,7 +234,7 @@ function createFirework(){
   const x = Math.random()*canvas.width;
   const y = Math.random()*canvas.height/2;
   const colors = ["#f7d98c","#ffe9b0","#ffffff","#ffcc66"];
-  for(let i=0;i<40;i++){
+  for(let j=0;j<40;j++){
     fireworks.push({
       x, y,
       radius:2,
@@ -248,7 +249,8 @@ function createFirework(){
 function animateFireworks(){
   ctx.fillStyle = "rgba(0,0,0,0.15)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-  fireworks.forEach((f,index)=>{
+  for(let i=fireworks.length-1;i>=0;i--){
+    const f = fireworks[i];
     f.x += Math.cos(f.angle)*f.speed;
     f.y += Math.sin(f.angle)*f.speed;
     f.life--;
@@ -256,8 +258,8 @@ function animateFireworks(){
     ctx.arc(f.x,f.y,f.radius,0,Math.PI*2);
     ctx.fillStyle=f.color;
     ctx.fill();
-    if(f.life<=0) fireworks.splice(index,1);
-  });
+    if(f.life<=0) fireworks.splice(i,1);
+  }
   requestAnimationFrame(animateFireworks);
 }
 
@@ -267,6 +269,12 @@ function startShow(){
   animateFireworks();
   setInterval(createFirework,800);
 }
+
+/* --- RESIZE CANVAS --- */
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 </script>
 
 </body>
