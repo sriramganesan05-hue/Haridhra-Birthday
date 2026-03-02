@@ -46,12 +46,15 @@ h2 {
   margin: auto;
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 1;
 }
 
 .card p {
   font-size: 18px;
   line-height: 1.8;
   min-height: 220px;
+  white-space: pre-wrap;
 }
 
 .signature {
@@ -107,7 +110,7 @@ canvas {
 <script>
 /* COUNTDOWN */
 const countdown = document.getElementById("countdown");
-const birthday = new Date(new Date().getFullYear(), 5, 21);
+let birthday = new Date(new Date().getFullYear(), 5, 21);
 
 function updateCountdown(){
   const now = new Date();
@@ -207,14 +210,17 @@ not because you try,
 but because you simply are.
 
 Happy Birthday, Haridhra.
+`;
 
-let i=0;
-const speed=30;
-function typeWriter(){
-  if(i<text.length){
-    document.getElementById("message").innerHTML += text.charAt(i).replace("\n","<br>");
+let i = 0;
+const speed = 25;
+
+function typeWriter() {
+  if(i < text.length){
+    const char = text.charAt(i);
+    document.getElementById("message").innerHTML += char === "\n" ? "<br>" : char;
     i++;
-    setTimeout(typeWriter,speed);
+    setTimeout(typeWriter, speed);
   }
 }
 
@@ -224,7 +230,7 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let fireworks=[];
+let fireworks = [];
 
 function createFirework(){
   const x = Math.random()*canvas.width;
@@ -232,7 +238,7 @@ function createFirework(){
   const colors = ["#f7d98c","#ffe9b0","#ffffff","#ffcc66"];
   for(let i=0;i<40;i++){
     fireworks.push({
-      x,y,
+      x, y,
       radius:2,
       angle:Math.random()*2*Math.PI,
       speed:Math.random()*3+1,
@@ -243,7 +249,8 @@ function createFirework(){
 }
 
 function animateFireworks(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = "rgba(0,0,0,0.15)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
   fireworks.forEach((f,index)=>{
     f.x += Math.cos(f.angle)*f.speed;
     f.y += Math.sin(f.angle)*f.speed;
@@ -267,4 +274,3 @@ function startShow(){
 
 </body>
 </html>
-
