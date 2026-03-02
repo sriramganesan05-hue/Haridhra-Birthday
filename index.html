@@ -42,7 +42,7 @@ h2 {
   border-radius: 25px;
   padding: 30px;
   width: 85%;
-  max-width: 900px;
+  max-width: 800px;
   margin: auto;
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
@@ -127,87 +127,33 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000);
 
-/* TYPING MESSAGE */
-const text = `My dearest little sister Haridhra,
+/* SHORTENED MESSAGE */
+const text = `My dearest Haridhra,
 
 You didn’t come into my life through blood,
 yet my heart claimed you as its own.
 There was no grand entrance, no dramatic moment —
 just a quiet magic that made my world brighter, warmer, alive.
 
-There’s something enchanted about you,
-not the kind that sparkles or shouts,
-but the kind that turns ordinary moments
-into something sacred.
-Your voice is a gentle song,
-your kindness the language you were born speaking.
+Your beauty is in every little thing:
+the sparkle in your eyes, the curve of your smile,
+the warmth in your hands, the honesty in your voice,
+the way your laughter lifts hearts and your face glows when you care.
+A sweetness that makes me want to protect you,
+even when you insist you’re strong.
 
-Your beauty is quiet, in every little thing:
-the way your eyes light up, the way they sparkle like stars,
-the soft curve of your smile, the soft curve of your lips before it blooms,
-the gentle warmth in your hands, the gentle warmth in the way you move,
-the honesty in your voice, the honesty that fills the air,
-the way your laughter fills the room, the way your laughter lifts hearts,
-the way your face glows when you care, the way your face shines when you love—
-all of it makes you radiant, all of it makes you irresistibly sweet,
-a sweetness that makes me want to protect you,
-a sweetness that makes me hold you close,
-even when you insist you’re strong, even when you insist you’re unshakable.
-
-And you are strong —
-but in the softest, most human way.
-You love without hesitation,
-you give without expectation,
-you carry a warmth that lifts even the heaviest days,
-a warmth that lingers, a warmth that stays,
-a warmth that makes the world feel safe.
-
-You may not share my blood,
-yet you are the sister my soul recognized —
-the one whose laughter fills my lungs,
-whose quiet pains echo in my chest,
-the one I would guard fiercely,
-the one I would hold fiercely,
-the one I would stand beside,
+You are the sister my soul recognized —
+the one I would guard, hold, and stand beside
 without a second thought.
-
-Haridhra, whenever the world feels heavy,
-you can call me, and I’ll be there — no matter the hour.
-You can scold me, tease me, or laugh at me until your cheeks hurt,
-you can cry, rant, or let out all your frustrations on me.
-You can sit in silence, or tell me every secret
-that you’ve never shared with anyone else.
-You can be angry, tender, messy, unstoppable —
-I’ll hold space for all of it,
-I’ll listen, I’ll protect, I’ll be your safe place,
-without question, without hesitation,
-because you are never alone while I am here.
-
-If ever your light should dim,
-a part of my world would fall silent.
-You are woven into my days,
-my memories,
-my hopes,
-my very sense of home.
-I don’t just care about you —
-I need you,
-I need you because you’ve become part of the way I breathe,
-I need you because you are my heart.
+And always remember, Haridhra,
+you can call me anytime, scold me, laugh with me, cry with me —
+I’ll be there, no questions, no hesitation.
 
 Today is your day, Haridhra,
-a day to celebrate the wonder that you are,
-a day to honor your laughter, your love, your light.
-May this year bring you joy as radiant
-as the joy you bring into everyone’s life,
-and may your heart feel as cherished
-as you make everyone around you feel.
-
-You are magical.
-You are loving.
-You are fearless.
-You are everything to me —
-not because you try,
-but because you simply are.
+a day to celebrate your laughter, your love, your light.
+You are magical, loving, fearless,
+and everything to me —
+simply because you *are*.
 
 Happy Birthday, Haridhra.
 `;
@@ -229,7 +175,6 @@ const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
 let fireworks = [];
 
 function createFirework(){
