@@ -6,39 +6,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* BODY & BACKGROUND */
 body {
-  margin: 0;
-  padding: 0;
+  margin:0;
+  padding:0;
   font-family: 'Poppins', sans-serif;
   background: radial-gradient(circle at top, #1a1f3b, #0d1024, #00010f);
-  overflow-x: hidden;
-  color: #f5e6c8;
+  overflow: hidden;
   text-align: center;
+  color: #f5e6c8;
 }
 
-/* FIREWORKS CANVAS */
-canvas#fireworks {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1; /* behind all content */
-}
-
-/* CONTENT WRAPPER */
-.content-wrapper {
-  position: relative;
-  z-index: 1; /* above canvas */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-}
-
-/* HEADINGS */
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 60px;
@@ -50,52 +27,80 @@ h1 {
 h2 {
   font-size: 22px;
   color: #ffe9b0;
-  margin-bottom: 10px;
 }
 
 #countdown {
   font-size: 26px;
-  margin-bottom: 20px;
+  margin: 10px 0 20px;
   color: #f7d98c;
   text-shadow: 0 0 10px rgba(255,215,140,0.6);
 }
 
-/* CARD */
 .card {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,215,140,0.3);
   border-radius: 25px;
   padding: 30px;
-  width: 90%;
-  max-width: 700px;
+  width: 85%;
+  max-width: 800px;
+  margin: auto;
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* IMAGE */
+/* IMAGE EFFECTS */
 .card img {
-  width: 240px;
-  height: 240px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid rgba(255,215,140,0.85);
-  box-shadow: 0 0 25px rgba(255,215,140,0.5);
+
   opacity: 0;
   animation:
     fadeIn 1.8s ease forwards,
     glow 3s ease-in-out infinite alternate,
     float 4s ease-in-out infinite,
     rotate 12s linear infinite;
+
+  border: 4px solid rgba(255, 215, 140, 0.85);
+  box-shadow: 0 0 25px rgba(255,215,140,0.5);
   position: relative;
+  z-index: 2;
 }
 
-/* IMAGE HALO */
+/* Fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Golden glow */
+@keyframes glow {
+  from { box-shadow: 0 0 15px rgba(255,215,140,0.3); }
+  to   { box-shadow: 0 0 35px rgba(255,215,140,0.9); }
+}
+
+/* Gentle floating motion */
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Slow rotation */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Sparkle halo */
 .card img::after {
   content: "";
   position: absolute;
-  width: 280px;
-  height: 280px;
+  width: 360px;
+  height: 360px;
   border-radius: 50%;
   top: 50%;
   left: 50%;
@@ -106,12 +111,17 @@ h2 {
   z-index: 1;
 }
 
-/* TEXT & BUTTON */
+@keyframes sparkle {
+  0%   { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+  50%  { opacity: 0.6; transform: translate(-50%, -50%) scale(1.15); }
+  100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+}
+
 .card p {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.8;
+  min-height: 220px;
   white-space: pre-wrap;
-  min-height: 200px;
 }
 
 .signature {
@@ -122,8 +132,8 @@ h2 {
 }
 
 button {
-  padding: 12px 30px;
-  font-size: 18px;
+  padding: 14px 40px;
+  font-size: 20px;
   margin-top: 15px;
   border: none;
   border-radius: 40px;
@@ -133,21 +143,21 @@ button {
   box-shadow: 0 5px 20px rgba(255,215,140,0.4);
 }
 
-/* ANIMATIONS */
-@keyframes fadeIn { from {opacity:0; transform:scale(0.85);} to {opacity:1; transform:scale(1);} }
-@keyframes glow { from {box-shadow:0 0 15px rgba(255,215,140,0.3);} to {box-shadow:0 0 35px rgba(255,215,140,0.9);} }
-@keyframes float { 0% {transform:translateY(0px);} 50% {transform:translateY(-12px);} 100% {transform:translateY(0px);} }
-@keyframes rotate { from {transform:rotate(0deg);} to {transform:rotate(360deg);} }
-@keyframes sparkle { 0% {opacity:0.2; transform:translate(-50%,-50%) scale(1);} 50% {opacity:0.6; transform:translate(-50%,-50%) scale(1.1);} 100% {opacity:0.2; transform:translate(-50%,-50%) scale(1);} }
+canvas {
+  position: fixed;
+  top:0;
+  left:0;
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* RESPONSIVE */
 @media (max-width:600px){
-  h1{font-size:36px;}
-  h2{font-size:18px;}
-  #countdown{font-size:20px;}
-  .card img{width:180px; height:180px;}
-  .card p{font-size:14px;}
-  button{font-size:16px; padding:10px 25px;}
+  h1{font-size:40px;}
+  .card p{font-size:16px;}
+  .card img{
+    width: 220px;
+    height: 220px;
+  }
 }
 </style>
 </head>
@@ -156,17 +166,18 @@ button {
 
 <canvas id="fireworks"></canvas>
 
-<div class="content-wrapper">
-  <h1>✨ Happy Birthday Haridhra ✨</h1>
-  <h2>21st June — A Magical Day</h2>
-  <div id="countdown"></div>
+<h1>✨ Happy Birthday Haridhra ✨</h1>
+<h2>21st June — A Magical Day</h2>
+<div id="countdown"></div>
 
-  <div class="card">
-    <img src="https://raw.githubusercontent.com/sriramganesan05-hue/Haridhra-Birthday/main/Haridhra.jpg" alt="Haridhra and Sriram">
-    <p id="message"></p>
-    <p class="signature">— With all my love, Your Big Brother, Sriram</p>
-    <button onclick="startShow(); this.disabled=true;">Celebrate 🎉</button>
-  </div>
+<div class="card">
+
+  <img src="https://raw.githubusercontent.com/sriramganesan05-hue/Haridhra-Birthday/main/Haridhra.jpg"
+       alt="Haridhra and Sriram">
+
+  <p id="message"></p>
+  <p class="signature">— With all my love, Your Big Brother, Sriram</p>
+  <button onclick="startShow(); this.disabled=true;">Celebrate 🎉</button>
 </div>
 
 <audio id="voice" src="https://www.soundjay.com/human/sounds/happy-birthday-01.mp3"></audio>
@@ -179,7 +190,10 @@ let birthday = new Date(new Date().getFullYear(), 5, 21);
 function updateCountdown(){
   const now = new Date();
   let diff = birthday - now;
-  if(diff < 0){ birthday.setFullYear(birthday.getFullYear()+1); diff = birthday - now; }
+  if(diff < 0){
+    birthday.setFullYear(birthday.getFullYear()+1);
+    diff = birthday - now;
+  }
   const days = Math.floor(diff/(1000*60*60*24));
   const hours = Math.floor((diff/(1000*60*60))%24);
   const mins = Math.floor((diff/(1000*60))%60);
@@ -188,15 +202,25 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000);
 
-/* TYPEWRITER */
+/* MESSAGE */
 const text = `I’m really grateful to have you in my life.
 
 Hope today brings you lots of smiles and happiness.
 
 Wishing you a wonderful year ahead.`;
-let i=0;
-const speed=25;
-function typeWriter(){ if(i<text.length){ const char=text.charAt(i); document.getElementById("message").innerHTML += char === "\n" ? "<br>":char; i++; setTimeout(typeWriter,speed); } }
+
+/* TYPEWRITER */
+let i = 0;
+const speed = 25;
+
+function typeWriter() {
+  if(i < text.length){
+    const char = text.charAt(i);
+    document.getElementById("message").innerHTML += char === "\n" ? "<br>" : char;
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
 
 /* FIREWORKS */
 const canvas = document.getElementById("fireworks");
@@ -206,28 +230,34 @@ canvas.height = window.innerHeight;
 let fireworks = [];
 
 function createFirework(){
-  const x=Math.random()*canvas.width;
-  const y=Math.random()*canvas.height/2;
-  const colors=["#f7d98c","#ffe9b0","#ffffff","#ffcc66"];
-  for(let j=0;j<40;j++){
-    fireworks.push({x,y,radius:2,angle:Math.random()*2*Math.PI,speed:Math.random()*3+1,color:colors[Math.floor(Math.random()*colors.length)],life:60});
+  const x = Math.random()*canvas.width;
+  const y = Math.random()*canvas.height/2;
+  const colors = ["#f7d98c","#ffe9b0","#ffffff","#ffcc66"];
+  for(let i=0;i<40;i++){
+    fireworks.push({
+      x, y,
+      radius:2,
+      angle:Math.random()*2*Math.PI,
+      speed:Math.random()*3+1,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      life:60
+    });
   }
 }
 
 function animateFireworks(){
-  ctx.fillStyle="rgba(0,0,0,0.15)";
+  ctx.fillStyle = "rgba(0,0,0,0.15)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-  for(let i=fireworks.length-1;i>=0;i--){
-    const f=fireworks[i];
-    f.x+=Math.cos(f.angle)*f.speed;
-    f.y+=Math.sin(f.angle)*f.speed;
+  fireworks.forEach((f,index)=>{
+    f.x += Math.cos(f.angle)*f.speed;
+    f.y += Math.sin(f.angle)*f.speed;
     f.life--;
     ctx.beginPath();
     ctx.arc(f.x,f.y,f.radius,0,Math.PI*2);
     ctx.fillStyle=f.color;
     ctx.fill();
-    if(f.life<=0) fireworks.splice(i,1);
-  }
+    if(f.life<=0) fireworks.splice(index,1);
+  });
   requestAnimationFrame(animateFireworks);
 }
 
@@ -237,8 +267,6 @@ function startShow(){
   animateFireworks();
   setInterval(createFirework,800);
 }
-
-window.addEventListener('resize', () => { canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
 </script>
 
 </body>
