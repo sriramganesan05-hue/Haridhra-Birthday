@@ -50,17 +50,28 @@ h2 {
   z-index: 1;
 }
 
+/* IMAGE EFFECTS */
 .card img {
-  width: 65%;
-  border-radius: 20px;
-  margin-bottom: 25px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  opacity: 0;
+  animation: fadeIn 1.8s ease forwards, glow 3s ease-in-out infinite alternate;
+
+  border: 4px solid rgba(255, 215, 140, 0.85);
   box-shadow: 0 0 25px rgba(255,215,140,0.5);
-  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes glow {
   from { box-shadow: 0 0 15px rgba(255,215,140,0.3); }
-  to   { box-shadow: 0 0 35px rgba(255,215,140,0.8); }
+  to   { box-shadow: 0 0 35px rgba(255,215,140,0.9); }
 }
 
 .card p {
@@ -100,7 +111,10 @@ canvas {
 @media (max-width:600px){
   h1{font-size:40px;}
   .card p{font-size:16px;}
-  .card img{width:85%;}
+  .card img{
+    width: 180px;
+    height: 180px;
+  }
 }
 </style>
 </head>
@@ -115,7 +129,6 @@ canvas {
 
 <div class="card">
 
-  <!-- IMAGE FROM GITHUB -->
   <img src="https://raw.githubusercontent.com/sriramganesan05-hue/Haridhra-Birthday/main/Haridhra.jpg"
        alt="Haridhra and Sriram">
 
@@ -146,7 +159,7 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000);
 
-/* UPDATED MESSAGE */
+/* MESSAGE */
 const text = `I’m really grateful to have you in my life.
 
 Hope today brings you lots of smiles and happiness.
