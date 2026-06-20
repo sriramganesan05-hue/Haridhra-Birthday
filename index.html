@@ -3,185 +3,770 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Realistic Flight Booking</title>
+<title>Sky Travel - A Special Journey</title>
 
 <style>
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --accent: #ec4899;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-light: #64748b;
+  --success: #10b981;
+}
 
-body{
-margin:0;
-font-family:system-ui, Arial;
-background:#f5f7fb;
-color:#111;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #e2e8f0;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* APP CONTAINER */
-.app{
-max-width:420px;
-margin:auto;
-min-height:100vh;
-background:white;
+.app {
+  width: 100%;
+  max-width: 412px;
+  height: 90vh;
+  min-height: 720px;
+  background: var(--bg);
+  border-radius: 30px;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 /* HEADER */
-.header{
-padding:16px;
-background:#2563eb;
-color:white;
-font-weight:600;
+.header {
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  z-index: 10;
 }
 
-/* SCREEN */
-.screen{
-display:none;
-padding:20px;
+.header span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.active{display:block;}
-
-/* INPUTS */
-input{
-width:100%;
-padding:12px;
-margin:8px 0;
-border:1px solid #ddd;
-border-radius:10px;
+/* MAIN CONTENT AREA WITH SCROLLING */
+.content-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  scroll-behavior: smooth;
 }
 
-/* BUTTON */
-button{
-width:100%;
-padding:12px;
-margin-top:12px;
-border:none;
-border-radius:10px;
-background:#2563eb;
-color:white;
-font-weight:600;
-cursor:pointer;
+/* SCREEN LAYOUTS */
+.screen {
+  display: none;
+  padding: 24px;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
-/* FLIGHT CARD */
-.card{
-border:1px solid #eee;
-border-radius:12px;
-padding:14px;
-margin:10px 0;
-display:flex;
-flex-direction: column; /* Changed to column for better detail layout */
-justify-content:space-between;
-align-items:flex-start; /* Align text to start */
+.screen.active {
+  display: block;
 }
 
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 8px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.card-details {
-    width: 100%;
-    font-size: 0.9em;
-    color: #555;
-    margin-top: 5px;
+h3 {
+  font-size: 1.35rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: #0f172a;
 }
 
-.card-details small {
-    display: block;
-    margin-top: 3px;
+p.subtitle {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-top: -12px;
+  margin-bottom: 20px;
 }
 
-.price{
-color:#16a34a;
-font-weight:700;
-font-size: 1.2em;
+/* FORM ELEMENTS */
+.form-group {
+  margin-bottom: 16px;
 }
 
-/* BOARDING PASS */
-.pass{
-border:1px dashed #ccc;
-padding:16px;
-border-radius:12px;
-text-align:center;
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
 }
 
-.face{
-width:70px;
-height:70px;
-border-radius:50%;
-object-fit:cover;
-margin:10px 0;
-border:2px solid #2563eb;
+input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  color: var(--text);
+  background: white;
 }
 
-.pass-detail {
-    text-align: left;
-    margin: 8px 0;
-    font-size: 0.95em;
-}
-.pass-detail strong {
-    display: inline-block;
-    width: 100px;
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
-/* MAP */
-.map{
-height:200px;
-background:linear-gradient(135deg,#dbeafe,#f0f9ff);
-border-radius:12px;
-position:relative;
-overflow:hidden;
+/* BUTTONS */
+button.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
 }
 
-.plane{
-position:absolute;
-font-size:26px;
-left:10%;
-top:50%;
-transition:5s linear;
+button.btn-primary:active {
+  transform: scale(0.98);
 }
 
-/* CAKE */
-.cake{
-width:160px;
-height:100px;
-background:#ffb6c1;
-margin:auto;
-border-radius:12px;
-position:relative;
-margin-top:30px;
+button.btn-primary:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
-.candle{
-position:absolute;
-width:8px;
-height:30px;
-background:white;
-top:-30px;
+/* FLIGHT CARDS */
+.flight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.flame{
-width:10px;
-height:14px;
-background:orange;
-border-radius:50%;
-position:absolute;
-top:-14px;
-animation:flicker .2s infinite alternate;
+.flight-card {
+  background: var(--card-bg);
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes flicker{
-from{transform:scale(1);}
-to{transform:scale(.8);}
+.flight-card:hover {
+  border-color: #cbd5e1;
 }
 
-/* FINAL */
-.final{
-text-align:center;
-padding:30px;
-font-weight:600;
+.flight-card.selected {
+  border-color: var(--primary);
+  background: #f0f7ff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
 }
 
+.flight-card.selected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--primary);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.airline-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.airline-logo {
+  font-size: 1.4rem;
+}
+
+.airline-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.flight-number {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  display: block;
+}
+
+.card-price {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--success);
+}
+
+.card-mid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.time-block {
+  text-align: left;
+}
+
+.time-block.right {
+  text-align: right;
+}
+
+.time {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.airport-code {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.path-line {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+  position: relative;
+}
+
+.path-line .dots {
+  width: 100%;
+  height: 2px;
+  border-top: 2px dashed #cbd5e1;
+  position: relative;
+  top: 1px;
+}
+
+.path-line .plane-icon {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  position: absolute;
+  top: -6px;
+  background: var(--card-bg);
+  padding: 0 6px;
+  transition: background 0.2s;
+}
+
+.flight-card.selected .plane-icon {
+  background: #f0f7ff;
+  color: var(--primary);
+}
+
+.duration {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* SEAT SELECTION SECTOR */
+.seat-map-container {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.seat {
+  aspect-ratio: 1;
+  background: #e2e8f0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.seat.aisle {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.seat.occupied {
+  background: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.seat.selected {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+/* BOARDING PASS WALLET STYLE */
+.boarding-pass-ticket {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  margin-bottom: 20px;
+}
+
+.ticket-header {
+  background: rgba(255,255,255,0.05);
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+
+.ticket-header img.passenger-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+  object-fit: cover;
+}
+
+.ticket-flight-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 18px;
+}
+
+.airport-large {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.airport-name-sub {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.ticket-mid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.15);
+  border-top: 1px dashed rgba(255,255,255,0.1);
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  position: relative;
+}
+
+/* Tear circles on boarding pass */
+.ticket-mid::before, .ticket-mid::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.ticket-mid::before { left: -10px; }
+.ticket-mid::after { right: -10px; }
+
+.ticket-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.ticket-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ticket-barcode-section {
+  padding: 20px 18px;
+  text-align: center;
+  background: white;
+  color: black;
+}
+
+/* Simulated QR Code styling */
+.barcode {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 10px;
+  background-image: radial-gradient(black 30%, transparent 31%), radial-gradient(black 30%, transparent 31%);
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+  border: 8px solid white;
+  outline: 1px solid #cbd5e1;
+}
+
+/* MAP SCREEN */
+.map-screen-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.flight-stats-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-item {
+  border-left: 2px solid var(--primary);
+  padding-left: 10px;
+}
+
+.stat-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.live-map {
+  height: 200px;
+  background: radial-gradient(circle at 50% 120%, #1e3a8a 0%, #020617 80%);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+}
+
+.live-map .star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.flight-path-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.live-plane {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(45deg);
+  font-size: 24px;
+  z-index: 5;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+}
+
+.progress-text {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* CAKE SCREEN */
+.arrival-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.welcome-msg {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.cake-box {
+  width: 220px;
+  height: 220px;
+  margin: 30px auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cake {
+  width: 160px;
+  height: 90px;
+  background: linear-gradient(to right, #f472b6, #ec4899);
+  border-radius: 12px 12px 4px 4px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+}
+
+.cake-layer {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  background: #fdf2f8;
+  bottom: 30px;
+  left: 0;
+}
+
+.cake-frosting {
+  position: absolute;
+  width: 100%;
+  height: 16px;
+  background: #f43f5e;
+  top: 0;
+  border-radius: 12px 12px 0 0;
+}
+
+.candles-container {
+  display: flex;
+  justify-content: space-around;
+  width: 120px;
+  position: absolute;
+  top: -24px;
+}
+
+.candle {
+  width: 10px;
+  height: 30px;
+  background: linear-gradient(to right, #38bdf8, #bae6fd);
+  border-radius: 3px 3px 0 0;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.candle-flame {
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(ellipse at bottom, #f59e0b, #ef4444);
+  border-radius: 50% 50% 20% 20%;
+  position: absolute;
+  top: -16px;
+  left: -1px;
+  animation: flicker 0.15s infinite alternate;
+  transform-origin: center bottom;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+}
+
+@keyframes flicker {
+  0% { transform: scale(1) rotate(-1deg); }
+  100% { transform: scale(0.9) rotate(2deg); }
+}
+
+.candle.blown .candle-flame {
+  display: none;
+}
+
+.candle-smoke {
+  position: absolute;
+  width: 4px;
+  height: 15px;
+  background: rgba(226, 232, 240, 0.8);
+  top: -15px;
+  left: 3px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.candle.blown .candle-smoke {
+  animation: smokeRise 1.5s ease-out forwards;
+}
+
+@keyframes smokeRise {
+  0% { opacity: 0.8; transform: translateY(0) scale(1); filter: blur(1px); }
+  100% { opacity: 0; transform: translateY(-30px) scale(2.5); filter: blur(3px); }
+}
+
+.cake-plate {
+  width: 200px;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.instruction-text {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* FINAL SCREEN */
+.birthday-card {
+  text-align: center;
+  padding: 10px 5px;
+}
+
+.wishes-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 12px;
+  background: linear-gradient(45deg, #ec4899, #8b5cf6, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.avatar-large-container {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 20px;
+}
+
+.avatar-large {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+}
+
+.crown {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-10deg);
+  font-size: 2.2rem;
+  animation: floatCrown 2s ease-in-out infinite alternate;
+}
+
+@keyframes floatCrown {
+  0% { transform: translateX(-50%) rotate(-10deg) translateY(0); }
+  100% { transform: translateX(-50%) rotate(-5deg) translateY(-6px); }
+}
+
+.card-message {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+  margin-bottom: 24px;
+}
+
+/* CONFETTI CANVAS Overlay */
+#confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* AUDIO TOGGLE BUTTON */
+.audio-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
 </style>
 </head>
 
@@ -189,164 +774,816 @@ font-weight:600;
 
 <div class="app">
 
-<div class="header">✈️ Sky Travel</div>
+  <!-- HEADER -->
+  <div class="header">
+    <span>✈️ Sky Travel</span>
+    <button id="audioBtn" class="audio-toggle" onclick="toggleMute()" title="Mute/Unmute sound">🔊</button>
+  </div>
 
-<!-- SEARCH -->
-<div id="s1" class="screen active">
+  <!-- MAIN SCROLLABLE WRAPPER -->
+  <div class="content-wrapper">
 
-<h3>Search Flights</h3>
+    <!-- SCREEN 1: SEARCH -->
+    <div id="s1" class="screen active">
+      <h3>Search Flights</h3>
+      <p class="subtitle">Find your next memorable gateway</p>
 
-<input id="originInput" value="India (MAA)" placeholder="Origin (e.g., Chennai, MAA)">
-<input id="destinationInput" value="London (LHR)" placeholder="Destination (e.g., London, LHR)">
-<input type="date" id="dateInput" value="2024-08-15">
-<input type="number" id="passengersInput" value="1" min="1" placeholder="Number of Passengers">
+      <div class="form-group">
+        <label>Passenger Name</label>
+        <input id="passengerName" type="text" value="Haridhra">
+      </div>
 
+      <div class="form-group">
+        <label>From</label>
+        <input id="originInput" type="text" value="Chennai (MAA)">
+      </div>
 
-<button onclick="search()">Search</button>
+      <div class="form-group">
+        <label>To</label>
+        <input id="destinationInput" type="text" value="London (LHR)">
+      </div>
 
-</div>
+      <div class="form-group">
+        <label>Departure Date</label>
+        <input id="dateInput" type="date">
+      </div>
 
-<!-- RESULTS -->
-<div id="s2" class="screen">
+      <button class="btn-primary" onclick="search()">Find Flights</button>
+    </div>
 
-<h3>Available Flights</h3>
+    <!-- SCREEN 2: CHOOSE FLIGHT -->
+    <div id="s2" class="screen">
+      <h3>Available Flights</h3>
+      <p class="subtitle">Select the best itinerary for your special day</p>
 
-<div class="card">
-    <div class="card-header">
-        <div>
-            <strong>Air India</strong> - AI 150 <br>
-            <small>02:00 PM MAA → 10:30 PM LHR</small>
+      <div id="flightList" class="flight-list">
+        <!-- Dynamic Flights Injected Here -->
+      </div>
+
+      <button class="btn-primary" id="selectFlightBtn" onclick="goToSeats()" disabled>Choose Seat</button>
+    </div>
+
+    <!-- SCREEN 2.5: SEAT SELECTOR -->
+    <div id="s2_seat" class="screen">
+      <h3>Choose Your Seat</h3>
+      <p class="subtitle">Window seats offer the most majestic sunrise views</p>
+
+      <div class="seat-map-container">
+        <div class="seat-grid" id="seatGrid">
+          <!-- Dynamic Seat Map Injected Here -->
         </div>
-        <div class="price">£240</div>
-    </div>
-    <div class="card-details">
-        Direct Flight <br>
-        <small>Duration: 9h 10m</small>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header">
-        <div>
-            <strong>Emirates</strong> - EK 545 <br>
-            <small>04:00 PM MAA → 07:00 AM LHR (+1 day)</small>
+        <div class="seat-legend">
+          <div class="legend-item"><div class="legend-color" style="background:#e2e8f0"></div>Available</div>
+          <div class="legend-item"><div class="legend-color" style="background:#cbd5e1"></div>Occupied</div>
+          <div class="legend-item"><div class="legend-color" style="background:var(--primary)"></div>Selected</div>
         </div>
-        <div class="price">£180</div>
+      </div>
+
+      <button class="btn-primary" id="confirmSeatBtn" onclick="goToPass()" disabled>Confirm Seat</button>
     </div>
-    <div class="card-details">
-        1 Stop (DXB)<br>
-        <small>Duration: 11h 30m</small>
+
+    <!-- SCREEN 3: BOARDING PASS -->
+    <div id="s3" class="screen">
+      <h3>Your Boarding Pass</h3>
+      <p class="subtitle">Check-in complete. Have a comfortable flight!</p>
+
+      <div class="boarding-pass-ticket">
+        <div class="ticket-header">
+          <span style="font-weight: 700; letter-spacing: 0.5px;" id="ticketAirline">SKY AIRWAYS</span>
+          <img class="passenger-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" alt="Avatar">
+        </div>
+
+        <div class="ticket-flight-info">
+          <div>
+            <div class="airport-large" id="passFromCode">MAA</div>
+            <div class="airport-name-sub" id="passFromName">Chennai</div>
+          </div>
+          <div style="font-size: 1.5rem; color: var(--primary);">✈️</div>
+          <div style="text-align: right">
+            <div class="airport-large" id="passToCode">LHR</div>
+            <div class="airport-name-sub" id="passToName">London</div>
+          </div>
+        </div>
+
+        <div class="ticket-mid">
+          <div>
+            <div class="ticket-label">Passenger</div>
+            <div class="ticket-value" id="passName">Haridhra</div>
+          </div>
+          <div>
+            <div class="ticket-label">Flight</div>
+            <div class="ticket-value" id="passFlightNo">AI 150</div>
+          </div>
+          <div>
+            <div class="ticket-label">Seat</div>
+            <div class="ticket-value" id="passSeat">12A</div>
+          </div>
+        </div>
+
+        <div class="ticket-mid" style="border-top: none;">
+          <div>
+            <div class="ticket-label">Date</div>
+            <div class="ticket-value" id="passDate">15 Aug</div>
+          </div>
+          <div>
+            <div class="ticket-label">Gate</div>
+            <div class="ticket-value">B12</div>
+          </div>
+          <div>
+            <div class="ticket-label">Class</div>
+            <div class="ticket-value">Premium</div>
+          </div>
+        </div>
+
+        <div class="ticket-barcode-section">
+          <div class="barcode"></div>
+          <div style="font-family: monospace; font-size: 0.75rem; letter-spacing: 2px;">SKYTRAVEL-HAPPY-BDAY</div>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="startFlight()">Take Off</button>
     </div>
-</div>
 
-<button onclick="book()">Book Selected</button>
+    <!-- SCREEN 4: FLIGHT TRACKER -->
+    <div id="s4" class="screen">
+      <h3>In-Flight Tracker</h3>
+      <p class="subtitle" id="flightStatusText">Cruising above the clouds...</p>
 
-</div>
+      <div class="live-map" id="liveMap">
+        <!-- Stars injected dynamically -->
+        <svg class="flight-path-svg">
+          <path id="flightCurve" d="M 40 100 Q 180 20 320 100" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3" stroke-dasharray="6,6" />
+          <path id="flightProgressCurve" d="M 40 100 Q 180 20 320 100" fill="none" stroke="var(--primary)" stroke-width="3" stroke-dasharray="1000" stroke-dashoffset="1000" />
+        </svg>
+        <div class="live-plane" id="livePlane">✈️</div>
+        <div class="progress-text" id="progressPercent">0% Journey Complete</div>
+      </div>
 
-<!-- PASS -->
-<div id="s3" class="screen">
+      <div class="flight-stats-card">
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="ticket-label">Speed</div>
+            <div class="stat-val" id="liveSpeed">540 mph</div>
+          </div>
+          <div class="stat-item">
+            <div class="ticket-label">Altitude</div>
+            <div class="stat-val" id="liveAltitude">36,000 ft</div>
+          </div>
+        </div>
+        <div class="stat-row" style="margin-top: 14px;">
+          <div class="stat-item">
+            <div class="ticket-label">Distance to destination</div>
+            <div class="stat-val" id="liveDistance">Calculated...</div>
+          </div>
+          <div class="stat-item">
+            <div class="ticket-label">Est. Temp Outside</div>
+            <div class="stat-val">-54°F</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="pass">
+    <!-- SCREEN 5: ARRIVAL & CAKE -->
+    <div id="s5" class="screen">
+      <div class="arrival-header">
+        <div class="welcome-msg">Welcome to your destination! 🎉</div>
+        <p class="subtitle" id="arrivalWelcomeSub">The cabin crew is bringing a special surprise...</p>
+      </div>
 
-<h3>Boarding Pass</h3>
+      <div class="cake-box">
+        <div class="candles-container">
+          <div class="candle" onclick="blowCandle(this)">
+            <div class="candle-flame"></div>
+            <div class="candle-smoke"></div>
+          </div>
+          <div class="candle" onclick="blowCandle(this)">
+            <div class="candle-flame"></div>
+            <div class="candle-smoke"></div>
+          </div>
+          <div class="candle" onclick="blowCandle(this)">
+            <div class="candle-flame"></div>
+            <div class="candle-smoke"></div>
+          </div>
+        </div>
+        <div class="cake">
+          <div class="cake-frosting"></div>
+          <div class="cake-layer"></div>
+        </div>
+        <div class="cake-plate"></div>
+      </div>
 
-<p>India (MAA) → London (LHR)</p>
+      <p class="instruction-text">🎂 Click or tap the candles to blow them out!</p>
+    </div>
 
-<img class="face" src="https://via.placeholder.com/70" alt="Passenger Photo">
+    <!-- SCREEN 6: CELEBRATION -->
+    <div id="s6" class="screen">
+      <div class="birthday-card">
+        <div class="avatar-large-container">
+          <span class="crown">👑</span>
+          <img class="avatar-large" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240" alt="Haridhra">
+        </div>
 
-<div class="pass-detail"><strong>Passenger:</strong> Haridhra</div>
-<div class="pass-detail"><strong>Flight:</strong> AI 150</div>
-<div class="pass-detail"><strong>Date:</strong> 15 Aug 2024</div>
-<div class="pass-detail"><strong>Seat:</strong> 23A</div>
-<div class="pass-detail"><strong>Gate:</strong> B12</div>
-<div class="pass-detail"><strong>Boarding:</strong> 01:20 PM</div>
-<div class="pass-detail"><strong>Class:</strong> Economy</div>
+        <h2 class="wishes-title" id="finalWishesTitle">Happy Birthday, Haridhra!</h2>
 
+        <div class="card-message">
+          <p id="finalCardMsg">
+            Your special journey from Chennai to London is complete, but the grand adventure of life is just beginning! May this year bring you boundless happiness, soaring achievements, and beautiful safe landings.
+          </p>
+        </div>
 
-<button onclick="fly()">Check In</button>
+        <button class="btn-primary" onclick="restartJourney()">Book Another Journey</button>
+      </div>
+    </div>
 
-</div>
+  </div>
 
-</div>
-
-<!-- FLIGHT -->
-<div id="s4" class="screen">
-
-<h3>Flight in Progress</h3>
-
-<div class="map">
-<div id="plane" class="plane">✈️</div>
-</div>
-
-</div>
-
-<!-- CAKE -->
-<div id="s5" class="screen">
-
-<h3>Arrival 🎉</h3>
-
-<div class="cake">
-
-<div class="candle" style="left:30px"><div class="flame"></div></div>
-<div class="candle" style="left:70px"><div class="flame"></div></div>
-<div class="candle" style="left:110px"><div class="flame"></div></div>
-
-</div>
-
-<button onclick="end()">Celebrate</button>
-
-</div>
-
-<!-- FINAL -->
-<div id="s6" class="screen">
-
-<div class="final">
-💛 Happy Birthday Haridhra 💛<br><br>
-
-A journey from India → London<br>
-Made real in moments ✈️
-</div>
-
-</div>
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
 
 </div>
 
 <script>
+// State Store
+let appState = {
+  passengerName: "Haridhra",
+  origin: "MAA",
+  destination: "LHR",
+  originFull: "Chennai",
+  destinationFull: "London",
+  date: "15 Aug 2026",
+  flights: [],
+  selectedFlight: null,
+  selectedSeat: null,
+  soundMuted: false
+};
 
-function show(id){
-document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
+// Setup Default Date
+document.getElementById('dateInput').valueAsDate = new Date();
+
+// Core navigation utility
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  
+  // Scroll content container back to top on screen change
+  document.querySelector('.content-wrapper').scrollTop = 0;
 }
 
-function search(){ show("s2"); }
+// Generate Realistic Flights based on User Input
+function search() {
+  const pName = document.getElementById('passengerName').value.trim();
+  const rawOrigin = document.getElementById('originInput').value.trim();
+  const rawDest = document.getElementById('destinationInput').value.trim();
+  const rawDate = document.getElementById('dateInput').value;
 
-function book(){ show("s3"); }
+  if (!pName || !rawOrigin || !rawDest) {
+    alert("Please fill in all details to proceed.");
+    return;
+  }
 
-function fly(){
+  appState.passengerName = pName;
+  
+  // Try parsing codes
+  appState.origin = extractCode(rawOrigin, "MAA");
+  appState.destination = extractCode(rawDest, "LHR");
+  appState.originFull = cleanCityName(rawOrigin);
+  appState.destinationFull = cleanCityName(rawDest);
+  
+  if(rawDate) {
+    const d = new Date(rawDate);
+    appState.date = d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
 
-show("s4");
+  // Generate Flight Offers
+  appState.flights = [
+    {
+      airline: "Sky Airways",
+      logo: "✈️",
+      code: "SA-204",
+      deptTime: "08:15 AM",
+      arrTime: "04:30 PM",
+      duration: "13h 45m",
+      price: "£295",
+      stops: "Direct"
+    },
+    {
+      airline: "Global Carrier",
+      logo: "🌐",
+      code: "GC-881",
+      deptTime: "11:40 AM",
+      arrTime: "09:10 PM",
+      duration: "14h 50m",
+      price: "£240",
+      stops: "1 Stop"
+    },
+    {
+      airline: "Elite Air",
+      logo: "⭐",
+      code: "EA-102",
+      deptTime: "06:00 PM",
+      arrTime: "06:15 AM",
+      duration: "17h 45m",
+      price: "£410",
+      stops: "Direct (Premium)"
+    }
+  ];
 
-setTimeout(()=>{
-document.getElementById("plane").style.left="85%";
-document.getElementById("plane").style.top="20%";
-},500);
-
-setTimeout(()=>{
-show("s5");
-},5000);
-
+  renderFlights();
+  showScreen("s2");
 }
 
-function end(){
+function extractCode(str, fallback) {
+  const match = str.match(/\(([^)]+)\)/);
+  return match ? match[1].toUpperCase() : (str.substring(0, 3).toUpperCase() || fallback);
+}
 
-document.querySelectorAll(".flame").forEach(f=>{
-f.style.opacity="0";
+function cleanCityName(str) {
+  return str.split('(')[0].trim();
+}
+
+// Render dynamic flight list
+function renderFlights() {
+  const list = document.getElementById('flightList');
+  list.innerHTML = '';
+  
+  appState.flights.forEach((f, idx) => {
+    const card = document.createElement('div');
+    card.className = 'flight-card';
+    card.onclick = () => selectFlight(idx, card);
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="airline-info">
+          <span class="airline-logo">${f.logo}</span>
+          <div>
+            <span class="airline-name">${f.airline}</span>
+            <span class="flight-number">${f.code}</span>
+          </div>
+        </div>
+        <div class="card-price">${f.price}</div>
+      </div>
+      <div class="card-mid">
+        <div class="time-block">
+          <div class="time">${f.deptTime}</div>
+          <div class="airport-code">${appState.origin}</div>
+        </div>
+        <div class="path-line">
+          <span class="plane-icon">✈️</span>
+          <div class="dots"></div>
+          <span class="duration">${f.duration}</span>
+        </div>
+        <div class="time-block right">
+          <div class="time">${f.arrTime}</div>
+          <div class="airport-code">${appState.destination}</div>
+        </div>
+      </div>
+      <div style="font-size: 0.75rem; color: var(--text-light); text-align: left;">
+        🚀 ${f.stops} • Premium snacks included
+      </div>
+    `;
+    list.appendChild(card);
+  });
+  
+  document.getElementById('selectFlightBtn').disabled = true;
+}
+
+function selectFlight(idx, element) {
+  document.querySelectorAll('.flight-card').forEach(c => c.classList.remove('selected'));
+  element.classList.add('selected');
+  appState.selectedFlight = appState.flights[idx];
+  document.getElementById('selectFlightBtn').disabled = false;
+  playBeep();
+}
+
+// Dynamic Seat Map Generator
+function goToSeats() {
+  const seatGrid = document.getElementById('seatGrid');
+  seatGrid.innerHTML = '';
+  
+  const cols = ['A', 'B', 'C', '', 'D', 'E', 'F'];
+  const rows = 5;
+
+  for(let r=1; r<=rows; r++) {
+    cols.forEach((c) => {
+      const seatSpan = document.createElement('div');
+      if (c === '') {
+        seatSpan.className = 'seat aisle';
+        seatSpan.innerText = r;
+      } else {
+        const seatId = `${r}${c}`;
+        // Randomly simulate occupied seats
+        const isOccupied = Math.random() < 0.4 && seatId !== '3A' && seatId !== '4F'; 
+        seatSpan.className = `seat ${isOccupied ? 'occupied' : 'available'}`;
+        seatSpan.innerText = seatId;
+        if (!isOccupied) {
+          seatSpan.onclick = () => selectSeat(seatId, seatSpan);
+        }
+      }
+      seatGrid.appendChild(seatSpan);
+    });
+  }
+
+  appState.selectedSeat = null;
+  document.getElementById('confirmSeatBtn').disabled = true;
+  showScreen("s2_seat");
+}
+
+function selectSeat(seatId, element) {
+  document.querySelectorAll('.seat.selected').forEach(s => s.classList.remove('selected'));
+  element.classList.add('selected');
+  appState.selectedSeat = seatId;
+  document.getElementById('confirmSeatBtn').disabled = false;
+  playBeep();
+}
+
+// Map variables over to Boarding Pass
+function goToPass() {
+  const f = appState.selectedFlight;
+  
+  document.getElementById('ticketAirline').innerText = f.airline.toUpperCase();
+  document.getElementById('passFromCode').innerText = appState.origin;
+  document.getElementById('passFromName').innerText = appState.originFull;
+  document.getElementById('passToCode').innerText = appState.destination;
+  document.getElementById('passToName').innerText = appState.destinationFull;
+  
+  document.getElementById('passName').innerText = appState.passengerName;
+  document.getElementById('passFlightNo').innerText = f.code;
+  document.getElementById('passSeat').innerText = appState.selectedSeat;
+  document.getElementById('passDate').innerText = appState.date.substring(0,6);
+
+  showScreen("s3");
+}
+
+// Simulated Live Map & Flight progress
+function startFlight() {
+  showScreen("s4");
+  
+  // Build dynamic star fields
+  const map = document.getElementById("liveMap");
+  document.querySelectorAll('.star').forEach(el => el.remove());
+  for(let i=0; i<15; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.width = star.style.height = `${Math.random() * 3}px`;
+    map.appendChild(star);
+  }
+
+  const plane = document.getElementById("livePlane");
+  const progressText = document.getElementById("progressPercent");
+  const liveSpeed = document.getElementById("liveSpeed");
+  const liveAltitude = document.getElementById("liveAltitude");
+  const liveDistance = document.getElementById("liveDistance");
+  const path = document.getElementById("flightCurve");
+  const progressPath = document.getElementById("flightProgressCurve");
+  const statusText = document.getElementById("flightStatusText");
+
+  // Get SVG Path dimensions
+  const totalLength = path.getTotalLength();
+  progressPath.style.strokeDasharray = totalLength;
+  progressPath.style.strokeDashoffset = totalLength;
+
+  let progress = 0;
+  const duration = 5000; // 5 seconds animation
+  const start = performance.now();
+
+  // Sounds
+  playJetSound();
+
+  function update(time) {
+    let elapsed = time - start;
+    let ratio = Math.min(elapsed / duration, 1);
+    
+    // SVG Path Follower logic
+    let point = path.getPointAtLength(ratio * totalLength);
+    plane.style.left = `${point.x}px`;
+    plane.style.top = `${point.y}px`;
+    
+    // Update progress stroke
+    progressPath.style.strokeDashoffset = totalLength - (ratio * totalLength);
+    
+    // Stats Update
+    let pct = Math.floor(ratio * 100);
+    progressText.innerText = `${pct}% Journey Complete`;
+    
+    // Varying stats for flight realism
+    let currentAlt = Math.floor(28000 + Math.sin(ratio * Math.PI) * 10000);
+    let currentSpeed = Math.floor(520 + Math.sin(ratio * Math.PI * 1.5) * 40);
+    let currentDist = Math.floor((1 - ratio) * 4500);
+
+    liveAltitude.innerText = `${currentAlt.toLocaleString()} ft`;
+    liveSpeed.innerText = `${currentSpeed} mph`;
+    liveDistance.innerText = `${currentDist.toLocaleString()} miles`;
+
+    if (pct < 20) {
+      statusText.innerText = "🛫 Taking off from " + appState.originFull + "...";
+    } else if (pct < 85) {
+      statusText.innerText = "☁️ Cruising smoothly at cabin level...";
+    } else {
+      statusText.innerText = "🛬 Preparing for descent into " + appState.destinationFull + "...";
+    }
+
+    if (ratio < 1) {
+      requestAnimationFrame(update);
+    } else {
+      // Arrived!
+      setTimeout(() => {
+        setupArrival();
+      }, 500);
+    }
+  }
+
+  requestAnimationFrame(update);
+}
+
+function setupArrival() {
+  document.getElementById('arrivalWelcomeSub').innerText = `You have landed safely in ${appState.destinationFull}. The cabin crew has prepared a custom cake!`;
+  
+  // Ensure all candles are unblown for the new round
+  document.querySelectorAll('.candle').forEach(c => {
+    c.classList.remove('blown');
+  });
+
+  showScreen("s5");
+}
+
+let blownOutCandles = 0;
+function blowCandle(candleEl) {
+  if (candleEl.classList.contains('blown')) return;
+  
+  candleEl.classList.add('blown');
+  playBlowSound();
+  blownOutCandles++;
+  
+  if (blownOutCandles >= 3) {
+    setTimeout(() => {
+      triggerCelebration();
+    }, 800);
+  }
+}
+
+// Celebration confetti & sound trigger
+function triggerCelebration() {
+  showScreen("s6");
+  
+  // Personalize greetings
+  document.getElementById('finalWishesTitle').innerText = `Happy Birthday, ${appState.passengerName}! 🎂`;
+  document.getElementById('finalCardMsg').innerHTML = `
+    Your special flight from <strong>${appState.originFull} (${appState.origin})</strong> to <strong>${appState.destinationFull} (${appState.destination})</strong> was a complete success! <br><br>
+    May this year and all your upcoming departures bring you exciting journeys, marvelous horizons, and unforgettable arrivals. Cheers to beautiful years ahead! ✈️💛
+  `;
+
+  blownOutCandles = 0; // Reset
+  initConfetti();
+  playBirthdayTune();
+}
+
+function restartJourney() {
+  stopConfetti();
+  showScreen("s1");
+}
+
+/* AUDIO HELPER UTILIZING WEB AUDIO API (NO EXTERNAL FILES REQUIRED) */
+let audioCtx = null;
+
+function getAudioContext() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  return audioCtx;
+}
+
+function toggleMute() {
+  appState.soundMuted = !appState.soundMuted;
+  document.getElementById('audioBtn').innerText = appState.soundMuted ? "🔇" : "🔊";
+}
+
+function playBeep() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.frequency.setValueAtTime(800, ctx.currentTime);
+    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+    
+    osc.start();
+    osc.stop(ctx.currentTime + 0.1);
+  } catch(e) {}
+}
+
+function playBlowSound() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    // Simulate puff of white noise
+    const bufferSize = ctx.sampleRate * 0.12;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(600, ctx.currentTime);
+    
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.4, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+    
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    
+    noise.start();
+  } catch(e) {}
+}
+
+function playJetSound() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    // Simulate low engine hum that glides up and down
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(60, ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(220, ctx.currentTime + 1.5);
+    osc.frequency.linearRampToValueAtTime(100, ctx.currentTime + 4.5);
+    
+    gain.gain.setValueAtTime(0.02, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 5);
+    
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(400, ctx.currentTime);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start();
+    osc.stop(ctx.currentTime + 5);
+  } catch(e) {}
+}
+
+// Synthesis of "Happy Birthday" Theme
+function playBirthdayTune() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    const tempo = 120; // BPM
+    const beat = 60 / tempo;
+    
+    // Notes and relative durations (Happy Birthday in C)
+    const notes = [
+      { f: 261.63, d: 0.75 }, // C4
+      { f: 261.63, d: 0.25 }, // C4
+      { f: 293.66, d: 1.0 },  // D4
+      { f: 261.63, d: 1.0 },  // C4
+      { f: 349.23, d: 1.0 },  // F4
+      { f: 329.63, d: 2.0 },  // E4
+      
+      { f: 261.63, d: 0.75 }, 
+      { f: 261.63, d: 0.25 }, 
+      { f: 293.66, d: 1.0 },  
+      { f: 261.63, d: 1.0 },  
+      { f: 392.00, d: 1.0 },  // G4
+      { f: 349.23, d: 2.0 },  // F4
+      
+      { f: 261.63, d: 0.75 }, 
+      { f: 261.63, d: 0.25 }, 
+      { f: 523.25, d: 1.0 },  // C5
+      { f: 440.00, d: 1.0 },  // A4
+      { f: 349.23, d: 1.0 },  // F4
+      { f: 329.63, d: 1.0 },  // E4
+      { f: 293.66, d: 2.0 },  // D4
+      
+      { f: 466.16, d: 0.75 }, // Bb4
+      { f: 466.16, d: 0.25 }, 
+      { f: 440.00, d: 1.0 },  
+      { f: 349.23, d: 1.0 },  
+      { f: 392.00, d: 1.0 },  
+      { f: 349.23, d: 2.0 }   
+    ];
+
+    let timeOffset = ctx.currentTime + 0.2;
+    notes.forEach(note => {
+      const osc = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      
+      osc.type = 'triangle'; // Sweet, softer tone
+      osc.frequency.value = note.f;
+      
+      gainNode.gain.setValueAtTime(0.08, timeOffset);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, timeOffset + (note.d * beat) - 0.05);
+      
+      osc.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      
+      osc.start(timeOffset);
+      osc.stop(timeOffset + (note.d * beat));
+      
+      timeOffset += (note.d * beat);
+    });
+  } catch(e) {}
+}
+
+
+/* SEAMLESS CANVAS CONFETTI SYSTEM */
+let confettiAnimationId = null;
+function initConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Fit to screen boundary
+  const parent = canvas.parentElement;
+  canvas.width = parent.clientWidth;
+  canvas.height = parent.clientHeight;
+
+  const colors = ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
+  const confettiCount = 100;
+  const particles = [];
+
+  class ConfettiParticle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * -canvas.height;
+      this.size = Math.random() * 6 + 6;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.speedX = Math.random() * 2 - 1;
+      this.speedY = Math.random() * 3 + 2;
+      this.rotation = Math.random() * 360;
+      this.rotationSpeed = Math.random() * 4 - 2;
+    }
+
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotationSpeed;
+      
+      // Cycle back to top if offscreen
+      if (this.y > canvas.height) {
+        this.y = -20;
+        this.x = Math.random() * canvas.width;
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate((this.rotation * Math.PI) / 180);
+      ctx.fillStyle = this.color;
+      ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < confettiCount; i++) {
+    particles.push(new ConfettiParticle());
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    confettiAnimationId = requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+function stopConfetti() {
+  if (confettiAnimationId) {
+    cancelAnimationFrame(confettiAnimationId);
+    confettiAnimationId = null;
+  }
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Ensure responsive canvas resizing
+window.addEventListener('resize', () => {
+  const canvas = document.getElementById('confetti-canvas');
+  if (canvas) {
+    const parent = canvas.parentElement;
+    canvas.width = parent.clientWidth;
+    canvas.height = parent.clientHeight;
+  }
 });
-
-show("s6");
-
-}
-
 </script>
 
 </body>
