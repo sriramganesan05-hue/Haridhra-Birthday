@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky Travel - Haridhra's Cosmic Odyssey</title>
+<title>Sky Travel - Haridra's Cosmic Odyssey</title>
 
 <style>
 :root {
@@ -87,6 +87,58 @@ body {
   font-size: 0.7rem;
   text-transform: uppercase;
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+/* PILOT RADIO TRANSMISSION HUD */
+.radio-hud {
+  position: absolute;
+  top: -120px;
+  left: 20px;
+  right: 20px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1.5px solid var(--portal-color);
+  border-radius: 16px;
+  padding: 12px 16px;
+  z-index: 100;
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.radio-hud.active {
+  top: 75px;
+}
+
+.radio-signal-icon {
+  font-size: 1.8rem;
+  animation: pulseSignal 1s infinite alternate;
+}
+
+@keyframes pulseSignal {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 6px var(--portal-color)); }
+}
+
+.radio-content {
+  flex: 1;
+}
+
+.radio-sender {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--portal-color);
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.radio-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
 }
 
 /* MAIN CONTENT AREA WITH SCROLLING */
@@ -1214,6 +1266,15 @@ button.btn-primary:disabled {
     </div>
   </div>
 
+  <!-- REAL-TIME PILOT RADIO TRANSMISSION HUD Overlay -->
+  <div class="radio-hud" id="radioHud">
+    <div class="radio-signal-icon">📡</div>
+    <div class="radio-content">
+      <div class="radio-sender" id="radioSender">Pilot Comms</div>
+      <div class="radio-text" id="radioText">Radio transmission active...</div>
+    </div>
+  </div>
+
   <!-- MAIN WRAPPER -->
   <div class="content-wrapper">
 
@@ -1224,7 +1285,7 @@ button.btn-primary:disabled {
 
       <div class="form-group">
         <label>Passenger Name</label>
-        <input id="passengerName" type="text" value="Haridhra">
+        <input id="passengerName" type="text" value="Haridra">
       </div>
 
       <div class="form-group">
@@ -1242,13 +1303,18 @@ button.btn-primary:disabled {
         <input id="dateInput" type="date">
       </div>
 
+      <!-- Direct vocal test button to grant browser permission instantly -->
+      <button class="btn-primary" style="background: linear-gradient(135deg, #10b981, #059669); margin-bottom: 12px; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);" onclick="testRadioVoice()">
+        Test Radio Voice 📡
+      </button>
+
       <button class="btn-primary" onclick="goToPacking()">Start Quest Line</button>
     </div>
 
     <!-- SCREEN 1.5: PACKING CHALLENGE -->
     <div id="s1_pack" class="screen">
       <h3>Quest 1: The Packing Puzzle</h3>
-      <p class="subtitle">Haridhra needs to find her three must-pack items before she can receive her flight boarding pass!</p>
+      <p class="subtitle">Haridra needs to find her three must-pack items before she can receive her flight boarding pass!</p>
 
       <div class="task-container">
         <div class="task-title">💼 Pack her suitcase:</div>
@@ -1322,8 +1388,8 @@ button.btn-primary:disabled {
       <div class="boarding-pass-ticket">
         <div class="ticket-header">
           <span style="font-weight: 700; letter-spacing: 0.5px;" id="ticketAirline">SKY AIRWAYS</span>
-          <!-- Passport Photo: Haridhra 1.jpg -->
-          <img class="passenger-avatar" src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridhra Passport">
+          <!-- Passport Photo: Haridra 1.jpg -->
+          <img class="passenger-avatar" src="Haridra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra Passport">
         </div>
 
         <div class="ticket-flight-info">
@@ -1341,7 +1407,7 @@ button.btn-primary:disabled {
         <div class="ticket-mid">
           <div>
             <div class="ticket-label">Passenger</div>
-            <div class="ticket-value" id="passName">Haridhra</div>
+            <div class="ticket-value" id="passName">Haridra</div>
           </div>
           <div>
             <div class="ticket-label">Flight</div>
@@ -1425,12 +1491,12 @@ button.btn-primary:disabled {
     <!-- SCREEN 4.05: BORDER CONTROL RIDDLE -->
     <div id="s4_border" class="screen">
       <h3>Quest 3: Heathrow Border Control</h3>
-      <p class="subtitle">To enter the United Kingdom, Haridhra must satisfy the Customs Officer regarding her true itinerary.</p>
+      <p class="subtitle">To enter the United Kingdom, Haridra must satisfy the Customs Officer regarding her true itinerary.</p>
 
       <div class="border-card">
         <div style="text-align: center; font-size: 3rem; margin-bottom: 12px;">👮‍♂️</div>
         <div class="border-dialogue">
-          "Welcome to London Heathrow, Haridhra. State the primary purpose of your trip to the UK."
+          "Welcome to London Heathrow, Haridra. State the primary purpose of your trip to the UK."
         </div>
 
         <div class="border-options">
@@ -1484,7 +1550,7 @@ button.btn-primary:disabled {
     <!-- QUEST 4: SPORTS CHALLENGE -->
     <div id="s4_sports" class="screen">
       <h3>Quest 4: Grass Court Tennis Challenge</h3>
-      <p class="subtitle" id="sportsSubtitle">While visiting, Haridhra is invited to play a friendly set on a classic British grass court!</p>
+      <p class="subtitle" id="sportsSubtitle">While visiting, Haridra is invited to play a friendly set on a classic British grass court!</p>
 
       <div class="task-container">
         <div class="task-title">🏸 Click "Swing Racket" when the ball lands in the green zone!</div>
@@ -1510,7 +1576,7 @@ button.btn-primary:disabled {
     <!-- QUEST 5: BANQUET EATING -->
     <div id="s4_feast" class="screen">
       <h3>Quest 5: The Gourmet UK Feast</h3>
-      <p class="subtitle">Playing tennis made Haridhra hungry! Select her birthday dish and help her eat it down slice-by-slice.</p>
+      <p class="subtitle">Playing tennis made Haridra hungry! Select her birthday dish and help her eat it down slice-by-slice.</p>
 
       <div class="banquet-menu">
         <div class="menu-item selected" id="menu_scone" onclick="selectFood('scone', '🧁')">
@@ -1561,9 +1627,9 @@ button.btn-primary:disabled {
         </div>
       </div>
 
-      <!-- Displays Haridhra 2.jpg during the overland quest -->
+      <!-- Displays Haridra 2.jpg during the overland quest -->
       <div class="scenic-image-container">
-        <img class="scenic-photo" src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridhra travelling">
+        <img class="scenic-photo" src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra travelling">
         <div style="flex:1">
           <div class="scenic-title" style="font-size:0.9rem" id="transitHeading">Buckinghamshire Countryside</div>
           <div class="scenic-text" style="font-size:0.75rem" id="transitDesc">Help her select the correct navigation options so she can reach your home in High Wycombe.</div>
@@ -1584,8 +1650,8 @@ button.btn-primary:disabled {
             <div class="door-knob"></div>
           </div>
           <div class="door-interior">
-            <!-- Reveals Haridhra 3.jpg standing at the doorway -->
-            <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=300'" alt="Welcome Haridhra">
+            <!-- Reveals Haridra 3.jpg standing at the doorway -->
+            <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=300'" alt="Welcome Haridra">
           </div>
         </div>
         <div class="welcome-label" id="doorHint">🚪 Tap the door to knock!</div>
@@ -1629,23 +1695,23 @@ button.btn-primary:disabled {
 
     <!-- SLIDESHOW SCREEN (PLAYS AUTOMATICALLY AFTER CAKE) -->
     <div id="s5_slideshow" class="screen">
-      <h3>Memories of Haridhra</h3>
+      <h3>Memories of Haridra</h3>
       <p class="subtitle">Walk through her magical memories across continents...</p>
 
       <div class="slideshow-container">
         <!-- Slide 1 -->
         <div class="slide" id="slide_0">
-          <img src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridhra 1">
+          <img src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 1">
           <div class="slide-caption">Beginning of an amazing adventure... 🛫</div>
         </div>
         <!-- Slide 2 -->
         <div class="slide" id="slide_1">
-          <img src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridhra 2">
+          <img src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 2">
           <div class="slide-caption">Exploring beautiful landscapes & city horizons... 🗺️</div>
         </div>
         <!-- Slide 3 -->
         <div class="slide" id="slide_2">
-          <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridhra 3">
+          <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 3">
           <div class="slide-caption">Arrived at the cozy destination in High Wycombe! 🏡</div>
         </div>
 
@@ -1664,11 +1730,11 @@ button.btn-primary:disabled {
       <div class="birthday-card">
         <div class="avatar-large-container">
           <span class="crown">👑</span>
-          <!-- Celebratory Photo: Haridhra 3.jpg -->
-          <img class="avatar-large" src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240'" alt="Haridhra Celebration">
+          <!-- Celebratory Photo: Haridra 3.jpg -->
+          <img class="avatar-large" src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240'" alt="Haridra Celebration">
         </div>
 
-        <h2 class="wishes-title" id="finalWishesTitle">Happy Birthday, Haridhra!</h2>
+        <h2 class="wishes-title" id="finalWishesTitle">Happy Birthday, Haridra!</h2>
 
         <div class="card-message">
           <p id="finalCardMsg">
@@ -1690,7 +1756,7 @@ button.btn-primary:disabled {
 <script>
 // State Store
 let appState = {
-  passengerName: "Haridhra",
+  passengerName: "Haridra",
   origin: "MAA",
   destination: "LHR",
   originFull: "Chennai",
@@ -1739,7 +1805,7 @@ function goToPacking() {
     return;
   }
   appState.passengerName = pName;
-  updateQuestBar("Quest 1", "Pack Haridhra's suitcase");
+  updateQuestBar("Quest 1", "Pack Haridra's suitcase");
   showScreen("s1_pack");
 }
 
@@ -1766,7 +1832,7 @@ function togglePackItem(itemKey) {
   }
 }
 
-// Dynamic Flight Lists
+// Generate dynamic flight offers
 function search() {
   const rawOrigin = document.getElementById('originInput').value.trim();
   const rawDest = document.getElementById('destinationInput').value.trim();
@@ -2099,11 +2165,11 @@ function goToSports() {
   
   const sub = document.getElementById('sportsSubtitle');
   if (appState.selectedDetour === 'windsor') {
-    sub.innerText = "While visiting Windsor Castle, the Royal Club invites Haridhra to play a friendly lawn tennis set!";
+    sub.innerText = "While visiting Windsor Castle, the Royal Club invites Haridra to play a friendly lawn tennis set!";
   } else if (appState.selectedDetour === 'stonehenge') {
-    sub.innerText = "Near the historic megaliths of Wiltshire, Haridhra joins a local grass court club for a match!";
+    sub.innerText = "Near the historic megaliths of Wiltshire, Haridra joins a local grass court club for a match!";
   } else {
-    sub.innerText = "In the heart of London city park, Haridhra steps onto the turf to test her tennis swing!";
+    sub.innerText = "In the heart of London city park, Haridra steps onto the turf to test her tennis swing!";
   }
 
   document.getElementById('sportsNextBtn').style.display = 'none';
@@ -2139,7 +2205,7 @@ function trySwing() {
 
     document.getElementById('sportsNextBtn').style.display = 'block';
     const widget = document.querySelector('#s4_sports .autopilot-widget');
-    widget.innerHTML = `<h4 style="color:var(--success); font-weight:800">🏸 Smash Hit! Set Won!</h4><p style="font-size:0.8rem; color:var(--text-light); margin-top:4px;">Haridhra won the friendly set with a dazzling baseline return!</p>`;
+    widget.innerHTML = `<h4 style="color:var(--success); font-weight:800">🏸 Smash Hit! Set Won!</h4><p style="font-size:0.8rem; color:var(--text-light); margin-top:4px;">Haridra won the friendly set with a dazzling baseline return!</p>`;
   } else {
     const widget = document.querySelector('#s4_sports .autopilot-widget');
     widget.style.borderColor = "#ef4444";
@@ -2213,15 +2279,15 @@ function goToTransit() {
   if (appState.selectedDetour === 'windsor') {
     intro.innerText = `Leaving Windsor Castle, the taxi travels north through countryside...`;
     h.innerText = "Windsor ➔ High Wycombe";
-    d.innerText = `Refreshed by tennis and traditional cream tea, Haridhra drives into Buckinghamshire.`;
+    d.innerText = `Refreshed by tennis and traditional cream tea, Haridra drives into Buckinghamshire.`;
   } else if (appState.selectedDetour === 'stonehenge') {
     intro.innerText = `Leaving Wiltshire and Stonehenge, we head east to Buckinghamshire...`;
     h.innerText = "Wiltshire ➔ High Wycombe";
-    d.innerText = `Carrying memories of tennis near megaliths, Haridhra drives closer to home.`;
+    d.innerText = `Carrying memories of tennis near megaliths, Haridra drives closer to home.`;
   } else {
     intro.innerText = `Leaving the vibrant lights of London city, the taxi heads northwest...`;
     h.innerText = "London ➔ High Wycombe";
-    d.innerText = `After active tennis sets and sweet chocolate treats, Haridhra travels to High Wycombe.`;
+    d.innerText = `After active tennis sets and sweet chocolate treats, Haridra travels to High Wycombe.`;
   }
   
   document.getElementById('mazeEmoji').innerText = "🚕";
@@ -2427,23 +2493,50 @@ function getAudioContext() {
   return audioCtx;
 }
 
+// Speak Utility using browser Synthesis and showing Visual HUD
 function speakPilot(text) {
   if (appState.soundMuted) return;
+  
+  // Update Visual HUD Captions
+  const hud = document.getElementById('radioHud');
+  const hudText = document.getElementById('radioText');
+  hudText.innerText = text;
+  hud.classList.add('active');
+  
+  // Set automatic close timer for captions box based on sentence length
+  const readDuration = Math.max(3000, text.length * 65);
+  setTimeout(() => {
+    hud.classList.remove('active');
+  }, readDuration);
+
   try {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = window.speechSynthesis.getVoices();
-    // Prioritize English British voice for the pilot aesthetic, fallback to generic English
-    const pilotVoice = voices.find(v => v.lang.startsWith('en-GB') || v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en'));
-    if (pilotVoice) {
-      utterance.voice = pilotVoice;
+    
+    // Dynamically filter system speech assets to prioritize high quality Natural, Siri, Google, or Apple voices
+    let premiumVoice = voices.find(v => v.name.includes('Natural') && v.lang.startsWith('en')) ||
+                       voices.find(v => v.name.includes('Google') && v.lang.startsWith('en')) ||
+                       voices.find(v => v.name.includes('Apple') && v.lang.startsWith('en')) ||
+                       voices.find(v => v.name.includes('Siri') && v.lang.startsWith('en')) ||
+                       voices.find(v => v.lang.startsWith('en-GB')) ||
+                       voices.find(v => v.lang.startsWith('en'));
+                       
+    if (premiumVoice) {
+      utterance.voice = premiumVoice;
     }
-    utterance.rate = 0.9;  // Slightly drawn out pilot tone
-    utterance.pitch = 0.95; // Slightly deeper authoritative pitch
+    
+    utterance.rate = 0.95;  // Warm, steady pacing
+    utterance.pitch = 1.05; // Slightly warmer pitch to sound human
     window.speechSynthesis.speak(utterance);
   } catch (e) {
     console.warn("Speech Synthesis blocked or unsupported", e);
   }
+}
+
+// User triggerable radio test button to wake engine
+function testRadioVoice() {
+  speakPilot("This is Sky Travel Pilot Comms. Testing connection. Haridra, the radio voice engine is online and operational. Smooth skies ahead!");
 }
 
 function toggleMute() {
@@ -2452,6 +2545,7 @@ function toggleMute() {
   if (appState.soundMuted) {
     stopSlideshowMusic();
     try { window.speechSynthesis.cancel(); } catch(e){}
+    document.getElementById('radioHud').classList.remove('active');
   } else {
     const slideshowActive = document.getElementById('s5_slideshow').classList.contains('active');
     if (slideshowActive) {
@@ -2736,6 +2830,7 @@ function initConfetti() {
   loop();
 }
 
+// Stop active loops
 function stopConfetti() {
   if (confettiAnimationId) {
     cancelAnimationFrame(confettiAnimationId);
