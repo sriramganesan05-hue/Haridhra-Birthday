@@ -4,127 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>London → Chennai ✈️ Birthday Journey</title>
+<title>Somewhere Between London & Chennai ✈️</title>
 
 <style>
 
 body{
 margin:0;
 overflow:hidden;
-font-family:Arial;
 background:black;
+font-family:Arial;
 }
 
-/* ---------- SCREEN SYSTEM ---------- */
-.screen{
+/* ---------- SCENES ---------- */
+
+.scene{
 position:absolute;
 inset:0;
-display:none;
+display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+opacity:0;
+transition:2s ease;
 color:white;
 }
 
-.active{display:flex;}
+.show{opacity:1;}
 
-/* ---------- BOARDING PASS ---------- */
+/* ---------- BACKGROUNDS ---------- */
 
-.pass{
-background:white;
-color:black;
-padding:25px;
-border-radius:18px;
-width:300px;
-box-shadow:0 20px 60px rgba(0,0,0,.4);
-animation:pop .6s ease;
+.london{
+background:linear-gradient(#0f172a,#1e293b);
 }
-
-@keyframes pop{
-from{transform:scale(.5);opacity:0;}
-to{transform:scale(1);opacity:1;}
-}
-
-.tag{
-font-size:12px;
-opacity:.6;
-}
-
-.route{
-font-size:22px;
-font-weight:bold;
-margin:10px 0;
-}
-
-.btn{
-margin-top:15px;
-padding:12px 20px;
-border:none;
-border-radius:30px;
-background:#ff4d6d;
-color:white;
-cursor:pointer;
-}
-
-/* ---------- AIRPORT LOADING ---------- */
-
-.loader{
-width:70px;
-height:70px;
-border:5px solid #333;
-border-top:5px solid #fff;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-100%{transform:rotate(360deg);}
-}
-
-/* ---------- SKY ---------- */
 
 .sky{
-background:linear-gradient(#1b2a49,#4f6d7a,#87ceeb);
-overflow:hidden;
+background:linear-gradient(#2b5876,#4e4376,#87ceeb);
 }
 
-/* CLOUDS */
-
-.cloud{
-position:absolute;
-background:white;
-border-radius:50px;
-opacity:.8;
-animation:moveClouds 12s linear infinite;
+.chennai{
+background:linear-gradient(#fff1d6,#ffd6e7);
+color:#333;
 }
 
-@keyframes moveClouds{
-from{left:-200px;}
-to{left:110%;}
+/* ---------- TEXT ---------- */
+
+.text{
+font-size:clamp(18px,3vw,32px);
+text-align:center;
+max-width:80%;
+line-height:1.5;
 }
 
 /* ---------- PLANE ---------- */
 
 .plane{
 position:absolute;
-font-size:45px;
-top:45%;
+font-size:50px;
 left:-100px;
-animation:fly 7s linear forwards;
-filter:drop-shadow(0 10px 10px rgba(0,0,0,.3));
+top:50%;
+animation:fly 6s linear forwards;
 }
 
 @keyframes fly{
-0%{left:-100px;top:55%;}
+0%{left:-100px; top:55%;}
 50%{top:35%;}
-100%{left:110%;top:45%;}
+100%{left:110%; top:45%;}
 }
 
-/* ---------- ARRIVAL ---------- */
+/* ---------- HEART FLOAT ---------- */
 
-.arrival{
-text-align:center;
-font-size:28px;
+.heart{
+position:absolute;
+font-size:20px;
+animation:rise 5s linear forwards;
+opacity:.7;
+}
+
+@keyframes rise{
+from{transform:translateY(0); opacity:1;}
+to{transform:translateY(-100vh); opacity:0;}
 }
 
 /* ---------- CAKE ---------- */
@@ -135,6 +93,7 @@ height:120px;
 background:pink;
 border-radius:20px;
 position:relative;
+margin-top:20px;
 }
 
 .candle{
@@ -146,13 +105,12 @@ top:-40px;
 }
 
 .flame{
-width:14px;
-height:20px;
+width:12px;
+height:18px;
 background:gold;
 border-radius:50%;
 position:absolute;
-top:-20px;
-left:-2px;
+top:-18px;
 animation:flicker .2s infinite alternate;
 }
 
@@ -164,25 +122,14 @@ to{transform:scale(.8);}
 /* ---------- FINAL ---------- */
 
 .final{
+font-size:clamp(22px,4vw,40px);
 text-align:center;
-font-size:30px;
 padding:20px;
+color:#5a3b2e;
 }
 
-/* CONFETTI */
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-animation:fall 4s linear forwards;
-}
-
-@keyframes fall{
-to{
-transform:translateY(100vh) rotate(720deg);
-opacity:0;
-}
+.glow{
+text-shadow:0 0 20px rgba(255,215,0,.6);
 }
 
 </style>
@@ -190,135 +137,140 @@ opacity:0;
 
 <body>
 
-<!-- STEP 1 -->
-<div id="s1" class="screen active">
+<!-- ACT 1 -->
+<div id="s1" class="scene london show">
 
-<div class="pass">
-
-<div class="tag">BOARDING PASS</div>
-
-<div class="route">London ✈️ Chennai</div>
-
-<p>Passenger: Someone Special 💛</p>
-
-<button class="btn" onclick="goLoading()">
-Check In
-</button>
-
+<div class="text">
+London is quiet tonight...<br><br>
+but someone is thinking about her 💛
 </div>
 
 </div>
 
-<!-- STEP 2 -->
-<div id="s2" class="screen">
+<!-- ACT 2 -->
+<div id="s2" class="scene sky">
 
-<div class="loader"></div>
-<p>Checking in... preparing surprise flight ✈️</p>
-
+<div class="text">
+“I miss her birthday…”<br><br>
+A decision is made ✈️
 </div>
-
-<!-- STEP 3 SKY -->
-<div id="s3" class="screen sky">
-
-<div class="cloud" style="width:120px;height:60px;top:20%;"></div>
-<div class="cloud" style="width:160px;height:70px;top:40%;"></div>
-<div class="cloud" style="width:100px;height:50px;top:60%;"></div>
 
 <div class="plane">✈️</div>
 
 </div>
 
-<!-- STEP 4 ARRIVAL -->
-<div id="s4" class="screen">
+<!-- ACT 3 -->
+<div id="s3" class="scene sky">
 
-<div class="arrival">
-🛬 Landing in Chennai...<br><br>
-Someone very special has arrived 💛
+<div class="text">
+Some journeys are not about distance…<br>
+they are about feeling close 💛
 </div>
 
-<button class="btn" onclick="birthday()">Continue</button>
+</div>
+
+<!-- ACT 4 -->
+<div id="s4" class="scene chennai">
+
+<div class="text">
+Chennai ✈️<br><br>
+“Almost there…”</div>
 
 </div>
 
-<!-- STEP 5 CAKE -->
-<div id="s5" class="screen">
+<!-- ACT 5 -->
+<div id="s5" class="scene chennai">
+
+<div class="text">
+He arrives quietly…<br>
+just in time for her day 💛
+</div>
+
+</div>
+
+<!-- ACT 6 CAKE -->
+<div id="s6" class="scene chennai">
+
+<div class="text">Make a wish 🎂</div>
 
 <div class="cake">
-
 <div class="candle" style="left:40px"><div class="flame"></div></div>
-<div class="candle" style="left:80px"><div class="flame"></div></div>
-<div class="candle" style="left:120px"><div class="flame"></div></div>
-
+<div class="candle" style="left:90px"><div class="flame"></div></div>
+<div class="candle" style="left:140px"><div class="flame"></div></div>
 </div>
-
-<button class="btn" onclick="blow()">Blow Candles 🎂</button>
 
 </div>
 
 <!-- FINAL -->
-<div id="s6" class="screen">
+<div id="s7" class="scene chennai">
 
-<div class="final">
-💛 Happy Birthday Haridhra 💛<br><br>
+<div class="final glow">
+Happy Birthday Haridhra 💛<br><br>
 
-From London to Chennai ✈️<br>
-Distance became a journey of love 💛
+I didn’t just send a wish…<br>
+I carried it across London → Chennai ✈️
 </div>
 
 </div>
 
 <script>
 
-function show(id){
-document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
+let scenes=["s1","s2","s3","s4","s5","s6","s7"];
+let i=0;
+
+function showNext(){
+
+document.getElementById(scenes[i]).classList.remove("show");
+
+i++;
+
+if(i<scenes.length){
+
+document.getElementById(scenes[i]).classList.add("show");
+
+if(scenes[i]==="s2"){
+startPlane();
 }
 
-/* FLOW */
-
-function goLoading(){
-show("s2");
-
-setTimeout(()=>{
-show("s3");
-},2000);
-
-setTimeout(()=>{
-show("s4");
-},9000);
+if(scenes[i]==="s6"){
+setTimeout(blowEffect,4000);
 }
 
-function birthday(){
-show("s5");
+setTimeout(showNext,4000);
+
 }
 
-function blow(){
+}
+
+setTimeout(showNext,3000);
+
+/* PLANE */
+
+function startPlane(){
+document.querySelector(".plane").style.animation="fly 6s linear forwards";
+}
+
+/* HEARTS */
+
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💛";
+h.style.left=Math.random()*100+"vw";
+h.style.bottom="-20px";
+document.body.appendChild(h);
+
+setTimeout(()=>h.remove(),5000);
+
+},400);
+
+/* BLOW EFFECT */
+
+function blowEffect(){
 
 document.querySelectorAll(".flame").forEach(f=>{
 f.style.opacity="0";
 });
-
-show("s6");
-confetti();
-
-}
-
-/* CONFETTI */
-
-function confetti(){
-
-for(let i=0;i<150;i++){
-
-let c=document.createElement("div");
-c.className="confetti";
-
-c.style.left=Math.random()*100+"vw";
-c.style.background=`hsl(${Math.random()*360},100%,60%)`;
-c.style.animationDuration=(Math.random()*3+2)+"s";
-
-document.body.appendChild(c);
-
-}
 
 }
 
