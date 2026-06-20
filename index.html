@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky Travel - Haridhra's Cosmic Odyssey</title>
+<title>Sky Travel - Haridhra's UK Quest</title>
 
 <style>
 :root {
@@ -688,6 +688,110 @@ button.btn-primary:disabled {
   line-height: 1.3;
 }
 
+/* NEW: SPORTS CHALLENGE SCREEN */
+.sports-court {
+  height: 160px;
+  background: linear-gradient(to bottom, #15803d, #166534);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(22, 101, 52, 0.4);
+}
+
+.court-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  top: 0; left: 0;
+}
+
+.court-net {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  top: 50%;
+  left: 0;
+}
+
+.sports-ball {
+  position: absolute;
+  font-size: 1.5rem;
+  left: 10%;
+  top: 40%;
+  animation: flyBall 2s ease-in-out infinite alternate;
+}
+
+@keyframes flyBall {
+  0% { left: 10%; top: 20%; transform: scale(0.8); }
+  50% { left: 50%; top: 60%; transform: scale(1.2); }
+  100% { left: 90%; top: 15%; transform: scale(0.8); }
+}
+
+/* NEW: FOOD BANQUET SECTOR */
+.banquet-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.menu-item {
+  background: #111827;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 10px 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.menu-item.selected {
+  border-color: var(--portal-color);
+  background: rgba(168, 85, 247, 0.1);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+.menu-item span {
+  font-size: 1.8rem;
+  display: block;
+}
+
+.menu-item-name {
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 4px;
+  color: white;
+}
+
+.dining-table {
+  background: #27272a;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.food-plate {
+  width: 100px;
+  height: 100px;
+  background: #f4f4f5;
+  border-radius: 50%;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.4);
+  transition: transform 0.3s;
+}
+
+.food-visual {
+  font-size: 3rem;
+  transition: transform 0.2s;
+}
+
 /* HIGH WYCOMBE MAP & TRANSIT */
 .maze-widget {
   background: var(--card-bg);
@@ -929,7 +1033,7 @@ button.btn-primary:disabled {
   transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
 }
 
-/* NEW: SLIDESHOW SCREEN */
+/* SLIDESHOW SCREEN */
 .slideshow-container {
   position: relative;
   width: 100%;
@@ -1345,7 +1449,7 @@ button.btn-primary:disabled {
       <button class="btn-primary" id="borderNextBtn" style="margin-top: 20px; display: none;" onclick="showDetourScreen()">Pass Border Control</button>
     </div>
 
-    <!-- NEW SCREEN: CHOOSE DETOUR TRIP -->
+    <!-- SCREEN: CHOOSE DETOUR TRIP -->
     <div id="s4_detour" class="screen">
       <h3>Select a Birthday Trip Detour!</h3>
       <p class="subtitle">Before arriving at High Wycombe, choose a magical tourist trip to complete her UK arrival adventure!</p>
@@ -1355,31 +1459,88 @@ button.btn-primary:disabled {
           <div class="detour-icon">🏰</div>
           <div class="detour-info">
             <div class="detour-name">Windsor Castle</div>
-            <div class="detour-desc">Visit the spellbound royal spires & ancient royal chambers.</div>
+            <div class="detour-desc">Visit the royal spires & ancient majestic chambers.</div>
           </div>
         </div>
         <div class="detour-card" id="detour_stonehenge" onclick="selectDetour('stonehenge')">
           <div class="detour-icon">🪨</div>
           <div class="detour-info">
             <div class="detour-name">Stonehenge</div>
-            <div class="detour-desc">Witness ancient floating monoliths of mysterious lore.</div>
+            <div class="detour-desc">Witness ancient monoliths of mysterious lore.</div>
           </div>
         </div>
         <div class="detour-card" id="detour_london" onclick="selectDetour('london')">
           <div class="detour-icon">🎡</div>
           <div class="detour-info">
             <div class="detour-name">London Eye & City</div>
-            <div class="detour-desc">Take a ride above the sparkling neon metropolis.</div>
+            <div class="detour-desc">Take a ride above the sparkling metropolitan horizon.</div>
           </div>
         </div>
       </div>
 
-      <button class="btn-primary" id="confirmDetourBtn" style="margin-top: 24px;" onclick="goToTransit()" disabled>Begin Selected Trip</button>
+      <button class="btn-primary" id="confirmDetourBtn" style="margin-top: 24px;" onclick="goToSports()" disabled>Begin Selected Trip</button>
+    </div>
+
+    <!-- NEW SCREEN: QUEST 4: SPORTS CHALLENGE -->
+    <div id="s4_sports" class="screen">
+      <h3>Quest 4: The Grass Court Tennis Challenge</h3>
+      <p class="subtitle" id="sportsSubtitle">While visiting, Haridhra is invited to play a friendly set on a classic British grass court!</p>
+
+      <div class="task-container">
+        <div class="task-title">🏸 Click "Swing Racket" when the ball lands in the green zone!</div>
+        <div class="sports-court">
+          <div class="court-lines"></div>
+          <div class="court-net"></div>
+          <div class="sports-ball" id="tennisBall">🎾</div>
+        </div>
+
+        <div class="autopilot-widget" style="margin-top: 16px;">
+          <div class="autopilot-game-track">
+            <!-- Target zone positioned in the sweet spot of racket timing -->
+            <div class="autopilot-target-zone" style="left: 60%; width: 20%;"></div>
+            <div class="autopilot-pointer" id="ballTimingPointer"></div>
+          </div>
+          <button class="btn-primary" onclick="trySwing()" style="padding: 10px; font-size: 0.85rem;">Swing Racket! 🏸</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="sportsNextBtn" style="display: none;" onclick="goToFeast()">Head over to the Dining Room</button>
+    </div>
+
+    <!-- NEW SCREEN: QUEST 5: BANQUET EATING -->
+    <div id="s4_feast" class="screen">
+      <h3>Quest 5: The Gourmet UK Feast</h3>
+      <p class="subtitle">Playing tennis made Haridhra hungry! Select her birthday dish and help her eat it down slice-by-slice.</p>
+
+      <div class="banquet-menu">
+        <div class="menu-item selected" id="menu_scone" onclick="selectFood('scone', '🧁')">
+          <span>🧁</span>
+          <div class="menu-item-name">Cream Scones</div>
+        </div>
+        <div class="menu-item" id="menu_chips" onclick="selectFood('chips', '🐟')">
+          <span>🐟</span>
+          <div class="menu-item-name">Fish & Chips</div>
+        </div>
+        <div class="menu-item" id="menu_cake" onclick="selectFood('cake', '🍰')">
+          <span>🍰</span>
+          <div class="menu-item-name">Chocolate Cake</div>
+        </div>
+      </div>
+
+      <div class="dining-table">
+        <div class="food-plate">
+          <div class="food-visual" id="currentPlateFood">🧁</div>
+        </div>
+        <button class="btn-primary" id="eatButton" onclick="biteFood()" style="padding: 10px; font-size: 0.9rem;">Take a Bite! 🍽️</button>
+        <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 10px;" id="eatStatusText">Click "Take a Bite" 3 times to finish the meal!</p>
+      </div>
+
+      <button class="btn-primary" id="feastNextBtn" style="margin-top: 18px; display: none;" onclick="goToTransit()">Drive to High Wycombe</button>
     </div>
 
     <!-- SCREEN 4.1: TRANSIT / NAVIGATION QUEST -->
     <div id="s4_transit" class="screen">
-      <h3>Quest 4: Countryside Route</h3>
+      <h3>Quest 6: Buckinghamshire Route</h3>
       <p class="subtitle" id="transitIntroText">Traveling through country lanes towards High Wycombe...</p>
 
       <div class="maze-widget">
@@ -1414,7 +1575,7 @@ button.btn-primary:disabled {
 
     <!-- SCREEN 4.2: HOUSE ARRIVAL (Knock & Open Door) -->
     <div id="s4_house" class="screen">
-      <h3>Quest 5: The Secret Knock</h3>
+      <h3>Quest 7: The Secret Knock</h3>
       <p class="subtitle">She has successfully arrived at your house in High Wycombe! Tap the red door exactly <strong>three times</strong> to execute the secret birthday knock and alert the host.</p>
 
       <div class="door-scene">
@@ -1466,7 +1627,7 @@ button.btn-primary:disabled {
       <p class="instruction-text" style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-top: 16px;">🎂 Extinguish all 3 flames!</p>
     </div>
 
-    <!-- NEW SCREEN: SLIDESHOW SCREEN -->
+    <!-- SLIDESHOW SCREEN (PLAYS AUTOMATICALLY AFTER CAKE) -->
     <div id="s5_slideshow" class="screen">
       <h3>Memories of Haridhra</h3>
       <p class="subtitle">Walk through her magical memories across continents...</p>
@@ -1550,10 +1711,13 @@ let appState = {
   selectedDetour: null,
   knocksCount: 0,
   autopilotLevel: 0,
-  stabilized: false
+  stabilized: false,
+  sportsCleared: false,
+  selectedFood: "scone",
+  bitesTaken: 0
 };
 
-// Default Date
+// Default Date Setup
 document.getElementById('dateInput').valueAsDate = new Date();
 
 function updateQuestBar(level, desc) {
@@ -1567,7 +1731,7 @@ function showScreen(id) {
   document.querySelector('.content-wrapper').scrollTop = 0;
 }
 
-// Q1: Packing logic
+// Q1: Packing Logic
 function goToPacking() {
   const pName = document.getElementById('passengerName').value.trim();
   if (!pName) {
@@ -1602,7 +1766,7 @@ function togglePackItem(itemKey) {
   }
 }
 
-// Generate dynamic flight offers
+// Dynamic Flight Lists
 function search() {
   const rawOrigin = document.getElementById('originInput').value.trim();
   const rawDest = document.getElementById('destinationInput').value.trim();
@@ -1905,8 +2069,6 @@ function submitBorderAns(ansId) {
 function showDetourScreen() {
   updateQuestBar("Quest 3.5", "Select a Birthday Trip!");
   document.getElementById('confirmDetourBtn').disabled = true;
-  
-  // Reset selection styles
   document.querySelectorAll('.detour-card').forEach(c => c.classList.remove('selected'));
   appState.selectedDetour = null;
   
@@ -1921,29 +2083,144 @@ function selectDetour(detourKey) {
   playBeep();
 }
 
+// NEW: Quest 4: Sports Game Loader
+let ballInterval = null;
+function goToSports() {
+  updateQuestBar("Quest 4", "Grass Court Tennis");
+  
+  const sub = document.getElementById('sportsSubtitle');
+  if (appState.selectedDetour === 'windsor') {
+    sub.innerText = "While visiting Windsor Castle, the Royal Club invites Haridhra to play a friendly lawn tennis set!";
+  } else if (appState.selectedDetour === 'stonehenge') {
+    sub.innerText = "Near the historic megaliths of Wiltshire, Haridhra joins a local grass court club for a match!";
+  } else {
+    sub.innerText = "In the heart of London city park, Haridhra steps onto the turf to test her tennis swing!";
+  }
+
+  document.getElementById('sportsNextBtn').style.display = 'none';
+  appState.sportsCleared = false;
+  showScreen("s4_sports");
+
+  // Dynamic timing pointer loop
+  const p = document.getElementById('ballTimingPointer');
+  let pos = 0;
+  let dir = 1;
+  ballInterval = setInterval(() => {
+    pos += dir * 5;
+    if (pos >= 95) dir = -1;
+    if (pos <= 0) dir = 1;
+    p.style.left = `${pos}%`;
+  }, 35);
+}
+
+function trySwing() {
+  const pointer = document.getElementById('ballTimingPointer');
+  const posVal = parseFloat(pointer.style.left);
+
+  // Target sweet-spot: 60% to 80% representing green strike zone
+  if (posVal >= 60 && posVal <= 80) {
+    appState.sportsCleared = true;
+    clearInterval(ballInterval);
+    playSuccessChime();
+
+    // Visual smash trigger
+    const ball = document.getElementById('tennisBall');
+    ball.style.transform = "scale(1.8) translateY(-40px)";
+    setTimeout(() => {
+      ball.style.transform = "scale(1.0)";
+    }, 500);
+
+    // Update screen buttons
+    document.getElementById('sportsNextBtn').style.display = 'block';
+    const widget = document.querySelector('#s4_sports .autopilot-widget');
+    widget.innerHTML = `<h4 style="color:var(--success); font-weight:800">🏸 Smash Hit! Set Won!</h4><p style="font-size:0.8rem; color:var(--text-light); margin-top:4px;">Haridhra won the friendly set with a dazzling baseline return!</p>`;
+  } else {
+    const widget = document.querySelector('#s4_sports .autopilot-widget');
+    widget.style.borderColor = "#ef4444";
+    setTimeout(() => {
+      widget.style.borderColor = "#cbd5e1";
+    }, 300);
+    playFailBeep();
+  }
+}
+
+// NEW: Quest 5: Feast Game Loader
+function goToFeast() {
+  updateQuestBar("Quest 5", "Traditional Feast");
+  appState.bitesTaken = 0;
+  
+  // Reset selected styles
+  document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('selected'));
+  document.getElementById('menu_scone').classList.add('selected');
+  appState.selectedFood = "scone";
+  
+  document.getElementById('currentPlateFood').innerText = "🧁";
+  document.getElementById('currentPlateFood').style.transform = "scale(1.0)";
+  document.getElementById('feastNextBtn').style.display = 'none';
+  document.getElementById('eatButton').disabled = false;
+  document.getElementById('eatStatusText').innerText = 'Click "Take a Bite" 3 times to finish the meal!';
+  
+  showScreen("s4_feast");
+}
+
+function selectFood(foodKey, emoji) {
+  document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('selected'));
+  document.getElementById(`menu_${foodKey}`).classList.add('selected');
+  appState.selectedFood = foodKey;
+  
+  document.getElementById('currentPlateFood').innerText = emoji;
+  document.getElementById('currentPlateFood').style.transform = "scale(1.0)";
+  appState.bitesTaken = 0;
+  document.getElementById('feastNextBtn').style.display = 'none';
+  document.getElementById('eatButton').disabled = false;
+  document.getElementById('eatStatusText').innerText = 'Click "Take a Bite" 3 times to finish the meal!';
+  playBeep();
+}
+
+function biteFood() {
+  appState.bitesTaken++;
+  playBlowSound(); // bite noise simulation
+  
+  const f = document.getElementById('currentPlateFood');
+  
+  if (appState.bitesTaken === 1) {
+    f.style.transform = "scale(0.7) rotate(15deg)";
+    document.getElementById('eatStatusText').innerText = 'Tasty bite! 2 bites left...';
+  } else if (appState.bitesTaken === 2) {
+    f.style.transform = "scale(0.4) rotate(-15deg)";
+    document.getElementById('eatStatusText').innerText = 'Delicious! 1 bite left...';
+  } else if (appState.bitesTaken >= 3) {
+    f.style.transform = "scale(0)";
+    document.getElementById('eatButton').disabled = true;
+    document.getElementById('feastNextBtn').style.display = 'block';
+    document.getElementById('eatStatusText').innerText = 'Banquet Completed! Gourmet Badge Unlocked 🎖️';
+    playSuccessChime();
+  }
+}
+
 function goToTransit() {
-  updateQuestBar("Quest 4", "Buckinghamshire Countryside");
+  updateQuestBar("Quest 6", "Buckinghamshire Road");
   
   const intro = document.getElementById('transitIntroText');
   const h = document.getElementById('transitHeading');
   const d = document.getElementById('transitDesc');
   
   if (appState.selectedDetour === 'windsor') {
-    intro.innerText = `First, we make a magical detour to Windsor Castle! 🏰`;
-    h.innerText = "Trip Detour: Windsor Castle";
-    d.innerText = `Haridhra explores the historical royal gardens of Windsor before embarking onwards.`;
+    intro.innerText = `Leaving Windsor Castle, the taxi travels north through countryside...`;
+    h.innerText = "Windsor ➔ High Wycombe";
+    d.innerText = `Refreshed by tennis and traditional cream tea, Haridhra drives into Buckinghamshire.`;
   } else if (appState.selectedDetour === 'stonehenge') {
-    intro.innerText = `First, we make a mysterious detour to Stonehenge! 🪨`;
-    h.innerText = "Trip Detour: Stonehenge";
-    d.innerText = `Haridhra captures photographs near the famous megalith circles of Wiltshire.`;
+    intro.innerText = `Leaving Wiltshire and Stonehenge, we head east to Buckinghamshire...`;
+    h.innerText = "Wiltshire ➔ High Wycombe";
+    d.innerText = `Carrying memories of tennis near megaliths, Haridhra drives closer to home.`;
   } else {
-    intro.innerText = `First, we make a dynamic detour to the London City Eye! 🎡`;
-    h.innerText = "Trip Detour: London Eye & City";
-    d.innerText = `Haridhra enjoys scenic aerial sights over the London urban skylines.`;
+    intro.innerText = `Leaving the vibrant lights of London city, the taxi heads northwest...`;
+    h.innerText = "London ➔ High Wycombe";
+    d.innerText = `After active tennis sets and sweet chocolate treats, Haridhra travels to High Wycombe.`;
   }
   
   document.getElementById('mazeEmoji').innerText = "🚕";
-  document.getElementById('mazeText').innerText = `"We are now heading towards High Wycombe! Which rural lane should we follow?"`;
+  document.getElementById('mazeText').innerText = `"We are now navigating near the Chiltern Hills! Which route should we follow?"`;
   document.getElementById('mazeOptions').style.display = 'flex';
   document.getElementById('transitNextBtn').style.display = 'none';
   
@@ -1970,9 +2247,9 @@ function chooseMazeRoute(choice) {
   }
 }
 
-// Q5: Knock Door Challenge
+// Q7: Knock Door Challenge
 function arriveAtHouse() {
-  updateQuestBar("Quest 5", "The Secret Door Knock");
+  updateQuestBar("Quest 7", "The Secret Door Knock");
   appState.knocksCount = 0;
   
   const door = document.getElementById('mainDoor');
@@ -2109,9 +2386,13 @@ function triggerCelebration() {
   if (appState.selectedDetour === 'stonehenge') detourMsg = "Stonehenge, ";
   if (appState.selectedDetour === 'london') detourMsg = "London City, ";
   
+  let foodDesc = "traditional cream scone";
+  if (appState.selectedFood === 'chips') foodDesc = "crispy fish and chips";
+  if (appState.selectedFood === 'cake') foodDesc = "birthday chocolate cake";
+
   document.getElementById('finalCardMsg').innerHTML = `
     Your special journey from <strong>${appState.originFull}</strong> to <strong>High Wycombe, UK</strong> is complete! <br><br>
-    Along the way, you solved the airport puzzle, braved European turbulence, cleared Customs, visited <strong>${detourMsg}</strong>and found your way straight to our front door! <br><br>
+    Along the way, you solved the airport puzzle, braved European turbulence, cleared Customs, visited <strong>${detourMsg}</strong> played a grass tennis court game, feasted on <strong>${foodDesc}</strong>, and found your way straight to our front door! <br><br>
     May your year be filled with exciting new travels, safe landings, and beautiful memories. ✈️🇬🇧💛
   `;
 
