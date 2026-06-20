@@ -157,16 +157,22 @@ body {
 
 .slideshow img {
   position:absolute;
-  width:100%; height:100%;
+  width:100%;
+  height:100%;
   object-fit:cover;
   opacity:0;
   animation:fade 12s infinite;
 }
 
 .slideshow img:nth-child(1){animation-delay:0s;}
-slideshow img:nth-child(2){animation-delay:4s;}
+.slideshow img:nth-child(2){animation-delay:4s;}
 .slideshow img:nth-child(3){animation-delay:8s;}
 
+.slideshow img:first-child {
+  opacity:1;
+}
+
+/* Fade animation for slideshow */
 @keyframes fade {
   0%{opacity:0;}
   10%{opacity:1;}
@@ -296,6 +302,10 @@ function nextQuestion(choice){
       return;
     }
     current++;
+    if(current >= questions.length){
+      startBirthday();
+      return;
+    }
     loadQuestion();
     box.classList.remove("fade-out");
     box.classList.add("fade-in");
