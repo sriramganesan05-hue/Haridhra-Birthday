@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Would You Rather?</title>
+<title>Happy Birthday Haridhra</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -12,30 +12,12 @@ body {
   font-family:'Poppins',sans-serif;
   background:#000;
   color:#fff;
+  overflow:hidden;
   text-align:center;
-  overflow-x:hidden;
 }
 
-/* Gold/orange gradient */
-.bg-gradient {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:linear-gradient(135deg,#ffcc00,#ff9900,#ff6600,#ff3300);
-  background-size:400% 400%;
-  animation:bgShift 12s ease infinite;
-  z-index:-2;
-}
-@keyframes bgShift {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-/* Background image */
-.bg-photo {
+/* Background slideshow */
+.bg {
   position:fixed;
   top:0;
   left:0;
@@ -43,62 +25,30 @@ body {
   height:100%;
   background-size:cover;
   background-position:center;
-  opacity:0.25;
-  filter:blur(6px);
-  transition:background-image 1s ease;
-  z-index:-1;
+  filter:blur(6px) brightness(0.6);
+  animation:slide 25s infinite;
+  z-index:-2;
 }
 
+@keyframes slide {
+  0%   {background-image:url('food.jpg');}
+  20%  {background-image:url('travel.jpg');}
+  40%  {background-image:url('animals.jpg');}
+  60%  {background-image:url('luck.jpg');}
+  80%  {background-image:url('surprise.jpg');}
+  100% {background-image:url('food.jpg');}
+}
+
+/* Gold glow title */
 h1 {
-  margin-top:40px;
-  font-size:42px;
+  margin-top:60px;
+  font-size:48px;
   font-weight:700;
   color:#ffcc00;
+  text-shadow:0 0 20px #ffcc00;
 }
 
-#game-box {
-  width:90%;
-  max-width:600px;
-  margin:40px auto;
-  padding:25px;
-  background:rgba(0,0,0,0.55);
-  border-radius:20px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 5px 20px rgba(0,0,0,0.6);
-}
-
-.question {
-  font-size:24px;
-  font-weight:600;
-  margin-bottom:25px;
-}
-
-.choice-btn {
-  display:block;
-  width:90%;
-  margin:12px auto;
-  padding:18px;
-  font-size:20px;
-  border:none;
-  border-radius:15px;
-  background:#fff;
-  color:#333;
-  cursor:pointer;
-  transition:0.3s;
-  font-weight:600;
-}
-.choice-btn:hover {
-  transform:scale(1.05);
-  background:#ffe08a;
-}
-
-/* Surprise section */
-#surprise-content {
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 2s ease;
-}
-
+/* Card */
 .card {
   background:rgba(0,0,0,0.55);
   padding:30px;
@@ -121,21 +71,21 @@ h1 {
   border:4px solid #ffcc00;
   box-shadow:0 0 25px rgba(255,204,0,0.7);
 }
+
 .slideshow img {
   position:absolute;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
   object-fit:cover;
   opacity:0;
-  animation:fadeCycle 9s infinite;
+  animation:fade 12s infinite;
 }
-.slideshow img:nth-child(1){animation-delay:0s;}
-.slideshow img:nth-child(2){animation-delay:3s;}
-.slideshow img:nth-child(3){animation-delay:6s;}
 
-@keyframes fadeCycle {
+.slideshow img:nth-child(1){animation-delay:0s;}
+.slideshow img:nth-child(2){animation-delay:4s;}
+.slideshow img:nth-child(3){animation-delay:8s;}
+
+@keyframes fade {
   0%{opacity:0;}
   10%{opacity:1;}
   30%{opacity:1;}
@@ -143,14 +93,17 @@ h1 {
   100%{opacity:0;}
 }
 
+/* Typewriter */
 #message {
   font-size:20px;
   line-height:1.8;
   margin-top:20px;
   min-height:200px;
   white-space:pre-wrap;
+  color:#fff;
 }
 
+/* Signature */
 .signature {
   margin-top:15px;
   font-style:italic;
@@ -171,126 +124,42 @@ canvas {
 
 <body>
 
-<div class="bg-gradient"></div>
-<div class="bg-photo" id="bg-photo"></div>
+<div class="bg"></div>
 
-<h1 id="title">Would You Rather?</h1>
+<h1>🎉 Happy Birthday Haridhra 🎉</h1>
 
-<div id="game-box">
-  <div id="question-container"></div>
-</div>
-
-<!-- Surprise Content -->
-<div id="surprise-content">
-  <canvas id="fireworks"></canvas>
-
-  <h1>🎉 Happy Birthday Haridhra 🎉</h1>
-
-  <div class="card">
-    <div class="slideshow">
-      <img src="Haridhra1.jpg">
-      <img src="Haridhra2.jpg">
-      <img src="Haridhra3.jpg">
-    </div>
-    <p id="message"></p>
-    <p class="signature">— With all my love, Your Big Brother, Sriram</p>
+<div class="card">
+  <div class="slideshow">
+    <img src="Haridhra1.jpg">
+    <img src="Haridhra2.jpg">
+    <img src="Haridhra3.jpg">
   </div>
 
-  <audio id="voice" src="https://www.soundjay.com/human/sounds/happy-birthday-01.mp3"></audio>
+  <p id="message"></p>
+
+  <p class="signature">— With all my love, Your Big Brother, Sriram</p>
 </div>
 
+<canvas id="fireworks"></canvas>
+
+<audio id="voice" src="https://www.soundjay.com/human/sounds/happy-birthday-01.mp3"></audio>
+
 <script>
-/* CLEAN QUESTIONS — no apostrophes */
-const questions = [
-  {
-    q: "Would you rather…",
-    a: ["Accidentally like someones 2014 Instagram post", "Say you too when the waiter says enjoy your meal"]
-  },
-  {
-    q: "Would you rather…",
-    a: ["Have your phone die at 1 percent every day", "Have WiFi that only works in one corner of your house"]
-  },
-  {
-    q: "Would you rather…",
-    a: ["Fight one horse sized duck", "Fight 50 duck sized horses"]
-  },
-  {
-    q: "Would you rather…",
-    a: ["Have a sneeze stuck for 3 hours", "Have hiccups during every serious conversation"]
-  },
-  {
-    q: "Final one…",
-    a: ["See normal results like a sensible human", "Unlock the special surprise made ONLY for the birthday girl"]
-  }
-];
-
-/* Background images */
-const bgImages = [
-  "food.jpg",
-  "travel.jpg",
-  "animals.jpg",
-  "luck.jpg",
-  "surprise.jpg"
-];
-
-let current = 0;
-
-function loadQuestion(){
-  const qBox = document.getElementById("question-container");
-  const bg = document.getElementById("bg-photo");
-
-  if(current >= questions.length){
-    revealSurprise();
-    return;
-  }
-
-  const q = questions[current];
-  bg.style.backgroundImage = `url('${bgImages[current]}')`;
-
-  qBox.innerHTML = `
-    <div class="question">${q.q}</div>
-    ${q.a.map(ans => `<button class="choice-btn" onclick="nextQuestion('${ans}')">${ans}</button>`).join("")}
-  `;
-}
-
-function nextQuestion(choice){
-  if(choice.includes("special surprise")){
-    revealSurprise();
-    return;
-  }
-  current++;
-  loadQuestion();
-}
-
-loadQuestion();
-
-/* Surprise reveal */
-function revealSurprise(){
-  document.getElementById("game-box").style.display="none";
-  document.getElementById("title").style.display="none";
-
-  const sc = document.getElementById("surprise-content");
-  sc.style.opacity = 1;
-  sc.style.pointerEvents = "auto";
-
-  startShow();
-}
-
 /* Typewriter message */
-const text = `You chose the surprise…
+const text = `Happy Birthday, Haridhra ❤️
 
-And honestly, that makes sense.
+Today is all about you.
 
-Because YOU are the surprise.
-You are the joy.
-You are the brightness.
-You are the reason today is special.
+Your smile, your kindness, your energy —
+you brighten every room you walk into.
 
-So here it is…
+You deserve joy.
+You deserve love.
+You deserve every good thing coming your way.
 
-A birthday message made just for you.
+Never forget how special you are.
 
-Happy Birthday, Haridhra ❤️`;
+Happy Birthday, superstar ✨`;
 
 let i = 0;
 function typeWriter(){
@@ -298,29 +167,30 @@ function typeWriter(){
     const char = text.charAt(i);
     document.getElementById("message").innerHTML += char === "\n" ? "<br>" : char;
     i++;
-    setTimeout(typeWriter, 25);
+    setTimeout(typeWriter, 35);
   }
 }
+typeWriter();
 
 /* Fireworks */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
-function resizeCanvas(){
+function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }
-resizeCanvas();
-window.onresize = resizeCanvas;
+resize();
+window.onresize = resize;
 
-let fireworks = [];
+let fw = [];
 
-function createFirework(){
+function create(){
   const x = Math.random()*canvas.width;
   const y = Math.random()*canvas.height/2;
   const colors = ["#ffffff","#ffcc00","#ff9900","#ff6600"];
   for(let i=0;i<40;i++){
-    fireworks.push({
+    fw.push({
       x,y,
       radius:2,
       angle:Math.random()*2*Math.PI,
@@ -331,28 +201,27 @@ function createFirework(){
   }
 }
 
-function animateFireworks(){
+function animate(){
   ctx.fillStyle="rgba(0,0,0,0.15)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
-  fireworks.forEach((f,index)=>{
-    f.x+=Math.cos(f.angle)*f.speed;
-    f.y+=Math.sin(f.angle)*f.speed;
-    f.life--;
+  fw.forEach((p,i)=>{
+    p.x+=Math.cos(p.angle)*p.speed;
+    p.y+=Math.sin(p.angle)*p.speed;
+    p.life--;
     ctx.beginPath();
-    ctx.arc(f.x,f.y,f.radius,0,Math.PI*2);
-    ctx.fillStyle=f.color;
+    ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+    ctx.fillStyle=p.color;
     ctx.fill();
-    if(f.life<=0) fireworks.splice(index,1);
+    if(p.life<=0) fw.splice(i,1);
   });
-  requestAnimationFrame(animateFireworks);
+  requestAnimationFrame(animate);
 }
 
-function startShow(){
-  typeWriter();
-  document.getElementById("voice").play().catch(()=>{});
-  animateFireworks();
-  setInterval(createFirework,800);
-}
+setInterval(create,800);
+animate();
+
+/* Play music */
+document.getElementById("voice").play().catch(()=>{});
 </script>
 
 </body>
