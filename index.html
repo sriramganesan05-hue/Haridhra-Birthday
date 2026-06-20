@@ -2,75 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Quick Personality Check</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<title>Would You Rather?</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin:0;
   padding:0;
   font-family:'Poppins',sans-serif;
-  background:#eef2f7;
-  color:#222;
+  background:linear-gradient(135deg,#ffcf33,#ff914d,#ff4d6d,#ff6f91,#ff9671);
+  background-size:400% 400%;
+  animation:bgShift 10s ease infinite;
+  color:#fff;
   text-align:center;
   transition:1.5s ease;
   overflow-x:hidden;
-}
-
-h1 {
-  margin-top:40px;
-  font-size:40px;
-  color:#1a3d7c;
-  transition:1.5s ease;
-}
-
-#quiz-box {
-  width:90%;
-  max-width:600px;
-  margin:30px auto;
-  padding:25px;
-  background:#ffffff;
-  border-radius:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-
-.question {
-  font-size:22px;
-  font-weight:600;
-  margin-bottom:20px;
-}
-
-.answer-btn {
-  display:block;
-  width:90%;
-  margin:10px auto;
-  padding:15px;
-  font-size:18px;
-  border:none;
-  border-radius:15px;
-  background:#1a3d7c;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.answer-btn:hover {
-  background:#0f2a55;
-  transform:scale(1.03);
-}
-
-#progress {
-  margin-top:20px;
-  font-size:16px;
-  color:#555;
-}
-
-/* Surprise Mode */
-.surprise {
-  background:linear-gradient(135deg,#1a3d7c,#3a7bd5,#00d2ff,#f7b733,#fc4a1a);
-  background-size:500% 500%;
-  animation:bgShift 10s ease infinite;
-  color:#fff;
 }
 
 @keyframes bgShift {
@@ -79,6 +25,50 @@ h1 {
   100%{background-position:0% 50%;}
 }
 
+h1 {
+  margin-top:40px;
+  font-size:42px;
+  font-weight:700;
+}
+
+#game-box {
+  width:90%;
+  max-width:600px;
+  margin:40px auto;
+  padding:25px;
+  background:rgba(255,255,255,0.15);
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+.question {
+  font-size:24px;
+  font-weight:600;
+  margin-bottom:25px;
+}
+
+.choice-btn {
+  display:block;
+  width:90%;
+  margin:12px auto;
+  padding:18px;
+  font-size:20px;
+  border:none;
+  border-radius:15px;
+  background:#ffffff;
+  color:#333;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:600;
+}
+
+.choice-btn:hover {
+  transform:scale(1.05);
+  background:#ffe6e6;
+}
+
+/* Surprise Mode */
 #surprise-content {
   opacity:0;
   pointer-events:none;
@@ -86,7 +76,7 @@ h1 {
 }
 
 .card {
-  background:rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.2);
   padding:30px;
   border-radius:25px;
   width:85%;
@@ -145,11 +135,10 @@ canvas {
 
 <body>
 
-<h1 id="title">Quick Personality Check</h1>
+<h1 id="title">Would You Rather?</h1>
 
-<div id="quiz-box">
+<div id="game-box">
   <div id="question-container"></div>
-  <div id="progress"></div>
 </div>
 
 <!-- Surprise Content -->
@@ -168,27 +157,27 @@ canvas {
 </div>
 
 <script>
-/* FUN QUESTIONS */
+/* FUN WOULD YOU RATHER QUESTIONS */
 const questions = [
   {
-    q: "Someone texts you at 2 AM saying they’re sad. What do you do?",
-    a: ["Reply instantly", "Call them", "Show up with snacks"]
+    q: "Would you rather…",
+    a: ["Have unlimited snacks", "Have unlimited holidays"]
   },
   {
-    q: "What’s your secret superpower?",
-    a: ["Making people feel safe", "Making people laugh", "Being effortlessly lovable"]
+    q: "Would you rather…",
+    a: ["Be the funniest person in the room", "Be the smartest person in the room"]
   },
   {
-    q: "How do people feel when you walk into a room?",
-    a: ["Relieved", "Happier", "Like the main character arrived"]
+    q: "Would you rather…",
+    a: ["Travel the world", "Stay home with comfort and peace"]
   },
   {
-    q: "Pick the word that fits you best:",
-    a: ["Warm", "Genuine", "Unforgettable"]
+    q: "Would you rather…",
+    a: ["Have a perfect day", "Have a perfect year"]
   },
   {
-    q: "How often do you accidentally make someone’s day better?",
-    a: ["Every day", "More than you notice", "Literally always"]
+    q: "Final one… Would you rather choose…",
+    a: ["Anyone else", "Haridhra ❤️"]
   }
 ];
 
@@ -196,7 +185,6 @@ let current = 0;
 
 function loadQuestion(){
   const qBox = document.getElementById("question-container");
-  const p = document.getElementById("progress");
 
   if(current >= questions.length){
     revealSurprise();
@@ -207,13 +195,15 @@ function loadQuestion(){
 
   qBox.innerHTML = `
     <div class="question">${q.q}</div>
-    ${q.a.map(ans => `<button class="answer-btn" onclick="nextQuestion()">${ans}</button>`).join("")}
+    ${q.a.map(ans => `<button class="choice-btn" onclick="nextQuestion('${ans}')">${ans}</button>`).join("")}
   `;
-
-  p.innerHTML = `Question ${current+1} of ${questions.length}`;
 }
 
-function nextQuestion(){
+function nextQuestion(choice){
+  if(choice.includes("Haridhra")){
+    revealSurprise();
+    return;
+  }
   current++;
   loadQuestion();
 }
@@ -222,8 +212,7 @@ loadQuestion();
 
 /* SURPRISE REVEAL */
 function revealSurprise(){
-  document.body.classList.add("surprise");
-  document.getElementById("quiz-box").style.display="none";
+  document.getElementById("game-box").style.display="none";
   document.getElementById("title").style.display="none";
 
   const sc = document.getElementById("surprise-content");
@@ -234,13 +223,14 @@ function revealSurprise(){
 }
 
 /* TYPEWRITER MESSAGE */
-const text = `Your answers were perfect…
+const text = `Looks like no matter what the choices were…
 
-Because you ARE the person who shows up for others.
-You ARE the person who makes people feel safe.
-You ARE the person who brightens rooms.
-You ARE unforgettable.
-You ARE loved more than you realise.
+The answer was always going to be you.
+
+Because you ARE the joy.
+You ARE the comfort.
+You ARE the brightness.
+You ARE the favourite choice.
 
 And today…
 
@@ -274,7 +264,7 @@ let fireworks = [];
 function createFirework(){
   const x = Math.random()*canvas.width;
   const y = Math.random()*canvas.height/2;
-  const colors = ["#ffffff","#ffe066","#00d2ff","#3a7bd5","#f7b733"];
+  const colors = ["#ffffff","#ffe066","#00d2ff","#ff4d6d","#ffcf33"];
   for(let i=0;i<40;i++){
     fireworks.push({
       x,y,
