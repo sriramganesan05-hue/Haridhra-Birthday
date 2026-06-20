@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky Travel - Haridhra's UK Birthday Adventure</title>
+<title>Sky Travel - Haridhra's Cosmic Odyssey</title>
 
 <style>
 :root {
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --accent: #ec4899;
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --text: #1e293b;
-  --text-light: #64748b;
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --accent: #f43f5e;
+  --bg: #0b0f19;
+  --card-bg: #1e293b;
+  --text: #f1f5f9;
+  --text-light: #94a3b8;
   --success: #10b981;
+  --portal-color: #a855f7;
 }
 
 * {
@@ -25,12 +26,13 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: #cbd5e1;
+  background: #020617;
   color: var(--text);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 /* APP CONTAINER */
@@ -41,22 +43,23 @@ body {
   min-height: 740px;
   background: var(--bg);
   border-radius: 30px;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.15);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.25);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* HEADER & QUEST BAR */
 .header-container {
   z-index: 10;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header {
   padding: 16px 20px;
-  background: linear-gradient(135deg, #1e3a8a, var(--primary));
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
   color: white;
   display: flex;
   align-items: center;
@@ -66,7 +69,7 @@ body {
 }
 
 .quest-status-bar {
-  background: #1e293b;
+  background: #0f172a;
   color: #94a3b8;
   padding: 8px 20px;
   font-size: 0.75rem;
@@ -74,16 +77,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #334155;
 }
 
 .quest-badge {
-  background: var(--accent);
+  background: var(--portal-color);
   color: white;
   padding: 2px 8px;
   border-radius: 10px;
   font-size: 0.7rem;
   text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
 /* MAIN CONTENT AREA WITH SCROLLING */
@@ -98,23 +101,26 @@ body {
 .screen {
   display: none;
   padding: 24px;
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .screen.active {
   display: block;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 h3 {
   font-size: 1.35rem;
   margin-bottom: 6px;
-  font-weight: 700;
-  color: #0f172a;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(to right, #ffffff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 p.subtitle {
@@ -124,11 +130,11 @@ p.subtitle {
   line-height: 1.4;
 }
 
-/* INTERACTIVE TASKS STYLING */
+/* TASK CONTAINERS */
 .task-container {
-  background: white;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
   padding: 18px;
   margin-bottom: 20px;
 }
@@ -136,24 +142,23 @@ p.subtitle {
 .task-title {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #0f172a;
+  color: white;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* Q1: PACKING MINI-GAME */
+/* Q1: PACKING GRID */
 .packing-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
-  margin-top: 10px;
 }
 
 .packing-item {
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
+  background: #111827;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 12px 6px;
   text-align: center;
@@ -162,8 +167,9 @@ p.subtitle {
 }
 
 .packing-item.selected {
-  background: #f0fdf4;
-  border-color: var(--success);
+  background: rgba(168, 85, 247, 0.15);
+  border-color: var(--portal-color);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
   transform: scale(1.05);
 }
 
@@ -176,6 +182,7 @@ p.subtitle {
 .packing-label {
   font-size: 0.75rem;
   font-weight: 600;
+  color: white;
 }
 
 /* INPUTS */
@@ -196,19 +203,18 @@ p.subtitle {
 input {
   width: 100%;
   padding: 12px 16px;
-  border: 1.5px solid #e2e8f0;
+  border: 1.5px solid rgba(255,255,255,0.15);
   border-radius: 12px;
   font-size: 1rem;
-  font-weight: 500;
+  color: white;
+  background: #111827;
   transition: all 0.2s;
-  color: var(--text);
-  background: white;
 }
 
 input:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  border-color: var(--portal-color);
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25);
 }
 
 /* BUTTONS */
@@ -222,8 +228,8 @@ button.btn-primary {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+  transition: all 0.25s;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 button.btn-primary:active {
@@ -231,12 +237,13 @@ button.btn-primary:active {
 }
 
 button.btn-primary:disabled {
-  background: #cbd5e1;
+  background: #334155;
+  color: #64748b;
   box-shadow: none;
   cursor: not-allowed;
 }
 
-/* FLIGHT LIST */
+/* FLIGHT CARDS */
 .flight-list {
   display: flex;
   flex-direction: column;
@@ -246,7 +253,7 @@ button.btn-primary:disabled {
 
 .flight-card {
   background: var(--card-bg);
-  border: 2px solid #e2e8f0;
+  border: 2px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 16px;
   cursor: pointer;
@@ -254,8 +261,9 @@ button.btn-primary:disabled {
 }
 
 .flight-card.selected {
-  border-color: var(--primary);
-  background: #f0f7ff;
+  border-color: var(--portal-color);
+  background: rgba(168, 85, 247, 0.05);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
 }
 
 .card-top {
@@ -265,15 +273,9 @@ button.btn-primary:disabled {
   margin-bottom: 12px;
 }
 
-.airline-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .airline-name {
   font-weight: 700;
-  font-size: 0.95rem;
+  color: white;
 }
 
 .card-price {
@@ -291,12 +293,7 @@ button.btn-primary:disabled {
 .time {
   font-size: 1.1rem;
   font-weight: 700;
-}
-
-.airport-code {
-  font-size: 0.8rem;
-  color: var(--text-light);
-  font-weight: 600;
+  color: white;
 }
 
 .path-line {
@@ -311,23 +308,18 @@ button.btn-primary:disabled {
 .path-line .dots {
   width: 100%;
   height: 2px;
-  border-top: 2px dashed #cbd5e1;
+  border-top: 2px dashed rgba(255, 255, 255, 0.2);
   position: relative;
   top: 1px;
 }
 
 .path-line .plane-icon {
   font-size: 0.8rem;
-  color: var(--text-light);
+  color: var(--portal-color);
   position: absolute;
   top: -6px;
   background: var(--card-bg);
   padding: 0 6px;
-}
-
-.flight-card.selected .plane-icon {
-  background: #f0f7ff;
-  color: var(--primary);
 }
 
 /* SEAT SELECTION */
@@ -336,7 +328,7 @@ button.btn-primary:disabled {
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 20px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .seat-grid {
@@ -349,7 +341,8 @@ button.btn-primary:disabled {
 
 .seat {
   aspect-ratio: 1;
-  background: #e2e8f0;
+  background: #334155;
+  color: white;
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -362,33 +355,33 @@ button.btn-primary:disabled {
 
 .seat.aisle {
   background: transparent;
-  cursor: default;
   pointer-events: none;
 }
 
 .seat.occupied {
-  background: #cbd5e1;
-  color: #94a3b8;
+  background: #1e293b;
+  color: #475569;
   cursor: not-allowed;
 }
 
 .seat.selected {
-  background: var(--primary);
-  color: white;
+  background: var(--portal-color);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
 }
 
 /* BOARDING PASS WALLET STYLE */
 .boarding-pass-ticket {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
+  background: linear-gradient(135deg, #1e1b4b, #030712);
   color: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .ticket-header {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.03);
   padding: 14px 18px;
   display: flex;
   justify-content: space-between;
@@ -397,11 +390,12 @@ button.btn-primary:disabled {
 }
 
 .ticket-header img.passenger-avatar {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: 2px solid var(--primary);
+  border: 2px solid var(--portal-color);
   object-fit: cover;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
 }
 
 .ticket-flight-info {
@@ -427,7 +421,7 @@ button.btn-primary:disabled {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   padding: 16px 18px;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.2);
   border-top: 1px dashed rgba(255,255,255,0.1);
   border-bottom: 1px dashed rgba(255,255,255,0.1);
   position: relative;
@@ -447,7 +441,7 @@ button.btn-primary:disabled {
 
 .ticket-label {
   font-size: 0.7rem;
-  color: #94a3b8;
+  color: #64748b;
   text-transform: uppercase;
   margin-bottom: 2px;
   font-weight: 600;
@@ -479,11 +473,12 @@ button.btn-primary:disabled {
 /* MAP SCREEN */
 .live-map {
   height: 180px;
-  background: radial-gradient(circle at 50% 120%, #1e3a8a 0%, #020617 80%);
+  background: radial-gradient(circle at 50% 120%, #1e1b4b 0%, #020617 80%);
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .live-map .star {
@@ -507,7 +502,7 @@ button.btn-primary:disabled {
   transform: translate(-50%, -50%) rotate(45deg);
   font-size: 24px;
   z-index: 5;
-  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.8));
 }
 
 .progress-text {
@@ -521,12 +516,12 @@ button.btn-primary:disabled {
 }
 
 .flight-stats-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 16px;
   margin-top: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .stat-row {
@@ -536,28 +531,29 @@ button.btn-primary:disabled {
 }
 
 .stat-item {
-  border-left: 2px solid var(--primary);
+  border-left: 2px solid var(--portal-color);
   padding-left: 10px;
 }
 
 .stat-val {
   font-size: 1.1rem;
   font-weight: 700;
+  color: white;
 }
 
 /* MINI AUTOPILOT GAME */
 .autopilot-widget {
-  background: #f1f5f9;
+  background: #111827;
   border-radius: 12px;
   padding: 12px;
   margin-top: 12px;
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid rgba(255,255,255,0.1);
   text-align: center;
 }
 
 .autopilot-game-track {
   height: 12px;
-  background: #cbd5e1;
+  background: #334155;
   border-radius: 6px;
   margin: 12px 0;
   position: relative;
@@ -576,26 +572,28 @@ button.btn-primary:disabled {
   position: absolute;
   width: 10px;
   height: 100%;
-  background: var(--accent);
+  background: var(--portal-color);
   left: 0%;
   transition: left 0.05s linear;
 }
 
 /* BORDER CONTROL SCREEN */
 .border-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 20px;
-  border: 1.5px solid #cbd5e1;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .border-dialogue {
-  background: #f1f5f9;
+  background: #111827;
   border-radius: 12px;
-  padding: 12px;
+  padding: 14px;
   margin-bottom: 16px;
-  border-left: 4px solid var(--primary);
+  border-left: 4px solid var(--portal-color);
   font-size: 0.9rem;
+  line-height: 1.4;
+  color: white;
 }
 
 .border-options {
@@ -607,44 +605,101 @@ button.btn-primary:disabled {
 .border-option {
   width: 100%;
   text-align: left;
-  background: white;
-  border: 1.5px solid #cbd5e1;
+  background: #111827;
+  border: 1.5px solid rgba(255,255,255,0.1);
   border-radius: 10px;
   padding: 12px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  color: white;
 }
 
 .border-option:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
+  background: #1e293b;
+  border-color: rgba(255,255,255,0.2);
 }
 
 .border-option.wrong {
   border-color: #ef4444;
-  background: #fef2f2;
+  background: rgba(239, 68, 68, 0.1);
 }
 
 .border-option.correct {
   border-color: var(--success);
-  background: #hn;
-  background-color: #f0fdf4;
+  background: rgba(16, 185, 129, 0.1);
 }
 
-/* HIGH WYCOMBE MAP & MAZE */
+/* TRIPS / DETOURS SECTOR */
+.detour-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detour-card {
+  background: var(--card-bg);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.detour-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.detour-card.selected {
+  border-color: var(--primary);
+  background: rgba(99, 102, 241, 0.08);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+}
+
+.detour-icon {
+  font-size: 2.2rem;
+  background: #111827;
+  border-radius: 12px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detour-info {
+  flex: 1;
+}
+
+.detour-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+}
+
+.detour-desc {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+/* HIGH WYCOMBE MAP & TRANSIT */
 .maze-widget {
-  background: #f1f5f9;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 16px;
   text-align: center;
-  border: 1.5px solid #e2e8f0;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .maze-scenery {
   height: 120px;
-  background: linear-gradient(180deg, #bae6fd 0%, #f0fdf4 100%);
+  background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%);
   border-radius: 12px;
   position: relative;
   overflow: hidden;
@@ -657,16 +712,17 @@ button.btn-primary:disabled {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
 }
 
 .scenic-image-container {
   display: flex;
   gap: 12px;
-  background: white;
+  background: var(--card-bg);
   padding: 14px;
   border-radius: 16px;
   margin-top: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   align-items: center;
 }
 
@@ -675,27 +731,27 @@ button.btn-primary:disabled {
   height: 70px;
   border-radius: 12px;
   object-fit: cover;
-  border: 2px solid #3b82f6;
+  border: 2px solid var(--portal-color);
 }
 
 /* HOUSE DOOR KNOCK */
 .door-scene {
-  background: #f1f5f9;
+  background: var(--card-bg);
   border-radius: 20px;
   padding: 24px;
   text-align: center;
-  border: 1px solid #cbd5e1;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .door-container {
   position: relative;
   width: 170px;
   height: 260px;
-  background: #1e293b;
+  background: #020617;
   margin: 0 auto 20px;
   border-radius: 8px;
   perspective: 800px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.2);
 }
 
 .door {
@@ -713,7 +769,7 @@ button.btn-primary:disabled {
   justify-content: flex-end;
   padding-right: 14px;
   cursor: pointer;
-  box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
 }
 
 .door-knob {
@@ -721,6 +777,7 @@ button.btn-primary:disabled {
   height: 14px;
   background: #f59e0b;
   border-radius: 50%;
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.8);
 }
 
 .door-interior {
@@ -747,7 +804,7 @@ button.btn-primary:disabled {
 .welcome-label {
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--portal-color);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -770,7 +827,7 @@ button.btn-primary:disabled {
   background: linear-gradient(to right, #ec4899, #db2777);
   border-radius: 12px 12px 4px 4px;
   position: relative;
-  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+  box-shadow: 0 4px 25px rgba(236, 72, 153, 0.4);
 }
 
 .cake-layer {
@@ -853,9 +910,98 @@ button.btn-primary:disabled {
 .cake-plate {
   width: 200px;
   height: 14px;
-  background: #e2e8f0;
+  background: #1e293b;
   border-radius: 50%;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+}
+
+/* SPARK EXPLOSION EFFECT */
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 1;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
+}
+
+/* NEW: SLIDESHOW SCREEN */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 310px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.2);
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 4s linear;
+  transform: scale(1.0);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1.08); /* Ken burns zoom */
+  z-index: 2;
+}
+
+.slide-caption {
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0));
+  padding: 24px 16px 14px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.slide-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: var(--portal-color);
+  box-shadow: 0 0 6px var(--portal-color);
 }
 
 /* FINAL SCREEN */
@@ -913,12 +1059,12 @@ button.btn-primary:disabled {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--text);
-  background: white;
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 18px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.04);
   margin-bottom: 24px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* CONFETTI CANVAS */
@@ -933,7 +1079,7 @@ button.btn-primary:disabled {
 }
 
 .audio-toggle {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   color: white;
   width: 36px;
@@ -1055,9 +1201,9 @@ button.btn-primary:disabled {
           <!-- Dynamic Seat Map Injected Here -->
         </div>
         <div class="seat-legend">
-          <div class="legend-item"><div class="legend-color" style="background:#e2e8f0"></div>Available</div>
-          <div class="legend-item"><div class="legend-color" style="background:#cbd5e1"></div>Occupied</div>
-          <div class="legend-item"><div class="legend-color" style="background:var(--primary)"></div>Selected</div>
+          <div class="legend-item"><div class="legend-color" style="background:#334155"></div>Available</div>
+          <div class="legend-item"><div class="legend-color" style="background:#1e293b"></div>Occupied</div>
+          <div class="legend-item"><div class="legend-color" style="background:var(--portal-color)"></div>Selected</div>
         </div>
       </div>
 
@@ -1196,20 +1342,52 @@ button.btn-primary:disabled {
         </div>
       </div>
 
-      <button class="btn-primary" id="borderNextBtn" style="margin-top: 20px; display: none;" onclick="showTransitScreen()">Pass Border Control</button>
+      <button class="btn-primary" id="borderNextBtn" style="margin-top: 20px; display: none;" onclick="showDetourScreen()">Pass Border Control</button>
+    </div>
+
+    <!-- NEW SCREEN: CHOOSE DETOUR TRIP -->
+    <div id="s4_detour" class="screen">
+      <h3>Select a Birthday Trip Detour!</h3>
+      <p class="subtitle">Before arriving at High Wycombe, choose a magical tourist trip to complete her UK arrival adventure!</p>
+
+      <div class="detour-grid">
+        <div class="detour-card" id="detour_windsor" onclick="selectDetour('windsor')">
+          <div class="detour-icon">🏰</div>
+          <div class="detour-info">
+            <div class="detour-name">Windsor Castle</div>
+            <div class="detour-desc">Visit the spellbound royal spires & ancient royal chambers.</div>
+          </div>
+        </div>
+        <div class="detour-card" id="detour_stonehenge" onclick="selectDetour('stonehenge')">
+          <div class="detour-icon">🪨</div>
+          <div class="detour-info">
+            <div class="detour-name">Stonehenge</div>
+            <div class="detour-desc">Witness ancient floating monoliths of mysterious lore.</div>
+          </div>
+        </div>
+        <div class="detour-card" id="detour_london" onclick="selectDetour('london')">
+          <div class="detour-icon">🎡</div>
+          <div class="detour-info">
+            <div class="detour-name">London Eye & City</div>
+            <div class="detour-desc">Take a ride above the sparkling neon metropolis.</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="confirmDetourBtn" style="margin-top: 24px;" onclick="goToTransit()" disabled>Begin Selected Trip</button>
     </div>
 
     <!-- SCREEN 4.1: TRANSIT / NAVIGATION QUEST -->
     <div id="s4_transit" class="screen">
-      <h3>Quest 4: Lost in the Chilterns</h3>
-      <p class="subtitle">The taxi departs Heathrow heading North. But the driver gets confused by the winding country lanes in Buckinghamshire!</p>
+      <h3>Quest 4: Countryside Route</h3>
+      <p class="subtitle" id="transitIntroText">Traveling through country lanes towards High Wycombe...</p>
 
       <div class="maze-widget">
         <div class="maze-scenery">
           <div class="maze-landmark" id="mazeEmoji">🚕</div>
         </div>
-        <div class="border-dialogue" id="mazeText" style="font-size: 0.85rem; margin-bottom: 12px; border-left-color: var(--accent);">
-          "We're lost near High Wycombe! Which historic route should we follow to find the house?"
+        <div class="border-dialogue" id="mazeText" style="font-size: 0.85rem; margin-bottom: 12px; border-left-color: var(--accent); color: white;">
+          "We're navigating near the Chiltern Hills! Which route should we follow to approach your home?"
         </div>
 
         <div class="border-options" id="mazeOptions">
@@ -1250,7 +1428,7 @@ button.btn-primary:disabled {
           </div>
         </div>
         <div class="welcome-label" id="doorHint">🚪 Tap the door to knock!</div>
-        <div style="margin-top: 10px; font-weight: 800; font-size: 1.1rem; color: var(--accent);" id="knockCounter">Knocks: 0 / 3</div>
+        <div style="margin-top: 10px; font-weight: 800; font-size: 1.1rem; color: var(--portal-color);" id="knockCounter">Knocks: 0 / 3</div>
       </div>
 
       <button id="afterDoorBtn" style="margin-top:20px; display:none;" class="btn-primary" onclick="goToCake()">Step inside the Living Room</button>
@@ -1263,17 +1441,17 @@ button.btn-primary:disabled {
         <p class="subtitle" style="margin-top: 4px;">Tap the birthday candles to make a wish and blow them out!</p>
       </div>
 
-      <div class="cake-box">
+      <div class="cake-box" id="cakeBox">
         <div class="candles-container">
-          <div class="candle" onclick="blowCandle(this)">
+          <div class="candle" onclick="blowCandle(this, event)">
             <div class="candle-flame"></div>
             <div class="candle-smoke"></div>
           </div>
-          <div class="candle" onclick="blowCandle(this)">
+          <div class="candle" onclick="blowCandle(this, event)">
             <div class="candle-flame"></div>
             <div class="candle-smoke"></div>
           </div>
-          <div class="candle" onclick="blowCandle(this)">
+          <div class="candle" onclick="blowCandle(this, event)">
             <div class="candle-flame"></div>
             <div class="candle-smoke"></div>
           </div>
@@ -1286,6 +1464,38 @@ button.btn-primary:disabled {
       </div>
 
       <p class="instruction-text" style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-top: 16px;">🎂 Extinguish all 3 flames!</p>
+    </div>
+
+    <!-- NEW SCREEN: SLIDESHOW SCREEN -->
+    <div id="s5_slideshow" class="screen">
+      <h3>Memories of Haridhra</h3>
+      <p class="subtitle">Walk through her magical memories across continents...</p>
+
+      <div class="slideshow-container">
+        <!-- Slide 1 -->
+        <div class="slide" id="slide_0">
+          <img src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridhra 1">
+          <div class="slide-caption">Beginning of an amazing adventure... 🛫</div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="slide" id="slide_1">
+          <img src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridhra 2">
+          <div class="slide-caption">Exploring beautiful landscapes & city horizons... 🗺️</div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide" id="slide_2">
+          <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridhra 3">
+          <div class="slide-caption">Arrived at the cozy destination in High Wycombe! 🏡</div>
+        </div>
+
+        <div class="slide-dots">
+          <span class="dot" id="dot_0"></span>
+          <span class="dot" id="dot_1"></span>
+          <span class="dot" id="dot_2"></span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="triggerCelebration()">Unlock Final Birthday Surprise ✨</button>
     </div>
 
     <!-- SCREEN 6: CELEBRATION -->
@@ -1337,6 +1547,7 @@ let appState = {
     crown: false,
     shoe: false
   },
+  selectedDetour: null,
   knocksCount: 0,
   autopilotLevel: 0,
   stabilized: false
@@ -1379,13 +1590,12 @@ function togglePackItem(itemKey) {
   }
   playBeep();
 
-  // Check if target items are packed: pass, coat, crown
   const isTargetPacked = appState.packedItems.pass && appState.packedItems.coat && appState.packedItems.crown;
   const btn = document.getElementById('packingBtn');
   
   if (isTargetPacked) {
     btn.disabled = false;
-    btn.innerText = " suitcase Packed! Go to Flights";
+    btn.innerText = "Suitcase Packed! Go to Flights";
   } else {
     btn.disabled = true;
     btn.innerText = "Find: Passport, Coat & Crown";
@@ -1596,7 +1806,6 @@ function startFlight() {
 
   function update(time) {
     if (!appState.stabilized) {
-      // Pause plane visual movement if they haven't stabilized
       start = time - (ratioTracked * duration);
     }
     let elapsed = time - start;
@@ -1645,12 +1854,10 @@ function startFlight() {
   requestAnimationFrame(update);
 }
 
-// In-Flight Task execution
 function tryStabilize() {
   const pointer = document.getElementById('planePointer');
   const posVal = parseFloat(pointer.style.left);
   
-  // Target range 40% to 70% represent green zone
   if (posVal >= 40 && posVal <= 70) {
     appState.stabilized = true;
     clearInterval(pointerInterval);
@@ -1660,7 +1867,6 @@ function tryStabilize() {
     `;
     playSuccessChime();
   } else {
-    // Fail flash effect
     const widget = document.querySelector('.autopilot-widget');
     widget.style.borderColor = "#ef4444";
     setTimeout(() => {
@@ -1670,11 +1876,9 @@ function tryStabilize() {
   }
 }
 
-// Q3: Border Control Interaction
 function enterBorderControl() {
-  updateQuestBar("Quest 3", "LHR Border Control Control");
+  updateQuestBar("Quest 3", "LHR Border Control");
   
-  // Reset buttons
   for(let i=1; i<=3; i++){
     const opt = document.getElementById(`border_opt_${i}`);
     opt.classList.remove('correct', 'wrong');
@@ -1689,7 +1893,6 @@ function submitBorderAns(ansId) {
     document.getElementById('border_opt_2').classList.add('correct');
     document.getElementById('borderNextBtn').style.display = 'block';
     playSuccessChime();
-    // Disable others
     document.getElementById('border_opt_1').disabled = true;
     document.getElementById('border_opt_3').disabled = true;
   } else {
@@ -1698,16 +1901,52 @@ function submitBorderAns(ansId) {
   }
 }
 
-// Q4: High Wycombe Maze
-function showTransitScreen() {
-  updateQuestBar("Quest 4", "Buckinghamshire Taxi Quest");
+// Side-trip / detour segment selection
+function showDetourScreen() {
+  updateQuestBar("Quest 3.5", "Select a Birthday Trip!");
+  document.getElementById('confirmDetourBtn').disabled = true;
+  
+  // Reset selection styles
+  document.querySelectorAll('.detour-card').forEach(c => c.classList.remove('selected'));
+  appState.selectedDetour = null;
+  
+  showScreen("s4_detour");
+}
+
+function selectDetour(detourKey) {
+  document.querySelectorAll('.detour-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById(`detour_${detourKey}`).classList.add('selected');
+  appState.selectedDetour = detourKey;
+  document.getElementById('confirmDetourBtn').disabled = false;
+  playBeep();
+}
+
+function goToTransit() {
+  updateQuestBar("Quest 4", "Buckinghamshire Countryside");
+  
+  const intro = document.getElementById('transitIntroText');
+  const h = document.getElementById('transitHeading');
+  const d = document.getElementById('transitDesc');
+  
+  if (appState.selectedDetour === 'windsor') {
+    intro.innerText = `First, we make a magical detour to Windsor Castle! 🏰`;
+    h.innerText = "Trip Detour: Windsor Castle";
+    d.innerText = `Haridhra explores the historical royal gardens of Windsor before embarking onwards.`;
+  } else if (appState.selectedDetour === 'stonehenge') {
+    intro.innerText = `First, we make a mysterious detour to Stonehenge! 🪨`;
+    h.innerText = "Trip Detour: Stonehenge";
+    d.innerText = `Haridhra captures photographs near the famous megalith circles of Wiltshire.`;
+  } else {
+    intro.innerText = `First, we make a dynamic detour to the London City Eye! 🎡`;
+    h.innerText = "Trip Detour: London Eye & City";
+    d.innerText = `Haridhra enjoys scenic aerial sights over the London urban skylines.`;
+  }
+  
   document.getElementById('mazeEmoji').innerText = "🚕";
-  document.getElementById('mazeText').innerText = `"We're lost in the Buckinghamshire countryside! Which scenic path should we take to reach High Wycombe?"`;
+  document.getElementById('mazeText').innerText = `"We are now heading towards High Wycombe! Which rural lane should we follow?"`;
   document.getElementById('mazeOptions').style.display = 'flex';
   document.getElementById('transitNextBtn').style.display = 'none';
-  document.getElementById('transitHeading').innerText = `${appState.passengerName} Overland Travel`;
-  document.getElementById('transitDesc').innerText = "Help the driver find the fastest route to High Wycombe.";
-
+  
   showScreen("s4_transit");
 }
 
@@ -1773,31 +2012,107 @@ function goToCake() {
   showScreen("s5");
 }
 
-// Cake blown out trigger
+// Candle blowing & upgraded spark trigger
 let blownOutCandles = 0;
-function blowCandle(candleEl) {
+function blowCandle(candleEl, event) {
   if (candleEl.classList.contains('blown')) return;
   
   candleEl.classList.add('blown');
   playBlowSound();
+  createSparks(event.clientX, event.clientY);
   blownOutCandles++;
   
   if (blownOutCandles >= 3) {
     setTimeout(() => {
-      triggerCelebration();
+      startSlideshow();
+    }, 1200);
+  }
+}
+
+// Spark system
+function createSparks(x, y) {
+  const container = document.getElementById('cakeBox');
+  const boxRect = container.getBoundingClientRect();
+  const sparkX = x - boxRect.left;
+  const sparkY = y - boxRect.top;
+  
+  const numSparks = 15;
+  for (let i = 0; i < numSparks; i++) {
+    const spark = document.createElement('div');
+    spark.className = 'spark';
+    spark.style.left = `${sparkX}px`;
+    spark.style.top = `${sparkY}px`;
+    
+    container.appendChild(spark);
+    
+    const angle = Math.random() * Math.PI * 2;
+    const distance = Math.random() * 80 + 30;
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+    
+    requestAnimationFrame(() => {
+      spark.style.transform = `translate(${tx}px, ${ty}px) scale(0)`;
+      spark.style.opacity = '0';
+    });
+    
+    setTimeout(() => {
+      spark.remove();
     }, 800);
   }
 }
 
+// Slideshow sequencer
+let slideshowInterval = null;
+let currentSlide = 0;
+function startSlideshow() {
+  updateQuestBar("Story Slideshow", "Reliving the journey...");
+  stopConfetti();
+  
+  currentSlide = 0;
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  
+  document.getElementById(`slide_${currentSlide}`).classList.add('active');
+  document.getElementById(`dot_${currentSlide}`).classList.add('active');
+  
+  showScreen("s5_slideshow");
+  playSlideshowMusic();
+  
+  slideshowInterval = setInterval(() => {
+    document.getElementById(`slide_${currentSlide}`).classList.remove('active');
+    document.getElementById(`dot_${currentSlide}`).classList.remove('active');
+    
+    currentSlide = (currentSlide + 1) % 3;
+    
+    document.getElementById(`slide_${currentSlide}`).classList.add('active');
+    document.getElementById(`dot_${currentSlide}`).classList.add('active');
+  }, 4000);
+}
+
+function stopSlideshow() {
+  if (slideshowInterval) {
+    clearInterval(slideshowInterval);
+    slideshowInterval = null;
+  }
+  stopSlideshowMusic();
+}
+
 function triggerCelebration() {
-  updateQuestBar("🎉 Completed!", "Happy Birthday, Haridhra!");
+  stopSlideshow();
+  updateQuestBar("🎉 Completed!", `Happy Birthday, ${appState.passengerName}!`);
   showScreen("s6");
   
   document.getElementById('finalWishesTitle').innerText = `Happy Birthday, ${appState.passengerName}! 🎂`;
+  
+  let detourMsg = "";
+  if (appState.selectedDetour === 'windsor') detourMsg = "Windsor Castle, ";
+  if (appState.selectedDetour === 'stonehenge') detourMsg = "Stonehenge, ";
+  if (appState.selectedDetour === 'london') detourMsg = "London City, ";
+  
   document.getElementById('finalCardMsg').innerHTML = `
-    Your epic quest from <strong>${appState.originFull}</strong> to <strong>High Wycombe, UK</strong> is complete! <br><br>
-    You packed her bag, navigated through turbulence, cleared Heathrow Border Patrol, found your way through the Buckinghamshire Hills, and solved the secret door knock! <br><br>
-    May your year be filled with amazing direct routes, safe landings, and beautiful memories in the United Kingdom. ✈️🇬🇧💛
+    Your special journey from <strong>${appState.originFull}</strong> to <strong>High Wycombe, UK</strong> is complete! <br><br>
+    Along the way, you solved the airport puzzle, braved European turbulence, cleared Customs, visited <strong>${detourMsg}</strong>and found your way straight to our front door! <br><br>
+    May your year be filled with exciting new travels, safe landings, and beautiful memories. ✈️🇬🇧💛
   `;
 
   initConfetti();
@@ -1808,7 +2123,6 @@ function restartJourney() {
   stopConfetti();
   appState.packedItems = { pass: false, book: false, coat: false, camera: false, crown: false, shoe: false };
   
-  // Reset first screen packing items classes
   document.querySelectorAll('.packing-item').forEach(el => el.classList.remove('selected'));
   const btn = document.getElementById('packingBtn');
   btn.disabled = true;
@@ -1817,7 +2131,7 @@ function restartJourney() {
   showScreen("s1");
 }
 
-/* AUDIO HELPER SYNTH (PURE SYNTHESIS - NO LINKS REQUIRED) */
+/* WEB AUDIO UTILITIES */
 let audioCtx = null;
 
 function getAudioContext() {
@@ -1830,6 +2144,14 @@ function getAudioContext() {
 function toggleMute() {
   appState.soundMuted = !appState.soundMuted;
   document.getElementById('audioBtn').innerText = appState.soundMuted ? "🔇" : "🔊";
+  if (appState.soundMuted) {
+    stopSlideshowMusic();
+  } else {
+    const slideshowActive = document.getElementById('s5_slideshow').classList.contains('active');
+    if (slideshowActive) {
+      playSlideshowMusic();
+    }
+  }
 }
 
 function playBeep() {
@@ -1965,6 +2287,58 @@ function playJetSound() {
   } catch(e) {}
 }
 
+// Custom synthesized ambient slideshow track
+let slideshowMusicInterval = null;
+function playSlideshowMusic() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    let step = 0;
+    const chords = [
+      [130.81, 164.81, 196.00, 246.94], // Cmaj7
+      [110.00, 130.81, 164.81, 196.00], // Am7
+      [87.31, 130.81, 174.61, 220.00],  // Fmaj7
+      [98.00, 146.83, 196.00, 246.94]   // G7
+    ];
+    
+    function playPluck(freq, delay) {
+      const osc = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+      gainNode.gain.setValueAtTime(0, ctx.currentTime + delay);
+      gainNode.gain.linearRampToValueAtTime(0.04, ctx.currentTime + delay + 0.1);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 1.2);
+      osc.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      osc.start(ctx.currentTime + delay);
+      osc.stop(ctx.currentTime + delay + 1.5);
+    }
+
+    function playArpeggio() {
+      if (appState.soundMuted) return;
+      const chord = chords[step % chords.length];
+      chord.forEach((note, i) => {
+        playPluck(note, i * 0.15);
+      });
+      const melodyNotes = [261.63, 329.63, 349.23, 392.00, 523.25];
+      const randomNote = melodyNotes[Math.floor(Math.random() * melodyNotes.length)];
+      playPluck(randomNote * 2, 0.6);
+      step++;
+    }
+
+    playArpeggio();
+    slideshowMusicInterval = setInterval(playArpeggio, 2400);
+  } catch(e) {}
+}
+
+function stopSlideshowMusic() {
+  if (slideshowMusicInterval) {
+    clearInterval(slideshowMusicInterval);
+    slideshowMusicInterval = null;
+  }
+}
+
 function playBirthdayTune() {
   if (appState.soundMuted) return;
   try {
@@ -1995,7 +2369,7 @@ function playBirthdayTune() {
   } catch(e) {}
 }
 
-/* CONFETTI SYSTEM */
+/* CONFETTI CANVAS UTILITY */
 let confettiAnimationId = null;
 function initConfetti() {
   const canvas = document.getElementById('confetti-canvas');
