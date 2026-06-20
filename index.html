@@ -4,396 +4,268 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Happy Birthday Haridhra 💛</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Birthday Story ✈️💛</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
 body{
-    overflow:hidden;
-    height:100vh;
-    background:
-    linear-gradient(
-    135deg,
-    #fff4d6,
-    #ffe0ec,
-    #fff7f0
-    );
+margin:0;
+overflow:hidden;
+font-family:Arial;
+background:linear-gradient(135deg,#fff2d6,#ffd6e7,#e6f3ff);
 }
 
-/* ---------------- WELCOME ---------------- */
-
-#welcome{
-    position:fixed;
-    inset:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:30px;
+.scene{
+position:absolute;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 }
 
-#welcome h1{
-    font-size:clamp(2.5rem,6vw,4.5rem);
-    color:#ff5f8f;
-    margin-bottom:15px;
+.active{ display:flex; }
+
+.character{
+position:absolute;
+display:flex;
+flex-direction:column;
+align-items:center;
+animation:float 2s infinite ease-in-out;
 }
 
-#welcome p{
-    font-size:1.2rem;
-    color:#666;
-    margin-bottom:30px;
+.face{
+width:70px;
+height:70px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid white;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
 }
 
-.startBtn{
-    border:none;
-    background:#ff7ba5;
-    color:white;
-    padding:16px 38px;
-    border-radius:50px;
-    cursor:pointer;
-    font-size:1.1rem;
-    font-weight:600;
+.body{width:6px;height:60px;background:#333;}
+
+.arm,.leg{
+width:40px;height:5px;background:#333;
+position:absolute;
 }
 
-/* ---------------- CAKE SCENE ---------------- */
+.arm.left{transform:rotate(30deg);top:90px;left:-20px;}
+.arm.right{transform:rotate(-30deg);top:90px;right:-20px;}
+.leg.left{transform:rotate(30deg);top:140px;left:-15px;}
+.leg.right{transform:rotate(-30deg);top:140px;right:-15px;}
 
-#cakeScene{
-    display:none;
-    position:fixed;
-    inset:0;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
+@keyframes float{
+50%{transform:translateY(-10px);}
 }
 
-#cakeWrap{
-    position:relative;
-    width:320px;
-    height:300px;
+.plane{
+font-size:50px;
+position:absolute;
+left:-100px;
+top:50%;
+animation:fly 6s linear forwards;
+}
+
+@keyframes fly{to{left:110%;}}
+
+.route{
+position:absolute;
+top:60%;
+width:80%;
+height:3px;
+background:#333;
+}
+
+.dot{
+width:12px;height:12px;
+border-radius:50%;
+background:red;
+position:absolute;
+top:calc(60% - 6px);
 }
 
 .cake{
-    position:absolute;
-    bottom:0;
-    width:320px;
-    height:170px;
-    background:#ffb6c1;
-    border-radius:25px;
-    box-shadow:0 20px 40px rgba(0,0,0,.15);
-}
-
-.cake:before,
-.cake:after{
-    content:"";
-    position:absolute;
-    width:100%;
-    height:15px;
-    background:white;
-}
-
-.cake:before{
-    top:50px;
-}
-
-.cake:after{
-    top:100px;
+width:200px;height:120px;
+background:pink;
+border-radius:20px;
+position:relative;
 }
 
 .candle{
-    position:absolute;
-    width:14px;
-    height:65px;
-    background:white;
-    top:35px;
+width:10px;height:40px;background:white;
+position:absolute;top:-40px;
 }
 
 .flame{
-    position:absolute;
-    width:18px;
-    height:28px;
-    background:gold;
-    border-radius:50%;
-    left:-2px;
-    top:-24px;
-
-    box-shadow:
-    0 0 20px orange,
-    0 0 40px gold;
-
-    animation:flicker .15s infinite alternate;
+width:14px;height:20px;
+background:gold;
+border-radius:50%;
+position:absolute;
+top:-20px;
+left:-2px;
+animation:flicker .2s infinite alternate;
 }
 
 @keyframes flicker{
-    from{transform:scale(1);}
-    to{transform:scale(.82);}
+from{transform:scale(1);}
+to{transform:scale(.8);}
 }
 
-#wishText{
-    margin-top:35px;
-    font-size:1.4rem;
-    color:#7a4b3a;
-    text-align:center;
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#ff5f8f;
+color:white;
+font-size:16px;
+cursor:pointer;
 }
 
-#blowBtn{
-    margin-top:25px;
-    border:none;
-    background:#ffcb47;
-    color:#333;
-    padding:16px 32px;
-    border-radius:50px;
-    cursor:pointer;
-    font-weight:700;
-    font-size:1rem;
-}
-
-/* ---------------- CELEBRATION ---------------- */
-
-#celebration{
-    display:none;
-    position:fixed;
-    inset:0;
-
-    background:
-    radial-gradient(circle at center,
-    #fff9d6,
-    #ffe7a3,
-    #ffd9eb,
-    #fffaf5);
-
-    overflow:hidden;
-}
-
-.slide{
-    position:absolute;
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-
-    opacity:0;
-    transition:opacity 2s ease;
-}
-
-#messageCard{
-    position:absolute;
-    left:50%;
-    bottom:40px;
-    transform:translateX(-50%);
-
-    background:rgba(255,255,255,.8);
-    backdrop-filter:blur(10px);
-
-    padding:24px 32px;
-    border-radius:24px;
-
-    text-align:center;
-
-    color:#6b4a3d;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.1);
-
-    opacity:0;
-    transition:2s;
-}
-
-#messageCard h2{
-    margin-bottom:10px;
+#message{
+font-size:30px;
+font-weight:bold;
+text-align:center;
+color:#6b3b3b;
+padding:20px;
 }
 
 .confetti{
-    position:absolute;
-    width:12px;
-    height:12px;
-    border-radius:50%;
-    animation:fall linear forwards;
+position:absolute;
+width:10px;
+height:10px;
+animation:fall 4s linear forwards;
 }
 
 @keyframes fall{
-    to{
-        transform:
-        translateY(120vh)
-        rotate(720deg);
-
-        opacity:0;
-    }
+to{
+transform:translateY(100vh) rotate(720deg);
+opacity:0;
 }
-
+}
 </style>
 </head>
+
 <body>
 
-<!-- WELCOME -->
-
-<div id="welcome">
-
-    <h1>🎉 Happy Birthday Haridhra 🎉</h1>
-
-    <p>
-        A little birthday surprise awaits...
-    </p>
-
-    <button class="startBtn" onclick="startBirthday()">
-        Begin ✨
-    </button>
-
+<!-- SCENE 1 -->
+<div id="scene1" class="scene active">
+<h1>✈️ London → Chennai Journey</h1>
+<div class="route"></div>
+<div class="dot"></div>
+<div class="plane">✈️</div>
+<button onclick="goScene2()">Start Journey</button>
 </div>
 
-<!-- CAKE -->
+<!-- SCENE 2 -->
+<div id="scene2" class="scene">
 
-<div id="cakeScene">
-
-    <div id="cakeWrap">
-
-        <div class="candle" style="left:40px">
-            <div class="flame"></div>
-        </div>
-
-        <div class="candle" style="left:95px">
-            <div class="flame"></div>
-        </div>
-
-        <div class="candle" style="left:150px">
-            <div class="flame"></div>
-        </div>
-
-        <div class="candle" style="left:205px">
-            <div class="flame"></div>
-        </div>
-
-        <div class="candle" style="left:260px">
-            <div class="flame"></div>
-        </div>
-
-        <div class="cake"></div>
-
-    </div>
-
-    <div id="wishText">
-        Close your eyes, make a wish 💛
-    </div>
-
-    <button id="blowBtn" onclick="blowCandles()">
-        Blow Out Candles 🕯️
-    </button>
-
+<div class="character" id="me">
+<img class="face" src="me.jpg">
+<div class="body"></div>
+<div class="arm left"></div>
+<div class="arm right"></div>
+<div class="leg left"></div>
+<div class="leg right"></div>
 </div>
 
-<!-- ENDING -->
+<div class="character" id="her" style="right:80px; top:50%;">
+<img class="face" id="herFace" src="Haridhra1.jpg">
+<div class="body"></div>
+<div class="arm left"></div>
+<div class="arm right"></div>
+<div class="leg left"></div>
+<div class="leg right"></div>
+</div>
 
-<div id="celebration">
+<button onclick="goScene3()">Meet ❤️</button>
+</div>
 
-    <img src="Haridhra1.jpg" class="slide" id="slide1">
-    <img src="Haridhra2.jpg" class="slide" id="slide2">
-    <img src="Haridhra3.jpg" class="slide" id="slide3">
+<!-- SCENE 3 -->
+<div id="scene3" class="scene">
 
-    <div id="messageCard">
+<h2>Birthday Celebration 🎂</h2>
 
-        <h2>Happy Birthday Haridhra 💛</h2>
+<div class="cake">
+<div class="candle" style="left:40px"><div class="flame"></div></div>
+<div class="candle" style="left:80px"><div class="flame"></div></div>
+<div class="candle" style="left:120px"><div class="flame"></div></div>
+</div>
 
-        <p>
-            May your year be filled with happiness,
-            laughter, beautiful memories,
-            and dreams coming true ✨
-        </p>
+<button onclick="blow()">Blow Candles 🕯️</button>
+</div>
 
-    </div>
+<!-- SCENE 4 -->
+<div id="scene4" class="scene">
+
+<div id="message">
+Happy Birthday Haridhra 💛<br><br>
+From London to Chennai ✈️<br>
+Distance means nothing
+</div>
 
 </div>
 
 <script>
 
-function startBirthday(){
+function show(id){
+document.querySelectorAll(".scene").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
 
-    document.getElementById("welcome").style.display="none";
-    document.getElementById("cakeScene").style.display="flex";
+/* ---------- HER IMAGE ROTATION ---------- */
+
+let herImages = [
+"Haridhra1.jpg",
+"Haridhra2.jpg",
+"Haridhra3.jpg"
+];
+
+let herIndex = 0;
+
+setInterval(()=>{
+document.getElementById("herFace").src = herImages[herIndex];
+herIndex = (herIndex + 1) % herImages.length;
+},1200);
+
+/* ---------- FLOW ---------- */
+
+function goScene2(){
+show("scene2");
+}
+
+function goScene3(){
+show("scene3");
+}
+
+function blow(){
+
+document.querySelectorAll(".flame").forEach(f=>{
+f.style.opacity="0";
+});
+
+setTimeout(()=>{
+show("scene4");
+launchConfetti();
+},1200);
 
 }
 
-function blowCandles(){
-
-    const flames = document.querySelectorAll(".flame");
-
-    flames.forEach((f,index)=>{
-
-        setTimeout(()=>{
-
-            f.style.transition=".5s";
-            f.style.opacity="0";
-            f.style.transform="scale(0)";
-
-        },index*250);
-
-    });
-
-    setTimeout(startCelebration,1800);
-}
-
-function startCelebration(){
-
-    document.getElementById("cakeScene").style.display="none";
-
-    const scene =
-    document.getElementById("celebration");
-
-    scene.style.display="block";
-
-    launchConfetti();
-
-    setTimeout(()=>{
-        slide1.style.opacity=1;
-    },500);
-
-    setTimeout(()=>{
-        slide1.style.opacity=0;
-        slide2.style.opacity=1;
-    },5000);
-
-    setTimeout(()=>{
-        slide2.style.opacity=0;
-        slide3.style.opacity=1;
-    },10000);
-
-    setTimeout(()=>{
-        document.getElementById("messageCard")
-        .style.opacity=1;
-    },12000);
-}
+/* ---------- CONFETTI ---------- */
 
 function launchConfetti(){
 
-    const scene =
-    document.getElementById("celebration");
+for(let i=0;i<120;i++){
 
-    for(let i=0;i<180;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.top="-10px";
+c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+c.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(c);
 
-        let c=document.createElement("div");
+}
 
-        c.className="confetti";
-
-        c.style.left=Math.random()*100+"vw";
-        c.style.top="-20px";
-
-        c.style.background=
-        `hsl(${Math.random()*360},100%,60%)`;
-
-        c.style.animationDuration=
-        (Math.random()*4+3)+"s";
-
-        scene.appendChild(c);
-    }
 }
 
 </script>
