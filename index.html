@@ -187,9 +187,9 @@ canvas {
 
   <div class="card">
     <div class="slideshow">
-      <img src="Haridhra1.jpg" alt="Haridhra 1">
-      <img src="Haridhra2.jpg" alt="Haridhra 2">
-      <img src="Haridhra3.jpg" alt="Haridhra 3">
+      <img src="Haridhra1.jpg">
+      <img src="Haridhra2.jpg">
+      <img src="Haridhra3.jpg">
     </div>
     <p id="message"></p>
     <p class="signature">— With all my love, Your Big Brother, Sriram</p>
@@ -199,31 +199,39 @@ canvas {
 </div>
 
 <script>
-/* Would You Rather questions */
+/* Funny + Hard Would You Rather questions */
 const questions = [
   {
     q: "Would you rather…",
-    a: ["Eat unlimited chocolate", "Eat unlimited pizza"]
+    a: ["Accidentally like someone's 2014 Instagram post", "Say 'you too' when the waiter says 'enjoy your meal'"]
   },
   {
     q: "Would you rather…",
-    a: ["Travel to space", "Travel to every country"]
+    a: ["Have your phone die at 1% every day", "Have WiFi that only works in one corner of your house"]
   },
   {
     q: "Would you rather…",
-    a: ["Talk to animals", "Read minds"]
+    a: ["Fight one horse-sized duck", "Fight 50 duck-sized horses"]
   },
   {
     q: "Would you rather…",
-    a: ["Have perfect luck", "Have perfect timing"]
+    a: ["Have a sneeze stuck for 3 hours", "Have hiccups during every serious conversation"]
   },
   {
     q: "Final one…",
-    a: ["See normal results", "Unlock a special surprise made just for you ❤️"]
+    a: ["See normal results like a sensible human", "Unlock the special surprise made ONLY for the birthday girl ❤️"]
   }
 ];
 
-const bgImages = ["Haridhra1.jpg","Haridhra2.jpg","Haridhra3.jpg"];
+/* Background images for each question */
+const bgImages = [
+  "food.jpg",
+  "travel.jpg",
+  "animals.jpg",
+  "luck.jpg",
+  "surprise.jpg"
+];
+
 let current = 0;
 
 function loadQuestion(){
@@ -236,7 +244,7 @@ function loadQuestion(){
   }
 
   const q = questions[current];
-  bg.style.backgroundImage = `url('${bgImages[current % bgImages.length]}')`;
+  bg.style.backgroundImage = `url('${bgImages[current]}')`;
 
   qBox.innerHTML = `
     <div class="question">${q.q}</div>
@@ -348,3 +356,4 @@ function startShow(){
 
 </body>
 </html>
+
