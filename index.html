@@ -2,239 +2,361 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Balloon Pop Game 🎈</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Haridhra 🎂</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin:0;
-  padding:0;
-  overflow:hidden;
-  background:#fef6e4;
-  font-family:'Poppins',sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
-/* BALLOON CANVAS */
-#gameCanvas {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  z-index:1;
+body{
+height:100vh;
+overflow:hidden;
+background:linear-gradient(135deg,#ffecd2,#fcb69f);
 }
 
-/* SCORE */
-#scoreBox {
-  position:fixed;
-  top:20px; left:20px;
-  background:white;
-  padding:15px 25px;
-  border-radius:15px;
-  font-size:22px;
-  font-weight:700;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
-  z-index:3;
+#welcome{
+position:absolute;
+inset:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+z-index:10;
 }
 
-/* CANDLE SCREEN */
-#candleScreen {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:#000000d0;
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  color:white;
-  z-index:4;
-  text-align:center;
+#welcome h1{
+font-size:3rem;
+color:#ff4081;
+margin-bottom:15px;
 }
 
-#cake {
-  width:260px;
-  margin-bottom:20px;
+#welcome p{
+font-size:1.2rem;
+color:#555;
+margin-bottom:25px;
 }
 
-#blowBtn {
-  padding:15px 30px;
-  font-size:20px;
-  border:none;
-  border-radius:12px;
-  background:#ffcc00;
-  color:black;
-  cursor:pointer;
-  font-weight:700;
+.startBtn{
+padding:15px 35px;
+font-size:1.1rem;
+border:none;
+border-radius:50px;
+background:#ff4081;
+color:white;
+cursor:pointer;
 }
 
-/* FINAL POLAROID FLOAT */
-#photoReveal {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:#000;
-  display:none;
-  overflow:hidden;
-  z-index:5;
+#cakeScene{
+display:none;
+position:absolute;
+inset:0;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 }
 
-.polaroid {
-  position:absolute;
-  width:180px;
-  padding:10px;
-  background:white;
-  border-radius:10px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.5);
-  transform:rotate(-5deg);
-  animation:float 12s infinite ease-in-out;
+.title{
+font-size:2rem;
+font-weight:700;
+color:#ff4081;
+margin-bottom:20px;
 }
 
-.polaroid img {
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:8px;
+#cakeWrap{
+position:relative;
+width:300px;
+height:260px;
 }
 
-@keyframes float {
-  0% { transform:translateY(0) rotate(-5deg); }
-  50% { transform:translateY(-40px) rotate(5deg); }
-  100% { transform:translateY(0) rotate(-5deg); }
+.cake{
+position:absolute;
+bottom:0;
+width:300px;
+height:160px;
+background:#ffb6c1;
+border-radius:20px;
+box-shadow:0 15px 30px rgba(0,0,0,.2);
 }
 
-/* MESSAGE */
-#finalMessage {
-  position:fixed;
-  bottom:40px;
-  width:100%;
-  text-align:center;
-  color:white;
-  font-size:26px;
-  font-weight:600;
-  text-shadow:0 0 15px gold;
+.cake:before{
+content:"";
+position:absolute;
+top:40px;
+width:100%;
+height:15px;
+background:white;
+}
+
+.cake:after{
+content:"";
+position:absolute;
+top:80px;
+width:100%;
+height:15px;
+background:white;
+}
+
+.candle{
+position:absolute;
+width:14px;
+height:60px;
+background:white;
+top:40px;
+}
+
+.flame{
+position:absolute;
+width:18px;
+height:25px;
+background:gold;
+border-radius:50% 50% 50% 50%;
+top:-20px;
+left:-2px;
+box-shadow:0 0 20px orange;
+animation:flicker .15s infinite alternate;
+}
+
+@keyframes flicker{
+from{
+transform:scale(1);
+}
+to{
+transform:scale(.85);
+}
+}
+
+#instruction{
+margin-top:30px;
+font-size:1.3rem;
+color:#333;
+}
+
+#blowBtn{
+margin-top:20px;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+font-size:1rem;
+background:#ffcc00;
+font-weight:700;
+cursor:pointer;
+}
+
+#celebration{
+display:none;
+position:absolute;
+inset:0;
+background:#000;
+overflow:hidden;
+}
+
+.polaroid{
+position:absolute;
+width:180px;
+background:white;
+padding:10px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(255,255,255,.15);
+opacity:0;
+animation:drop 1s forwards,
+float 8s ease-in-out infinite;
+}
+
+.polaroid img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:8px;
+}
+
+@keyframes drop{
+from{
+transform:translateY(-500px) rotate(-15deg);
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+
+@keyframes float{
+50%{
+transform:translateY(-25px);
+}
+}
+
+#message{
+position:absolute;
+bottom:40px;
+width:100%;
+text-align:center;
+color:white;
+font-size:2rem;
+font-weight:600;
+text-shadow:0 0 20px gold;
+padding:20px;
+}
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(120vh) rotate(720deg);
+opacity:0;
+}
 }
 </style>
 </head>
-
 <body>
 
-<canvas id="gameCanvas"></canvas>
-
-<div id="scoreBox">Balloons popped: <span id="score">0</span>/15</div>
-
-<!-- CANDLE SCREEN -->
-<div id="candleScreen">
-  <img id="cake" src="cake.png">
-  <h2>Make a wish, Haridhra…</h2>
-  <button id="blowBtn" onclick="blowCandles()">Blow the candles 🎂</button>
+<div id="welcome">
+<h1>🎉 Happy Birthday Haridhra 🎉</h1>
+<p>Make a wish and blow out the candles...</p>
+<button class="startBtn" onclick="startBirthday()">Begin ✨</button>
 </div>
 
-<!-- PHOTO REVEAL -->
-<div id="photoReveal">
-  <div id="finalMessage">Happy Birthday, Haridhra 💛</div>
+<div id="cakeScene">
+
+<div class="title">Happy Birthday 💛</div>
+
+<div id="cakeWrap">
+
+<div class="candle" style="left:40px;">
+<div class="flame"></div>
+</div>
+
+<div class="candle" style="left:90px;">
+<div class="flame"></div>
+</div>
+
+<div class="candle" style="left:140px;">
+<div class="flame"></div>
+</div>
+
+<div class="candle" style="left:190px;">
+<div class="flame"></div>
+</div>
+
+<div class="candle" style="left:240px;">
+<div class="flame"></div>
+</div>
+
+<div class="cake"></div>
+
+</div>
+
+<div id="instruction">
+Close your eyes and make a wish 🎂
+</div>
+
+<button id="blowBtn" onclick="blowCandles()">
+Blow Candles 🕯️
+</button>
+
+</div>
+
+<div id="celebration">
+<div id="message">
+Happy Birthday Haridhra 💛<br>
+May all your wishes come true ✨
+</div>
 </div>
 
 <script>
-/* CANVAS SETUP */
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
 
-function resize(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+function startBirthday(){
+document.getElementById("welcome").style.display="none";
+document.getElementById("cakeScene").style.display="flex";
 }
-resize();
-window.onresize = resize;
 
-/* BALLOONS */
-let balloons = [];
-let score = 0;
-const target = 15;
+function blowCandles(){
 
-function rand(min,max){ return Math.random()*(max-min)+min; }
-
-function spawnBalloon(){
-  balloons.push({
-    x: rand(50, canvas.width-50),
-    y: canvas.height + 50,
-    size: rand(40,70),
-    speed: rand(1.2,2.5),
-    color: `hsl(${rand(0,360)},100%,60%)`
-  });
-}
-setInterval(spawnBalloon, 700);
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  balloons.forEach((b,i)=>{
-    b.y -= b.speed;
-
-    ctx.beginPath();
-    ctx.fillStyle = b.color;
-    ctx.ellipse(b.x, b.y, b.size*0.7, b.size, 0, 0, Math.PI*2);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.moveTo(b.x, b.y + b.size);
-    ctx.lineTo(b.x, b.y + b.size + 40);
-    ctx.strokeStyle = "#555";
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    if(b.y < -100){
-      balloons.splice(i,1);
-    }
-  });
-
-  requestAnimationFrame(draw);
-}
-draw();
-
-/* POP BALLOONS */
-canvas.addEventListener("click", function(e){
-  const rect = canvas.getBoundingClientRect();
-  const mx = e.clientX - rect.left;
-  const my = e.clientY - rect.top;
-
-  balloons.forEach((b,i)=>{
-    const dx = mx - b.x;
-    const dy = my - b.y;
-    if(Math.sqrt(dx*dx + dy*dy) < b.size){
-      balloons.splice(i,1);
-      score++;
-      document.getElementById("score").innerText = score;
-
-      if(score >= target){
-        setTimeout(()=>document.getElementById("candleScreen").style.display="flex", 500);
-      }
-    }
-  });
+document.querySelectorAll(".flame").forEach((f,i)=>{
+setTimeout(()=>{
+f.style.transition=".5s";
+f.style.opacity="0";
+f.style.transform="scale(0)";
+},i*200);
 });
 
-/* CANDLE BLOW */
-function blowCandles(){
-  document.getElementById("candleScreen").style.display="none";
-  startPhotoReveal();
+setTimeout(()=>{
+startCelebration();
+},1500);
+
 }
 
-/* PHOTO REVEAL WITH HARIDHRA1–3.JPG */
-function startPhotoReveal(){
-  const container = document.getElementById("photoReveal");
-  container.style.display = "block";
+function startCelebration(){
 
-  const files = ["Haridhra1.jpg","Haridhra2.jpg","Haridhra3.jpg"];
+document.getElementById("cakeScene").style.display="none";
 
-  files.forEach((file,i)=>{
-    const p = document.createElement("div");
-    p.className = "polaroid";
-    p.style.left = rand(0, window.innerWidth-200) + "px";
-    p.style.top = rand(0, window.innerHeight-300) + "px";
-    p.style.animationDelay = (i * 0.7) + "s";
+const scene=document.getElementById("celebration");
+scene.style.display="block";
 
-    p.innerHTML = `<img src="${file}">`;
-    container.appendChild(p);
-  });
+launchConfetti();
+
+const photos=[
+"Haridhra1.jpg",
+"Haridhra2.jpg",
+"Haridhra3.jpg"
+];
+
+photos.forEach((photo,index)=>{
+
+setTimeout(()=>{
+
+let p=document.createElement("div");
+p.className="polaroid";
+
+p.style.left=Math.random()*75+"%";
+p.style.top=Math.random()*55+"%";
+
+p.innerHTML=`<img src="${photo}">`;
+
+scene.appendChild(p);
+
+},index*1200);
+
+});
+
 }
+
+function launchConfetti(){
+
+for(let i=0;i<150;i++){
+
+let c=document.createElement("div");
+c.className="confetti";
+
+c.style.left=Math.random()*100+"vw";
+c.style.top="-20px";
+
+c.style.background=
+`hsl(${Math.random()*360},100%,60%)`;
+
+c.style.animationDuration=
+(Math.random()*3+2)+"s";
+
+document.getElementById("celebration")
+.appendChild(c);
+
+}
+
+}
+
 </script>
 
 </body>
