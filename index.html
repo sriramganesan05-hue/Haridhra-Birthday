@@ -4,357 +4,396 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Happy Birthday Haridhra 🎂</title>
+<title>Happy Birthday Haridhra 💛</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
-height:100vh;
-overflow:hidden;
-background:linear-gradient(135deg,#ffecd2,#fcb69f);
+    overflow:hidden;
+    height:100vh;
+    background:
+    linear-gradient(
+    135deg,
+    #fff4d6,
+    #ffe0ec,
+    #fff7f0
+    );
 }
 
+/* ---------------- WELCOME ---------------- */
+
 #welcome{
-position:absolute;
-inset:0;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-z-index:10;
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
 }
 
 #welcome h1{
-font-size:3rem;
-color:#ff4081;
-margin-bottom:15px;
+    font-size:clamp(2.5rem,6vw,4.5rem);
+    color:#ff5f8f;
+    margin-bottom:15px;
 }
 
 #welcome p{
-font-size:1.2rem;
-color:#555;
-margin-bottom:25px;
+    font-size:1.2rem;
+    color:#666;
+    margin-bottom:30px;
 }
 
 .startBtn{
-padding:15px 35px;
-font-size:1.1rem;
-border:none;
-border-radius:50px;
-background:#ff4081;
-color:white;
-cursor:pointer;
+    border:none;
+    background:#ff7ba5;
+    color:white;
+    padding:16px 38px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:1.1rem;
+    font-weight:600;
 }
+
+/* ---------------- CAKE SCENE ---------------- */
 
 #cakeScene{
-display:none;
-position:absolute;
-inset:0;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-}
-
-.title{
-font-size:2rem;
-font-weight:700;
-color:#ff4081;
-margin-bottom:20px;
+    display:none;
+    position:fixed;
+    inset:0;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
 }
 
 #cakeWrap{
-position:relative;
-width:300px;
-height:260px;
+    position:relative;
+    width:320px;
+    height:300px;
 }
 
 .cake{
-position:absolute;
-bottom:0;
-width:300px;
-height:160px;
-background:#ffb6c1;
-border-radius:20px;
-box-shadow:0 15px 30px rgba(0,0,0,.2);
+    position:absolute;
+    bottom:0;
+    width:320px;
+    height:170px;
+    background:#ffb6c1;
+    border-radius:25px;
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.cake:before,
+.cake:after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:15px;
+    background:white;
 }
 
 .cake:before{
-content:"";
-position:absolute;
-top:40px;
-width:100%;
-height:15px;
-background:white;
+    top:50px;
 }
 
 .cake:after{
-content:"";
-position:absolute;
-top:80px;
-width:100%;
-height:15px;
-background:white;
+    top:100px;
 }
 
 .candle{
-position:absolute;
-width:14px;
-height:60px;
-background:white;
-top:40px;
+    position:absolute;
+    width:14px;
+    height:65px;
+    background:white;
+    top:35px;
 }
 
 .flame{
-position:absolute;
-width:18px;
-height:25px;
-background:gold;
-border-radius:50% 50% 50% 50%;
-top:-20px;
-left:-2px;
-box-shadow:0 0 20px orange;
-animation:flicker .15s infinite alternate;
+    position:absolute;
+    width:18px;
+    height:28px;
+    background:gold;
+    border-radius:50%;
+    left:-2px;
+    top:-24px;
+
+    box-shadow:
+    0 0 20px orange,
+    0 0 40px gold;
+
+    animation:flicker .15s infinite alternate;
 }
 
 @keyframes flicker{
-from{
-transform:scale(1);
-}
-to{
-transform:scale(.85);
-}
+    from{transform:scale(1);}
+    to{transform:scale(.82);}
 }
 
-#instruction{
-margin-top:30px;
-font-size:1.3rem;
-color:#333;
+#wishText{
+    margin-top:35px;
+    font-size:1.4rem;
+    color:#7a4b3a;
+    text-align:center;
 }
 
 #blowBtn{
-margin-top:20px;
-padding:15px 30px;
-border:none;
-border-radius:30px;
-font-size:1rem;
-background:#ffcc00;
-font-weight:700;
-cursor:pointer;
+    margin-top:25px;
+    border:none;
+    background:#ffcb47;
+    color:#333;
+    padding:16px 32px;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:1rem;
 }
+
+/* ---------------- CELEBRATION ---------------- */
 
 #celebration{
-display:none;
-position:absolute;
-inset:0;
-background:#000;
-overflow:hidden;
+    display:none;
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at center,
+    #fff9d6,
+    #ffe7a3,
+    #ffd9eb,
+    #fffaf5);
+
+    overflow:hidden;
 }
 
-.polaroid{
-position:absolute;
-width:180px;
-background:white;
-padding:10px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(255,255,255,.15);
-opacity:0;
-animation:drop 1s forwards,
-float 8s ease-in-out infinite;
+.slide{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    opacity:0;
+    transition:opacity 2s ease;
 }
 
-.polaroid img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:8px;
+#messageCard{
+    position:absolute;
+    left:50%;
+    bottom:40px;
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,.8);
+    backdrop-filter:blur(10px);
+
+    padding:24px 32px;
+    border-radius:24px;
+
+    text-align:center;
+
+    color:#6b4a3d;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+    opacity:0;
+    transition:2s;
 }
 
-@keyframes drop{
-from{
-transform:translateY(-500px) rotate(-15deg);
-opacity:0;
-}
-to{
-opacity:1;
-}
-}
-
-@keyframes float{
-50%{
-transform:translateY(-25px);
-}
-}
-
-#message{
-position:absolute;
-bottom:40px;
-width:100%;
-text-align:center;
-color:white;
-font-size:2rem;
-font-weight:600;
-text-shadow:0 0 20px gold;
-padding:20px;
+#messageCard h2{
+    margin-bottom:10px;
 }
 
 .confetti{
-position:absolute;
-width:10px;
-height:10px;
-animation:fall linear forwards;
+    position:absolute;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    animation:fall linear forwards;
 }
 
 @keyframes fall{
-to{
-transform:translateY(120vh) rotate(720deg);
-opacity:0;
+    to{
+        transform:
+        translateY(120vh)
+        rotate(720deg);
+
+        opacity:0;
+    }
 }
-}
+
 </style>
 </head>
 <body>
 
+<!-- WELCOME -->
+
 <div id="welcome">
-<h1>🎉 Happy Birthday Haridhra 🎉</h1>
-<p>Make a wish and blow out the candles...</p>
-<button class="startBtn" onclick="startBirthday()">Begin ✨</button>
+
+    <h1>🎉 Happy Birthday Haridhra 🎉</h1>
+
+    <p>
+        A little birthday surprise awaits...
+    </p>
+
+    <button class="startBtn" onclick="startBirthday()">
+        Begin ✨
+    </button>
+
 </div>
+
+<!-- CAKE -->
 
 <div id="cakeScene">
 
-<div class="title">Happy Birthday 💛</div>
+    <div id="cakeWrap">
 
-<div id="cakeWrap">
+        <div class="candle" style="left:40px">
+            <div class="flame"></div>
+        </div>
 
-<div class="candle" style="left:40px;">
-<div class="flame"></div>
-</div>
+        <div class="candle" style="left:95px">
+            <div class="flame"></div>
+        </div>
 
-<div class="candle" style="left:90px;">
-<div class="flame"></div>
-</div>
+        <div class="candle" style="left:150px">
+            <div class="flame"></div>
+        </div>
 
-<div class="candle" style="left:140px;">
-<div class="flame"></div>
-</div>
+        <div class="candle" style="left:205px">
+            <div class="flame"></div>
+        </div>
 
-<div class="candle" style="left:190px;">
-<div class="flame"></div>
-</div>
+        <div class="candle" style="left:260px">
+            <div class="flame"></div>
+        </div>
 
-<div class="candle" style="left:240px;">
-<div class="flame"></div>
-</div>
+        <div class="cake"></div>
 
-<div class="cake"></div>
+    </div>
 
-</div>
+    <div id="wishText">
+        Close your eyes, make a wish 💛
+    </div>
 
-<div id="instruction">
-Close your eyes and make a wish 🎂
-</div>
-
-<button id="blowBtn" onclick="blowCandles()">
-Blow Candles 🕯️
-</button>
+    <button id="blowBtn" onclick="blowCandles()">
+        Blow Out Candles 🕯️
+    </button>
 
 </div>
+
+<!-- ENDING -->
 
 <div id="celebration">
-<div id="message">
-Happy Birthday Haridhra 💛<br>
-May all your wishes come true ✨
-</div>
+
+    <img src="Haridhra1.jpg" class="slide" id="slide1">
+    <img src="Haridhra2.jpg" class="slide" id="slide2">
+    <img src="Haridhra3.jpg" class="slide" id="slide3">
+
+    <div id="messageCard">
+
+        <h2>Happy Birthday Haridhra 💛</h2>
+
+        <p>
+            May your year be filled with happiness,
+            laughter, beautiful memories,
+            and dreams coming true ✨
+        </p>
+
+    </div>
+
 </div>
 
 <script>
 
 function startBirthday(){
-document.getElementById("welcome").style.display="none";
-document.getElementById("cakeScene").style.display="flex";
+
+    document.getElementById("welcome").style.display="none";
+    document.getElementById("cakeScene").style.display="flex";
+
 }
 
 function blowCandles(){
 
-document.querySelectorAll(".flame").forEach((f,i)=>{
-setTimeout(()=>{
-f.style.transition=".5s";
-f.style.opacity="0";
-f.style.transform="scale(0)";
-},i*200);
-});
+    const flames = document.querySelectorAll(".flame");
 
-setTimeout(()=>{
-startCelebration();
-},1500);
+    flames.forEach((f,index)=>{
 
+        setTimeout(()=>{
+
+            f.style.transition=".5s";
+            f.style.opacity="0";
+            f.style.transform="scale(0)";
+
+        },index*250);
+
+    });
+
+    setTimeout(startCelebration,1800);
 }
 
 function startCelebration(){
 
-document.getElementById("cakeScene").style.display="none";
+    document.getElementById("cakeScene").style.display="none";
 
-const scene=document.getElementById("celebration");
-scene.style.display="block";
+    const scene =
+    document.getElementById("celebration");
 
-launchConfetti();
+    scene.style.display="block";
 
-const photos=[
-"Haridhra1.jpg",
-"Haridhra2.jpg",
-"Haridhra3.jpg"
-];
+    launchConfetti();
 
-photos.forEach((photo,index)=>{
+    setTimeout(()=>{
+        slide1.style.opacity=1;
+    },500);
 
-setTimeout(()=>{
+    setTimeout(()=>{
+        slide1.style.opacity=0;
+        slide2.style.opacity=1;
+    },5000);
 
-let p=document.createElement("div");
-p.className="polaroid";
+    setTimeout(()=>{
+        slide2.style.opacity=0;
+        slide3.style.opacity=1;
+    },10000);
 
-p.style.left=Math.random()*75+"%";
-p.style.top=Math.random()*55+"%";
-
-p.innerHTML=`<img src="${photo}">`;
-
-scene.appendChild(p);
-
-},index*1200);
-
-});
-
+    setTimeout(()=>{
+        document.getElementById("messageCard")
+        .style.opacity=1;
+    },12000);
 }
 
 function launchConfetti(){
 
-for(let i=0;i<150;i++){
+    const scene =
+    document.getElementById("celebration");
 
-let c=document.createElement("div");
-c.className="confetti";
+    for(let i=0;i<180;i++){
 
-c.style.left=Math.random()*100+"vw";
-c.style.top="-20px";
+        let c=document.createElement("div");
 
-c.style.background=
-`hsl(${Math.random()*360},100%,60%)`;
+        c.className="confetti";
 
-c.style.animationDuration=
-(Math.random()*3+2)+"s";
+        c.style.left=Math.random()*100+"vw";
+        c.style.top="-20px";
 
-document.getElementById("celebration")
-.appendChild(c);
+        c.style.background=
+        `hsl(${Math.random()*360},100%,60%)`;
 
-}
+        c.style.animationDuration=
+        (Math.random()*4+3)+"s";
 
+        scene.appendChild(c);
+    }
 }
 
 </script>
