@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky Travel - A Special Journey</title>
+<title>Sky Travel - Journey to High Wycombe</title>
 
 <style>
 :root {
-  --primary: #3b82f6;
+  --primary: #2563eb;
   --primary-dark: #1d4ed8;
   --accent: #ec4899;
   --bg: #f8fafc;
@@ -25,7 +25,7 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: #e2e8f0;
+  background: #cbd5e1;
   color: var(--text);
   min-height: 100vh;
   display: flex;
@@ -37,11 +37,11 @@ body {
 .app {
   width: 100%;
   max-width: 412px;
-  height: 90vh;
-  min-height: 720px;
+  height: 92vh;
+  min-height: 740px;
   background: var(--bg);
   border-radius: 30px;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.15);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -51,7 +51,7 @@ body {
 /* HEADER */
 .header {
   padding: 18px 20px;
-  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  background: linear-gradient(135deg, #1e3a8a, var(--primary));
   color: white;
   display: flex;
   align-items: center;
@@ -136,7 +136,7 @@ input {
 input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 /* BUTTONS */
@@ -151,7 +151,7 @@ button.btn-primary {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 
 button.btn-primary:active {
@@ -183,14 +183,10 @@ button.btn-primary:disabled {
   overflow: hidden;
 }
 
-.flight-card:hover {
-  border-color: #cbd5e1;
-}
-
 .flight-card.selected {
   border-color: var(--primary);
   background: #f0f7ff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
 }
 
 .flight-card.selected::before {
@@ -287,7 +283,6 @@ button.btn-primary:disabled {
   top: -6px;
   background: var(--card-bg);
   padding: 0 6px;
-  transition: background 0.2s;
 }
 
 .flight-card.selected .plane-icon {
@@ -301,7 +296,7 @@ button.btn-primary:disabled {
   margin-top: 4px;
 }
 
-/* SEAT SELECTION SECTOR */
+/* SEAT SELECTION */
 .seat-map-container {
   background: var(--card-bg);
   border-radius: 16px;
@@ -346,7 +341,7 @@ button.btn-primary:disabled {
 .seat.selected {
   background: var(--primary);
   color: white;
-  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
 }
 
 .seat-legend {
@@ -390,10 +385,10 @@ button.btn-primary:disabled {
 }
 
 .ticket-header img.passenger-avatar {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 1.5px solid var(--primary);
+  border: 2px solid var(--primary);
   object-fit: cover;
 }
 
@@ -426,7 +421,6 @@ button.btn-primary:disabled {
   position: relative;
 }
 
-/* Tear circles on boarding pass */
 .ticket-mid::before, .ticket-mid::after {
   content: '';
   position: absolute;
@@ -460,7 +454,6 @@ button.btn-primary:disabled {
   color: black;
 }
 
-/* Simulated QR Code styling */
 .barcode {
   width: 140px;
   height: 140px;
@@ -473,37 +466,8 @@ button.btn-primary:disabled {
 }
 
 /* MAP SCREEN */
-.map-screen-wrapper {
-  position: relative;
-  height: 100%;
-}
-
-.flight-stats-card {
-  background: white;
-  border-radius: 16px;
-  padding: 16px;
-  margin-top: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.stat-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.stat-item {
-  border-left: 2px solid var(--primary);
-  padding-left: 10px;
-}
-
-.stat-val {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
 .live-map {
-  height: 200px;
+  height: 180px;
   background: radial-gradient(circle at 50% 120%, #1e3a8a 0%, #020617 80%);
   border-radius: 20px;
   position: relative;
@@ -545,34 +509,196 @@ button.btn-primary:disabled {
   font-weight: 500;
 }
 
-/* CAKE SCREEN */
-.arrival-header {
-  text-align: center;
-  margin-bottom: 24px;
+.flight-stats-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
 }
 
-.welcome-msg {
-  font-size: 1.2rem;
+.stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-item {
+  border-left: 2px solid var(--primary);
+  padding-left: 10px;
+}
+
+.stat-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* NEW: TRANSIT SCREEN (LHR to High Wycombe) */
+.transit-visual {
+  height: 160px;
+  background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 100%);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #93c5fd;
+}
+
+.transit-scenery {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 40px;
+  background: repeating-linear-gradient(90deg, #22c55e, #22c55e 40px, #16a34a 40px, #16a34a 80px);
+  animation: scrollScenery 6s linear infinite;
+}
+
+@keyframes scrollScenery {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.transit-car {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  font-size: 2rem;
+  animation: carBounce 0.4s infinite alternate;
+  z-index: 5;
+}
+
+@keyframes carBounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}
+
+.scenic-image-container {
+  display: flex;
+  gap: 12px;
+  background: white;
+  padding: 14px;
+  border-radius: 16px;
+  margin-top: 16px;
+  border: 1px solid #e2e8f0;
+  align-items: center;
+}
+
+.scenic-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+}
+
+.scenic-details {
+  flex: 1;
+}
+
+.scenic-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.scenic-text {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* NEW: HOUSE ARRIVAL SCREEN (Knock Knock Door Interaction) */
+.door-scene {
+  background: #f1f5f9;
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  border: 1px solid #cbd5e1;
+}
+
+.door-container {
+  position: relative;
+  width: 170px;
+  height: 260px;
+  background: #1e293b; /* Door frame / interior dark look */
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  perspective: 800px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.door {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #991b1b; /* Vibrant Red English Door */
+  border: 5px solid #7f1d1d;
+  border-radius: 6px;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 14px;
+  cursor: pointer;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+}
+
+.door-knob {
+  width: 14px;
+  height: 14px;
+  background: #f59e0b; /* Golden knob */
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.door-interior {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.door-interior img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.door.open {
+  transform: rotateY(-115deg);
+}
+
+.welcome-label {
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+/* CAKE SCREEN */
 .cake-box {
   width: 220px;
   height: 220px;
-  margin: 30px auto;
-  position: relative;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  position: relative;
 }
 
 .cake {
   width: 160px;
   height: 90px;
-  background: linear-gradient(to right, #f472b6, #ec4899);
+  background: linear-gradient(to right, #ec4899, #db2777);
   border-radius: 12px 12px 4px 4px;
   position: relative;
   box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
@@ -584,14 +710,13 @@ button.btn-primary:disabled {
   height: 20px;
   background: #fdf2f8;
   bottom: 30px;
-  left: 0;
 }
 
 .cake-frosting {
   position: absolute;
   width: 100%;
   height: 16px;
-  background: #f43f5e;
+  background: #be185d;
   top: 0;
   border-radius: 12px 12px 0 0;
 }
@@ -611,7 +736,6 @@ button.btn-primary:disabled {
   border-radius: 3px 3px 0 0;
   position: relative;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
 .candle-flame {
@@ -665,24 +789,9 @@ button.btn-primary:disabled {
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.instruction-text {
-  text-align: center;
-  color: var(--text-light);
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 20px;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
 /* FINAL SCREEN */
 .birthday-card {
   text-align: center;
-  padding: 10px 5px;
 }
 
 .wishes-title {
@@ -740,9 +849,10 @@ button.btn-primary:disabled {
   border-radius: 18px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.04);
   margin-bottom: 24px;
+  border: 1px solid #e2e8f0;
 }
 
-/* CONFETTI CANVAS Overlay */
+/* CONFETTI CANVAS */
 #confetti-canvas {
   position: absolute;
   top: 0;
@@ -753,7 +863,6 @@ button.btn-primary:disabled {
   z-index: 99;
 }
 
-/* AUDIO TOGGLE BUTTON */
 .audio-toggle {
   background: rgba(255, 255, 255, 0.2);
   border: none;
@@ -780,13 +889,13 @@ button.btn-primary:disabled {
     <button id="audioBtn" class="audio-toggle" onclick="toggleMute()" title="Mute/Unmute sound">🔊</button>
   </div>
 
-  <!-- MAIN SCROLLABLE WRAPPER -->
+  <!-- MAIN WRAPPER -->
   <div class="content-wrapper">
 
     <!-- SCREEN 1: SEARCH -->
     <div id="s1" class="screen active">
       <h3>Search Flights</h3>
-      <p class="subtitle">Find your next memorable gateway</p>
+      <p class="subtitle">Book a journey from India to the United Kingdom</p>
 
       <div class="form-group">
         <label>Passenger Name</label>
@@ -800,7 +909,7 @@ button.btn-primary:disabled {
 
       <div class="form-group">
         <label>To</label>
-        <input id="destinationInput" type="text" value="London (LHR)">
+        <input id="destinationInput" type="text" value="London Heathrow (LHR)">
       </div>
 
       <div class="form-group">
@@ -850,7 +959,8 @@ button.btn-primary:disabled {
       <div class="boarding-pass-ticket">
         <div class="ticket-header">
           <span style="font-weight: 700; letter-spacing: 0.5px;" id="ticketAirline">SKY AIRWAYS</span>
-          <img class="passenger-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" alt="Avatar">
+          <!-- Passport Photo: Haridhra 1.jpg -->
+          <img class="passenger-avatar" src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Passenger Photo">
         </div>
 
         <div class="ticket-flight-info">
@@ -872,7 +982,7 @@ button.btn-primary:disabled {
           </div>
           <div>
             <div class="ticket-label">Flight</div>
-            <div class="ticket-value" id="passFlightNo">AI 150</div>
+            <div class="ticket-value" id="passFlightNo">SA-204</div>
           </div>
           <div>
             <div class="ticket-label">Seat</div>
@@ -943,11 +1053,55 @@ button.btn-primary:disabled {
       </div>
     </div>
 
+    <!-- SCREEN 4.1: TRANSIT (Onwards to High Wycombe) -->
+    <div id="s4_transit" class="screen">
+      <h3>Onwards to High Wycombe</h3>
+      <p class="subtitle">Traveling from London Heathrow through the UK countryside</p>
+
+      <div class="transit-visual">
+        <div class="transit-scenery"></div>
+        <div class="transit-car">🚕</div>
+      </div>
+
+      <!-- Transit details displaying Haridhra 2.jpg -->
+      <div class="scenic-image-container">
+        <img class="scenic-photo" src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridhra on the road">
+        <div class="scenic-details">
+          <div class="scenic-title" id="transitHeading">Traveling to your home</div>
+          <div class="scenic-text">Transferring from London Heathrow (LHR) to High Wycombe. Beautiful green valleys and rolling hills passing by...</div>
+        </div>
+      </div>
+
+      <button style="margin-top:20px" class="btn-primary" onclick="arriveAtHouse()">Arrive at House</button>
+    </div>
+
+    <!-- SCREEN 4.2: HOUSE ARRIVAL (Knock & Open Door) -->
+    <div id="s4_house" class="screen">
+      <h3>Welcome to My House!</h3>
+      <p class="subtitle">Tap the door to knock and welcome her inside</p>
+
+      <div class="door-scene">
+        <div class="door-container">
+          <!-- Clicking the door triggers openDoor() -->
+          <div class="door" id="mainDoor" onclick="openDoor()">
+            <div class="door-knob"></div>
+          </div>
+          <div class="door-interior">
+            <!-- Reveals Haridhra 3.jpg standing at the doorway -->
+            <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=300'" alt="Welcome Haridhra">
+          </div>
+        </div>
+        <div class="welcome-label" id="doorHint">🚪 Tap to open the door!</div>
+      </div>
+
+      <button id="afterDoorBtn" style="margin-top:20px; display:none;" class="btn-primary" onclick="goToCake()">Enter the Living Room</button>
+    </div>
+
     <!-- SCREEN 5: ARRIVAL & CAKE -->
     <div id="s5" class="screen">
-      <div class="arrival-header">
-        <div class="welcome-msg">Welcome to your destination! 🎉</div>
-        <p class="subtitle" id="arrivalWelcomeSub">The cabin crew is bringing a special surprise...</p>
+      <div class="arrival-header" style="text-align: center; margin-bottom: 20px;">
+        <div class="welcome-msg" style="font-size: 1.25rem; font-weight: 800; color: var(--accent);">Surprise! 🎁</div>
+        <p class="subtitle" style="margin-top: 4px;">Let's blow out the birthday candles!</p>
       </div>
 
       <div class="cake-box">
@@ -972,7 +1126,7 @@ button.btn-primary:disabled {
         <div class="cake-plate"></div>
       </div>
 
-      <p class="instruction-text">🎂 Click or tap the candles to blow them out!</p>
+      <p class="instruction-text" style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-top: 16px;">🎂 Click or tap the candles to blow them out!</p>
     </div>
 
     <!-- SCREEN 6: CELEBRATION -->
@@ -980,36 +1134,37 @@ button.btn-primary:disabled {
       <div class="birthday-card">
         <div class="avatar-large-container">
           <span class="crown">👑</span>
-          <img class="avatar-large" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240" alt="Haridhra">
+          <!-- Celebratory Photo: Haridhra 3.jpg -->
+          <img class="avatar-large" src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240'" alt="Haridhra Celebration">
         </div>
 
         <h2 class="wishes-title" id="finalWishesTitle">Happy Birthday, Haridhra!</h2>
 
         <div class="card-message">
           <p id="finalCardMsg">
-            Your special journey from Chennai to London is complete, but the grand adventure of life is just beginning! May this year bring you boundless happiness, soaring achievements, and beautiful safe landings.
+            Your special journey from Chennai to High Wycombe is complete! May this birthday be filled with endless smiles, warmth, and wonderful achievements in the United Kingdom.
           </p>
         </div>
 
-        <button class="btn-primary" onclick="restartJourney()">Book Another Journey</button>
+        <button class="btn-primary" onclick="restartJourney()">Plan Another Trip</button>
       </div>
     </div>
 
   </div>
 
-  <!-- Confetti Canvas -->
+  <!-- Confetti Canvas overlay -->
   <canvas id="confetti-canvas"></canvas>
 
 </div>
 
 <script>
-// State Store
+// Application State
 let appState = {
   passengerName: "Haridhra",
   origin: "MAA",
   destination: "LHR",
   originFull: "Chennai",
-  destinationFull: "London",
+  destinationFull: "London Heathrow",
   date: "15 Aug 2026",
   flights: [],
   selectedFlight: null,
@@ -1017,19 +1172,16 @@ let appState = {
   soundMuted: false
 };
 
-// Setup Default Date
+// Default setup
 document.getElementById('dateInput').valueAsDate = new Date();
 
-// Core navigation utility
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
-  
-  // Scroll content container back to top on screen change
   document.querySelector('.content-wrapper').scrollTop = 0;
 }
 
-// Generate Realistic Flights based on User Input
+// Search Flight Input Parsing
 function search() {
   const pName = document.getElementById('passengerName').value.trim();
   const rawOrigin = document.getElementById('originInput').value.trim();
@@ -1042,8 +1194,6 @@ function search() {
   }
 
   appState.passengerName = pName;
-  
-  // Try parsing codes
   appState.origin = extractCode(rawOrigin, "MAA");
   appState.destination = extractCode(rawDest, "LHR");
   appState.originFull = cleanCityName(rawOrigin);
@@ -1054,7 +1204,6 @@ function search() {
     appState.date = d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
   }
 
-  // Generate Flight Offers
   appState.flights = [
     {
       airline: "Sky Airways",
@@ -1075,16 +1224,6 @@ function search() {
       duration: "14h 50m",
       price: "£240",
       stops: "1 Stop"
-    },
-    {
-      airline: "Elite Air",
-      logo: "⭐",
-      code: "EA-102",
-      deptTime: "06:00 PM",
-      arrTime: "06:15 AM",
-      duration: "17h 45m",
-      price: "£410",
-      stops: "Direct (Premium)"
     }
   ];
 
@@ -1101,7 +1240,6 @@ function cleanCityName(str) {
   return str.split('(')[0].trim();
 }
 
-// Render dynamic flight list
 function renderFlights() {
   const list = document.getElementById('flightList');
   list.innerHTML = '';
@@ -1136,9 +1274,6 @@ function renderFlights() {
           <div class="airport-code">${appState.destination}</div>
         </div>
       </div>
-      <div style="font-size: 0.75rem; color: var(--text-light); text-align: left;">
-        🚀 ${f.stops} • Premium snacks included
-      </div>
     `;
     list.appendChild(card);
   });
@@ -1154,7 +1289,7 @@ function selectFlight(idx, element) {
   playBeep();
 }
 
-// Dynamic Seat Map Generator
+// Seat Selector map
 function goToSeats() {
   const seatGrid = document.getElementById('seatGrid');
   seatGrid.innerHTML = '';
@@ -1170,7 +1305,6 @@ function goToSeats() {
         seatSpan.innerText = r;
       } else {
         const seatId = `${r}${c}`;
-        // Randomly simulate occupied seats
         const isOccupied = Math.random() < 0.4 && seatId !== '3A' && seatId !== '4F'; 
         seatSpan.className = `seat ${isOccupied ? 'occupied' : 'available'}`;
         seatSpan.innerText = seatId;
@@ -1195,11 +1329,8 @@ function selectSeat(seatId, element) {
   playBeep();
 }
 
-// Map variables over to Boarding Pass
 function goToPass() {
   const f = appState.selectedFlight;
-  
-  document.getElementById('ticketAirline').innerText = f.airline.toUpperCase();
   document.getElementById('passFromCode').innerText = appState.origin;
   document.getElementById('passFromName').innerText = appState.originFull;
   document.getElementById('passToCode').innerText = appState.destination;
@@ -1208,16 +1339,15 @@ function goToPass() {
   document.getElementById('passName').innerText = appState.passengerName;
   document.getElementById('passFlightNo').innerText = f.code;
   document.getElementById('passSeat').innerText = appState.selectedSeat;
-  document.getElementById('passDate').innerText = appState.date.substring(0,6);
+  document.getElementById('passDate').innerText = appState.date.substring(0, 6);
 
   showScreen("s3");
 }
 
-// Simulated Live Map & Flight progress
+// Flight Map tracker progress
 function startFlight() {
   showScreen("s4");
   
-  // Build dynamic star fields
   const map = document.getElementById("liveMap");
   document.querySelectorAll('.star').forEach(el => el.remove());
   for(let i=0; i<15; i++) {
@@ -1238,35 +1368,28 @@ function startFlight() {
   const progressPath = document.getElementById("flightProgressCurve");
   const statusText = document.getElementById("flightStatusText");
 
-  // Get SVG Path dimensions
   const totalLength = path.getTotalLength();
   progressPath.style.strokeDasharray = totalLength;
   progressPath.style.strokeDashoffset = totalLength;
 
-  let progress = 0;
-  const duration = 5000; // 5 seconds animation
+  const duration = 4000; 
   const start = performance.now();
 
-  // Sounds
   playJetSound();
 
   function update(time) {
     let elapsed = time - start;
     let ratio = Math.min(elapsed / duration, 1);
     
-    // SVG Path Follower logic
     let point = path.getPointAtLength(ratio * totalLength);
     plane.style.left = `${point.x}px`;
     plane.style.top = `${point.y}px`;
     
-    // Update progress stroke
     progressPath.style.strokeDashoffset = totalLength - (ratio * totalLength);
     
-    // Stats Update
     let pct = Math.floor(ratio * 100);
-    progressText.innerText = `${pct}% Journey Complete`;
+    progressText.innerText = `${pct}% Flight Complete`;
     
-    // Varying stats for flight realism
     let currentAlt = Math.floor(28000 + Math.sin(ratio * Math.PI) * 10000);
     let currentSpeed = Math.floor(520 + Math.sin(ratio * Math.PI * 1.5) * 40);
     let currentDist = Math.floor((1 - ratio) * 4500);
@@ -1277,36 +1400,64 @@ function startFlight() {
 
     if (pct < 20) {
       statusText.innerText = "🛫 Taking off from " + appState.originFull + "...";
-    } else if (pct < 85) {
-      statusText.innerText = "☁️ Cruising smoothly at cabin level...";
+    } else if (pct < 80) {
+      statusText.innerText = "☁️ Cruising over continents...";
     } else {
-      statusText.innerText = "🛬 Preparing for descent into " + appState.destinationFull + "...";
+      statusText.innerText = "🛬 Landing at " + appState.destinationFull + "...";
     }
 
     if (ratio < 1) {
       requestAnimationFrame(update);
     } else {
-      // Arrived!
       setTimeout(() => {
-        setupArrival();
-      }, 500);
+        showTransitScreen();
+      }, 800);
     }
   }
 
   requestAnimationFrame(update);
 }
 
-function setupArrival() {
-  document.getElementById('arrivalWelcomeSub').innerText = `You have landed safely in ${appState.destinationFull}. The cabin crew has prepared a custom cake!`;
-  
-  // Ensure all candles are unblown for the new round
+// Transit to High Wycombe Screen
+function showTransitScreen() {
+  document.getElementById('transitHeading').innerText = `${appState.passengerName} On the Way!`;
+  showScreen("s4_transit");
+}
+
+function arriveAtHouse() {
+  // Reset Door State
+  const door = document.getElementById('mainDoor');
+  door.classList.remove('open');
+  document.getElementById('doorHint').innerText = "🚪 Tap to open the door!";
+  document.getElementById('afterDoorBtn').style.display = 'none';
+
+  showScreen("s4_house");
+}
+
+// Door Open Interaction
+function openDoor() {
+  const door = document.getElementById('mainDoor');
+  if (!door.classList.contains('open')) {
+    door.classList.add('open');
+    playDoorCreak();
+    document.getElementById('doorHint').innerText = `✨ Welcome Home, ${appState.passengerName}!`;
+    
+    setTimeout(() => {
+      document.getElementById('afterDoorBtn').style.display = 'block';
+    }, 500);
+  }
+}
+
+function goToCake() {
+  // Reset Candles
   document.querySelectorAll('.candle').forEach(c => {
     c.classList.remove('blown');
   });
-
+  blownOutCandles = 0;
   showScreen("s5");
 }
 
+// Candle blowing game
 let blownOutCandles = 0;
 function blowCandle(candleEl) {
   if (candleEl.classList.contains('blown')) return;
@@ -1322,18 +1473,16 @@ function blowCandle(candleEl) {
   }
 }
 
-// Celebration confetti & sound trigger
+// Final celebration screen
 function triggerCelebration() {
   showScreen("s6");
   
-  // Personalize greetings
   document.getElementById('finalWishesTitle').innerText = `Happy Birthday, ${appState.passengerName}! 🎂`;
   document.getElementById('finalCardMsg').innerHTML = `
-    Your special flight from <strong>${appState.originFull} (${appState.origin})</strong> to <strong>${appState.destinationFull} (${appState.destination})</strong> was a complete success! <br><br>
-    May this year and all your upcoming departures bring you exciting journeys, marvelous horizons, and unforgettable arrivals. Cheers to beautiful years ahead! ✈️💛
+    Your special journey from <strong>${appState.originFull}</strong> to <strong>High Wycombe, UK</strong> is complete! <br><br>
+    May this birthday be filled with unforgettable happiness, cozy warm tea, and wonderful achievements in your lovely home. Cheers to fabulous new horizons! ✈️🇬🇧
   `;
 
-  blownOutCandles = 0; // Reset
   initConfetti();
   playBirthdayTune();
 }
@@ -1343,7 +1492,7 @@ function restartJourney() {
   showScreen("s1");
 }
 
-/* AUDIO HELPER UTILIZING WEB AUDIO API (NO EXTERNAL FILES REQUIRED) */
+/* WEB AUDIO UTILITIES */
 let audioCtx = null;
 
 function getAudioContext() {
@@ -1364,14 +1513,11 @@ function playBeep() {
     const ctx = getAudioContext();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
-    
     osc.connect(gain);
     gain.connect(ctx.destination);
-    
     osc.frequency.setValueAtTime(800, ctx.currentTime);
-    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+    gain.gain.setValueAtTime(0.04, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
-    
     osc.start();
     osc.stop(ctx.currentTime + 0.1);
   } catch(e) {}
@@ -1381,30 +1527,42 @@ function playBlowSound() {
   if (appState.soundMuted) return;
   try {
     const ctx = getAudioContext();
-    // Simulate puff of white noise
     const bufferSize = ctx.sampleRate * 0.12;
     const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
       data[i] = Math.random() * 2 - 1;
     }
-    
     const noise = ctx.createBufferSource();
     noise.buffer = buffer;
-    
     const filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
     filter.frequency.setValueAtTime(600, ctx.currentTime);
-    
     const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.4, ctx.currentTime);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
-    
     noise.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
-    
     noise.start();
+  } catch(e) {}
+}
+
+function playDoorCreak() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(150, ctx.currentTime);
+    osc.frequency.linearRampToValueAtTime(280, ctx.currentTime + 0.6);
+    gain.gain.setValueAtTime(0.05, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.65);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.7);
   } catch(e) {}
 }
 
@@ -1412,107 +1570,66 @@ function playJetSound() {
   if (appState.soundMuted) return;
   try {
     const ctx = getAudioContext();
-    // Simulate low engine hum that glides up and down
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
-    
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(60, ctx.currentTime);
-    osc.frequency.linearRampToValueAtTime(220, ctx.currentTime + 1.5);
-    osc.frequency.linearRampToValueAtTime(100, ctx.currentTime + 4.5);
-    
+    osc.frequency.linearRampToValueAtTime(220, ctx.currentTime + 1.2);
+    osc.frequency.linearRampToValueAtTime(100, ctx.currentTime + 3.8);
     gain.gain.setValueAtTime(0.02, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 5);
-    
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 4);
     const filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(400, ctx.currentTime);
-
+    filter.frequency.setValueAtTime(350, ctx.currentTime);
     osc.connect(filter);
     filter.connect(gain);
     gain.connect(ctx.destination);
-    
     osc.start();
-    osc.stop(ctx.currentTime + 5);
+    osc.stop(ctx.currentTime + 4);
   } catch(e) {}
 }
 
-// Synthesis of "Happy Birthday" Theme
 function playBirthdayTune() {
   if (appState.soundMuted) return;
   try {
     const ctx = getAudioContext();
-    const tempo = 120; // BPM
+    const tempo = 120;
     const beat = 60 / tempo;
-    
-    // Notes and relative durations (Happy Birthday in C)
     const notes = [
-      { f: 261.63, d: 0.75 }, // C4
-      { f: 261.63, d: 0.25 }, // C4
-      { f: 293.66, d: 1.0 },  // D4
-      { f: 261.63, d: 1.0 },  // C4
-      { f: 349.23, d: 1.0 },  // F4
-      { f: 329.63, d: 2.0 },  // E4
-      
-      { f: 261.63, d: 0.75 }, 
-      { f: 261.63, d: 0.25 }, 
-      { f: 293.66, d: 1.0 },  
-      { f: 261.63, d: 1.0 },  
-      { f: 392.00, d: 1.0 },  // G4
-      { f: 349.23, d: 2.0 },  // F4
-      
-      { f: 261.63, d: 0.75 }, 
-      { f: 261.63, d: 0.25 }, 
-      { f: 523.25, d: 1.0 },  // C5
-      { f: 440.00, d: 1.0 },  // A4
-      { f: 349.23, d: 1.0 },  // F4
-      { f: 329.63, d: 1.0 },  // E4
-      { f: 293.66, d: 2.0 },  // D4
-      
-      { f: 466.16, d: 0.75 }, // Bb4
-      { f: 466.16, d: 0.25 }, 
-      { f: 440.00, d: 1.0 },  
-      { f: 349.23, d: 1.0 },  
-      { f: 392.00, d: 1.0 },  
-      { f: 349.23, d: 2.0 }   
+      { f: 261.63, d: 0.75 }, { f: 261.63, d: 0.25 }, { f: 293.66, d: 1.0 }, { f: 261.63, d: 1.0 }, { f: 349.23, d: 1.0 }, { f: 329.63, d: 2.0 },
+      { f: 261.63, d: 0.75 }, { f: 261.63, d: 0.25 }, { f: 293.66, d: 1.0 }, { f: 261.63, d: 1.0 }, { f: 392.00, d: 1.0 }, { f: 349.23, d: 2.0 },
+      { f: 261.63, d: 0.75 }, { f: 261.63, d: 0.25 }, { f: 523.25, d: 1.0 }, { f: 440.00, d: 1.0 }, { f: 349.23, d: 1.0 }, { f: 329.63, d: 1.0 }, { f: 293.66, d: 2.0 },
+      { f: 466.16, d: 0.75 }, { f: 466.16, d: 0.25 }, { f: 440.00, d: 1.0 }, { f: 349.23, d: 1.0 }, { f: 392.00, d: 1.0 }, { f: 349.23, d: 2.0 }
     ];
 
     let timeOffset = ctx.currentTime + 0.2;
     notes.forEach(note => {
       const osc = ctx.createOscillator();
       const gainNode = ctx.createGain();
-      
-      osc.type = 'triangle'; // Sweet, softer tone
+      osc.type = 'triangle';
       osc.frequency.value = note.f;
-      
       gainNode.gain.setValueAtTime(0.08, timeOffset);
       gainNode.gain.exponentialRampToValueAtTime(0.001, timeOffset + (note.d * beat) - 0.05);
-      
       osc.connect(gainNode);
       gainNode.connect(ctx.destination);
-      
       osc.start(timeOffset);
       osc.stop(timeOffset + (note.d * beat));
-      
       timeOffset += (note.d * beat);
     });
   } catch(e) {}
 }
 
-
-/* SEAMLESS CANVAS CONFETTI SYSTEM */
+/* CONFETTI CANVAS UTILITY */
 let confettiAnimationId = null;
 function initConfetti() {
   const canvas = document.getElementById('confetti-canvas');
   const ctx = canvas.getContext('2d');
-  
-  // Fit to screen boundary
   const parent = canvas.parentElement;
   canvas.width = parent.clientWidth;
   canvas.height = parent.clientHeight;
 
-  const colors = ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
-  const confettiCount = 100;
+  const colors = ['#f43f5e', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'];
+  const confettiCount = 110;
   const particles = [];
 
   class ConfettiParticle {
@@ -1531,8 +1648,6 @@ function initConfetti() {
       this.y += this.speedY;
       this.x += this.speedX;
       this.rotation += this.rotationSpeed;
-      
-      // Cycle back to top if offscreen
       if (this.y > canvas.height) {
         this.y = -20;
         this.x = Math.random() * canvas.width;
@@ -1575,7 +1690,6 @@ function stopConfetti() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-// Ensure responsive canvas resizing
 window.addEventListener('resize', () => {
   const canvas = document.getElementById('confetti-canvas');
   if (canvas) {
