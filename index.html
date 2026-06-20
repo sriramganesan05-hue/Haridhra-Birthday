@@ -16,14 +16,14 @@ body {
   overflow-x:hidden;
 }
 
-/* Animated gradient overlay */
+/* Gold/orange gradient (NO PINK) */
 .bg-gradient {
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:linear-gradient(135deg,#ffcf33,#ff914d,#ff4d6d,#ff6f91,#ff9671);
+  background:linear-gradient(135deg,#ffcc00,#ff9900,#ff6600,#ff3300);
   background-size:400% 400%;
   animation:bgShift 12s ease infinite;
   z-index:-2;
@@ -34,7 +34,7 @@ body {
   100%{background-position:0% 50%;}
 }
 
-/* Photo background slideshow for game */
+/* Background image for each question */
 .bg-photo {
   position:fixed;
   top:0;
@@ -53,6 +53,7 @@ h1 {
   margin-top:40px;
   font-size:42px;
   font-weight:700;
+  color:#ffcc00;
 }
 
 #game-box {
@@ -60,7 +61,7 @@ h1 {
   max-width:600px;
   margin:40px auto;
   padding:25px;
-  background:rgba(0,0,0,0.45);
+  background:rgba(0,0,0,0.55);
   border-radius:20px;
   backdrop-filter:blur(10px);
   box-shadow:0 5px 20px rgba(0,0,0,0.6);
@@ -80,7 +81,7 @@ h1 {
   font-size:20px;
   border:none;
   border-radius:15px;
-  background:#ffffff;
+  background:#fff;
   color:#333;
   cursor:pointer;
   transition:0.3s;
@@ -88,7 +89,7 @@ h1 {
 }
 .choice-btn:hover {
   transform:scale(1.05);
-  background:#ffe6e6;
+  background:#ffe08a;
 }
 
 /* Surprise section */
@@ -109,7 +110,7 @@ h1 {
   box-shadow:0 10px 40px rgba(0,0,0,0.8);
 }
 
-/* Slideshow images */
+/* Slideshow */
 .slideshow {
   position:relative;
   width:260px;
@@ -117,8 +118,8 @@ h1 {
   margin:0 auto;
   border-radius:50%;
   overflow:hidden;
-  border:4px solid #fff;
-  box-shadow:0 0 25px rgba(255,255,255,0.7);
+  border:4px solid #ffcc00;
+  box-shadow:0 0 25px rgba(255,204,0,0.7);
 }
 .slideshow img {
   position:absolute;
@@ -154,7 +155,7 @@ h1 {
   margin-top:15px;
   font-style:italic;
   font-weight:bold;
-  color:#ffe6e6;
+  color:#ffcc00;
 }
 
 /* Fireworks */
@@ -317,7 +318,7 @@ let fireworks = [];
 function createFirework(){
   const x = Math.random()*canvas.width;
   const y = Math.random()*canvas.height/2;
-  const colors = ["#ffffff","#ffe066","#00d2ff","#ff4d6d","#ffcf33"];
+  const colors = ["#ffffff","#ffcc00","#ff9900","#ff6600"];
   for(let i=0;i<40;i++){
     fireworks.push({
       x,y,
