@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky Travel - Haridhra's UK Quest</title>
+<title>Sky Travel - Haridhra's Cosmic Odyssey</title>
 
 <style>
 :root {
@@ -688,7 +688,7 @@ button.btn-primary:disabled {
   line-height: 1.3;
 }
 
-/* NEW: SPORTS CHALLENGE SCREEN */
+/* QUEST 4: SPORTS CHALLENGE SCREEN */
 .sports-court {
   height: 160px;
   background: linear-gradient(to bottom, #15803d, #166534);
@@ -730,7 +730,7 @@ button.btn-primary:disabled {
   100% { left: 90%; top: 15%; transform: scale(0.8); }
 }
 
-/* NEW: FOOD BANQUET SECTOR */
+/* FOOD BANQUET SECTOR */
 .banquet-menu {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1481,9 +1481,9 @@ button.btn-primary:disabled {
       <button class="btn-primary" id="confirmDetourBtn" style="margin-top: 24px;" onclick="goToSports()" disabled>Begin Selected Trip</button>
     </div>
 
-    <!-- NEW SCREEN: QUEST 4: SPORTS CHALLENGE -->
+    <!-- QUEST 4: SPORTS CHALLENGE -->
     <div id="s4_sports" class="screen">
-      <h3>Quest 4: The Grass Court Tennis Challenge</h3>
+      <h3>Quest 4: Grass Court Tennis Challenge</h3>
       <p class="subtitle" id="sportsSubtitle">While visiting, Haridhra is invited to play a friendly set on a classic British grass court!</p>
 
       <div class="task-container">
@@ -1507,7 +1507,7 @@ button.btn-primary:disabled {
       <button class="btn-primary" id="sportsNextBtn" style="display: none;" onclick="goToFeast()">Head over to the Dining Room</button>
     </div>
 
-    <!-- NEW SCREEN: QUEST 5: BANQUET EATING -->
+    <!-- QUEST 5: BANQUET EATING -->
     <div id="s4_feast" class="screen">
       <h3>Quest 5: The Gourmet UK Feast</h3>
       <p class="subtitle">Playing tennis made Haridhra hungry! Select her birthday dish and help her eat it down slice-by-slice.</p>
@@ -1968,6 +1968,9 @@ function startFlight() {
   let start = performance.now();
   playJetSound();
 
+  // Trigger takeoff vocal
+  speakPilot(`This is your Captain speaking. Welcome aboard Sky Airways. ${appState.passengerName}, we are now cleared for takeoff from Chennai to London Heathrow. Please ensure your birthday crown is securely packed and your seatbelt is fastened. Enjoy the flight.`);
+
   function update(time) {
     if (!appState.stabilized) {
       start = time - (ratioTracked * duration);
@@ -1992,7 +1995,7 @@ function startFlight() {
     liveSpeed.innerText = `${currentSpeed} mph`;
 
     if (!appState.stabilized) {
-      statusText.innerText = "⚠️ Jetstream encountered over Europe! Complete Quest 2.";
+      statusText.innerText = `⚠️ Jetstream encountered! Complete Quest 2, ${appState.passengerName}.`;
     } else {
       if (pct < 40) {
         statusText.innerText = "🛫 Gliding effortlessly through direct route...";
@@ -2007,9 +2010,13 @@ function startFlight() {
       requestAnimationFrame(update);
     } else {
       clearInterval(pointerInterval);
+      
+      // Trigger landing vocal
+      speakPilot(`Ladies and gentlemen, we have landed at London Heathrow. On behalf of the entire flight crew, we want to say: Happy Birthday, ${appState.passengerName}! Have an absolutely wonderful trip to High Wycombe for your celebration. Thank you for flying with us.`);
+      
       setTimeout(() => {
         enterBorderControl();
-      }, 800);
+      }, 1000);
     }
   }
 
@@ -2029,6 +2036,7 @@ function tryStabilize() {
       <div class="task-title" style="color: var(--success)">💚 Quest 2 Cleared!</div>
       <p style="font-size: 0.8rem; color: var(--text-light)">The jet has stabilized on the optimal flight glide path. Smooth flight ahead!</p>
     `;
+    speakPilot("Autopilot systems stabilized. Thank you, cabin crew.");
     playSuccessChime();
   } else {
     const widget = document.querySelector('.autopilot-widget');
@@ -2036,6 +2044,7 @@ function tryStabilize() {
     setTimeout(() => {
       widget.style.borderColor = "#cbd5e1";
     }, 300);
+    speakPilot("Alert. Cabin stability warning.");
     playFailBeep();
   }
 }
@@ -2083,7 +2092,7 @@ function selectDetour(detourKey) {
   playBeep();
 }
 
-// NEW: Quest 4: Sports Game Loader
+// Quest 4: Sports Game Loader
 let ballInterval = null;
 function goToSports() {
   updateQuestBar("Quest 4", "Grass Court Tennis");
@@ -2117,20 +2126,17 @@ function trySwing() {
   const pointer = document.getElementById('ballTimingPointer');
   const posVal = parseFloat(pointer.style.left);
 
-  // Target sweet-spot: 60% to 80% representing green strike zone
   if (posVal >= 60 && posVal <= 80) {
     appState.sportsCleared = true;
     clearInterval(ballInterval);
     playSuccessChime();
 
-    // Visual smash trigger
     const ball = document.getElementById('tennisBall');
     ball.style.transform = "scale(1.8) translateY(-40px)";
     setTimeout(() => {
       ball.style.transform = "scale(1.0)";
     }, 500);
 
-    // Update screen buttons
     document.getElementById('sportsNextBtn').style.display = 'block';
     const widget = document.querySelector('#s4_sports .autopilot-widget');
     widget.innerHTML = `<h4 style="color:var(--success); font-weight:800">🏸 Smash Hit! Set Won!</h4><p style="font-size:0.8rem; color:var(--text-light); margin-top:4px;">Haridhra won the friendly set with a dazzling baseline return!</p>`;
@@ -2144,12 +2150,11 @@ function trySwing() {
   }
 }
 
-// NEW: Quest 5: Feast Game Loader
+// Quest 5: Feast Game Loader
 function goToFeast() {
   updateQuestBar("Quest 5", "Traditional Feast");
   appState.bitesTaken = 0;
   
-  // Reset selected styles
   document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('selected'));
   document.getElementById('menu_scone').classList.add('selected');
   appState.selectedFood = "scone";
@@ -2179,7 +2184,7 @@ function selectFood(foodKey, emoji) {
 
 function biteFood() {
   appState.bitesTaken++;
-  playBlowSound(); // bite noise simulation
+  playBlowSound(); 
   
   const f = document.getElementById('currentPlateFood');
   
@@ -2422,11 +2427,31 @@ function getAudioContext() {
   return audioCtx;
 }
 
+function speakPilot(text) {
+  if (appState.soundMuted) return;
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = window.speechSynthesis.getVoices();
+    // Prioritize English British voice for the pilot aesthetic, fallback to generic English
+    const pilotVoice = voices.find(v => v.lang.startsWith('en-GB') || v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en'));
+    if (pilotVoice) {
+      utterance.voice = pilotVoice;
+    }
+    utterance.rate = 0.9;  // Slightly drawn out pilot tone
+    utterance.pitch = 0.95; // Slightly deeper authoritative pitch
+    window.speechSynthesis.speak(utterance);
+  } catch (e) {
+    console.warn("Speech Synthesis blocked or unsupported", e);
+  }
+}
+
 function toggleMute() {
   appState.soundMuted = !appState.soundMuted;
   document.getElementById('audioBtn').innerText = appState.soundMuted ? "🔇" : "🔊";
   if (appState.soundMuted) {
     stopSlideshowMusic();
+    try { window.speechSynthesis.cancel(); } catch(e){}
   } else {
     const slideshowActive = document.getElementById('s5_slideshow').classList.contains('active');
     if (slideshowActive) {
@@ -2729,6 +2754,11 @@ window.addEventListener('resize', () => {
     canvas.height = parent.clientHeight;
   }
 });
+
+// Trigger voices pre-loading on user interaction
+window.addEventListener('click', () => {
+  try { window.speechSynthesis.getVoices(); } catch(e){}
+}, { once: true });
 </script>
 
 </body>
