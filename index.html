@@ -3,114 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Somewhere Between London & Chennai ✈️</title>
+<title>Flight Booking</title>
 
 <style>
 
 body{
 margin:0;
-overflow:hidden;
-background:black;
-font-family:Arial;
+font-family:system-ui, Arial;
+background:#f5f7fb;
+color:#111;
 }
 
-/* ---------- SCENES ---------- */
+/* APP CONTAINER */
+.app{
+max-width:420px;
+margin:auto;
+min-height:100vh;
+background:white;
+}
 
-.scene{
-position:absolute;
-inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-opacity:0;
-transition:2s ease;
+/* HEADER */
+.header{
+padding:16px;
+background:#2563eb;
 color:white;
+font-weight:600;
 }
 
-.show{opacity:1;}
-
-/* ---------- BACKGROUNDS ---------- */
-
-.london{
-background:linear-gradient(#0f172a,#1e293b);
+/* SCREEN */
+.screen{
+display:none;
+padding:20px;
 }
 
-.sky{
-background:linear-gradient(#2b5876,#4e4376,#87ceeb);
+.active{display:block;}
+
+/* INPUTS */
+input{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:10px;
 }
 
-.chennai{
-background:linear-gradient(#fff1d6,#ffd6e7);
-color:#333;
+/* BUTTON */
+button{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-weight:600;
+cursor:pointer;
 }
 
-/* ---------- TEXT ---------- */
+/* FLIGHT CARD */
+.card{
+border:1px solid #eee;
+border-radius:12px;
+padding:14px;
+margin:10px 0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
-.text{
-font-size:clamp(18px,3vw,32px);
+.price{
+color:#16a34a;
+font-weight:700;
+}
+
+/* BOARDING PASS */
+.pass{
+border:1px dashed #ccc;
+padding:16px;
+border-radius:12px;
 text-align:center;
-max-width:80%;
-line-height:1.5;
 }
 
-/* ---------- PLANE ---------- */
+.face{
+width:70px;
+height:70px;
+border-radius:50%;
+object-fit:cover;
+margin:10px 0;
+border:2px solid #2563eb;
+}
+
+/* MAP */
+.map{
+height:200px;
+background:linear-gradient(135deg,#dbeafe,#f0f9ff);
+border-radius:12px;
+position:relative;
+overflow:hidden;
+}
 
 .plane{
 position:absolute;
-font-size:50px;
-left:-100px;
+font-size:26px;
+left:10%;
 top:50%;
-animation:fly 6s linear forwards;
+transition:5s linear;
 }
 
-@keyframes fly{
-0%{left:-100px; top:55%;}
-50%{top:35%;}
-100%{left:110%; top:45%;}
-}
-
-/* ---------- HEART FLOAT ---------- */
-
-.heart{
-position:absolute;
-font-size:20px;
-animation:rise 5s linear forwards;
-opacity:.7;
-}
-
-@keyframes rise{
-from{transform:translateY(0); opacity:1;}
-to{transform:translateY(-100vh); opacity:0;}
-}
-
-/* ---------- CAKE ---------- */
-
+/* CAKE */
 .cake{
-width:200px;
-height:120px;
-background:pink;
-border-radius:20px;
+width:160px;
+height:100px;
+background:#ffb6c1;
+margin:auto;
+border-radius:12px;
 position:relative;
-margin-top:20px;
+margin-top:30px;
 }
 
 .candle{
-width:10px;
-height:40px;
-background:white;
 position:absolute;
-top:-40px;
+width:8px;
+height:30px;
+background:white;
+top:-30px;
 }
 
 .flame{
-width:12px;
-height:18px;
-background:gold;
+width:10px;
+height:14px;
+background:orange;
 border-radius:50%;
 position:absolute;
-top:-18px;
+top:-14px;
 animation:flicker .2s infinite alternate;
 }
 
@@ -119,17 +144,11 @@ from{transform:scale(1);}
 to{transform:scale(.8);}
 }
 
-/* ---------- FINAL ---------- */
-
+/* FINAL */
 .final{
-font-size:clamp(22px,4vw,40px);
 text-align:center;
-padding:20px;
-color:#5a3b2e;
-}
-
-.glow{
-text-shadow:0 0 20px rgba(255,215,0,.6);
+padding:30px;
+font-weight:600;
 }
 
 </style>
@@ -137,140 +156,141 @@ text-shadow:0 0 20px rgba(255,215,0,.6);
 
 <body>
 
-<!-- ACT 1 -->
-<div id="s1" class="scene london show">
+<div class="app">
 
-<div class="text">
-London is quiet tonight...<br><br>
-but someone is thinking about her 💛
+<div class="header">✈️ Sky Travel</div>
+
+<!-- SEARCH -->
+<div id="s1" class="screen active">
+
+<h3>Search Flights</h3>
+
+<input value="India (MAA)">
+<input value="London (LHR)">
+
+<button onclick="search()">Search</button>
+
+</div>
+
+<!-- RESULTS -->
+<div id="s2" class="screen">
+
+<h3>Available Flights</h3>
+
+<div class="card">
+<div>
+Direct Flight<br>
+<small>9h 10m</small>
+</div>
+<div class="price">£240</div>
+</div>
+
+<div class="card">
+<div>
+1 Stop Flight<br>
+<small>11h 30m</small>
+</div>
+<div class="price">£180</div>
+</div>
+
+<button onclick="book()">Book Selected</button>
+
+</div>
+
+<!-- PASS -->
+<div id="s3" class="screen">
+
+<div class="pass">
+
+<h3>Boarding Pass</h3>
+
+<p>India → London</p>
+
+<img class="face" src="Haridhra1.jpg">
+
+<p>Passenger: Haridhra</p>
+
+<button onclick="fly()">Check In</button>
+
 </div>
 
 </div>
 
-<!-- ACT 2 -->
-<div id="s2" class="scene sky">
+<!-- FLIGHT -->
+<div id="s4" class="screen">
 
-<div class="text">
-“I miss her birthday…”<br><br>
-A decision is made ✈️
-</div>
+<h3>Flight in Progress</h3>
 
-<div class="plane">✈️</div>
-
-</div>
-
-<!-- ACT 3 -->
-<div id="s3" class="scene sky">
-
-<div class="text">
-Some journeys are not about distance…<br>
-they are about feeling close 💛
+<div class="map">
+<div id="plane" class="plane">✈️</div>
 </div>
 
 </div>
 
-<!-- ACT 4 -->
-<div id="s4" class="scene chennai">
+<!-- CAKE -->
+<div id="s5" class="screen">
 
-<div class="text">
-Chennai ✈️<br><br>
-“Almost there…”</div>
-
-</div>
-
-<!-- ACT 5 -->
-<div id="s5" class="scene chennai">
-
-<div class="text">
-He arrives quietly…<br>
-just in time for her day 💛
-</div>
-
-</div>
-
-<!-- ACT 6 CAKE -->
-<div id="s6" class="scene chennai">
-
-<div class="text">Make a wish 🎂</div>
+<h3>Arrival 🎉</h3>
 
 <div class="cake">
-<div class="candle" style="left:40px"><div class="flame"></div></div>
-<div class="candle" style="left:90px"><div class="flame"></div></div>
-<div class="candle" style="left:140px"><div class="flame"></div></div>
+
+<div class="candle" style="left:30px"><div class="flame"></div></div>
+<div class="candle" style="left:70px"><div class="flame"></div></div>
+<div class="candle" style="left:110px"><div class="flame"></div></div>
+
 </div>
+
+<button onclick="end()">Celebrate</button>
 
 </div>
 
 <!-- FINAL -->
-<div id="s7" class="scene chennai">
+<div id="s6" class="screen">
 
-<div class="final glow">
-Happy Birthday Haridhra 💛<br><br>
+<div class="final">
+💛 Happy Birthday Haridhra 💛<br><br>
 
-I didn’t just send a wish…<br>
-I carried it across London → Chennai ✈️
+A journey from India → London<br>
+Made real in moments ✈️
+</div>
+
 </div>
 
 </div>
 
 <script>
 
-let scenes=["s1","s2","s3","s4","s5","s6","s7"];
-let i=0;
-
-function showNext(){
-
-document.getElementById(scenes[i]).classList.remove("show");
-
-i++;
-
-if(i<scenes.length){
-
-document.getElementById(scenes[i]).classList.add("show");
-
-if(scenes[i]==="s2"){
-startPlane();
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
-if(scenes[i]==="s6"){
-setTimeout(blowEffect,4000);
-}
+function search(){ show("s2"); }
 
-setTimeout(showNext,4000);
+function book(){ show("s3"); }
 
-}
+function fly(){
+
+show("s4");
+
+setTimeout(()=>{
+document.getElementById("plane").style.left="85%";
+document.getElementById("plane").style.top="20%";
+},500);
+
+setTimeout(()=>{
+show("s5");
+},5000);
 
 }
 
-setTimeout(showNext,3000);
-
-/* PLANE */
-
-function startPlane(){
-document.querySelector(".plane").style.animation="fly 6s linear forwards";
-}
-
-/* HEARTS */
-
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💛";
-h.style.left=Math.random()*100+"vw";
-h.style.bottom="-20px";
-document.body.appendChild(h);
-
-setTimeout(()=>h.remove(),5000);
-
-},400);
-
-/* BLOW EFFECT */
-
-function blowEffect(){
+function end(){
 
 document.querySelectorAll(".flame").forEach(f=>{
 f.style.opacity="0";
 });
+
+show("s6");
 
 }
 
