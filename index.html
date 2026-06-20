@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sky Travel - Journey to High Wycombe</title>
+<title>Sky Travel - Haridhra's UK Birthday Adventure</title>
 
 <style>
 :root {
@@ -48,9 +48,14 @@ body {
   position: relative;
 }
 
-/* HEADER */
+/* HEADER & QUEST BAR */
+.header-container {
+  z-index: 10;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
 .header {
-  padding: 18px 20px;
+  padding: 16px 20px;
   background: linear-gradient(135deg, #1e3a8a, var(--primary));
   color: white;
   display: flex;
@@ -58,14 +63,27 @@ body {
   justify-content: space-between;
   font-weight: 700;
   font-size: 1.1rem;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-  z-index: 10;
 }
 
-.header span {
+.quest-status-bar {
+  background: #1e293b;
+  color: #94a3b8;
+  padding: 8px 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  border-bottom: 2px solid #334155;
+}
+
+.quest-badge {
+  background: var(--accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
 }
 
 /* MAIN CONTENT AREA WITH SCROLLING */
@@ -94,7 +112,7 @@ body {
 
 h3 {
   font-size: 1.35rem;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
   font-weight: 700;
   color: #0f172a;
 }
@@ -102,11 +120,65 @@ h3 {
 p.subtitle {
   color: var(--text-light);
   font-size: 0.9rem;
-  margin-top: -12px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* INTERACTIVE TASKS STYLING */
+.task-container {
+  background: white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px;
   margin-bottom: 20px;
 }
 
-/* FORM ELEMENTS */
+.task-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Q1: PACKING MINI-GAME */
+.packing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.packing-item {
+  background: #f1f5f9;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 12px 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.packing-item.selected {
+  background: #f0fdf4;
+  border-color: var(--success);
+  transform: scale(1.05);
+}
+
+.packing-emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.packing-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* INPUTS */
 .form-group {
   margin-bottom: 16px;
 }
@@ -164,7 +236,7 @@ button.btn-primary:disabled {
   cursor: not-allowed;
 }
 
-/* FLIGHT CARDS */
+/* FLIGHT LIST */
 .flight-list {
   display: flex;
   flex-direction: column;
@@ -179,24 +251,11 @@ button.btn-primary:disabled {
   padding: 16px;
   cursor: pointer;
   transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
 }
 
 .flight-card.selected {
   border-color: var(--primary);
   background: #f0f7ff;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
-}
-
-.flight-card.selected::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--primary);
 }
 
 .card-top {
@@ -212,19 +271,9 @@ button.btn-primary:disabled {
   gap: 8px;
 }
 
-.airline-logo {
-  font-size: 1.4rem;
-}
-
 .airline-name {
   font-weight: 700;
   font-size: 0.95rem;
-}
-
-.flight-number {
-  font-size: 0.75rem;
-  color: var(--text-light);
-  display: block;
 }
 
 .card-price {
@@ -237,15 +286,6 @@ button.btn-primary:disabled {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-}
-
-.time-block {
-  text-align: left;
-}
-
-.time-block.right {
-  text-align: right;
 }
 
 .time {
@@ -288,12 +328,6 @@ button.btn-primary:disabled {
 .flight-card.selected .plane-icon {
   background: #f0f7ff;
   color: var(--primary);
-}
-
-.duration {
-  font-size: 0.75rem;
-  color: var(--text-light);
-  margin-top: 4px;
 }
 
 /* SEAT SELECTION */
@@ -341,28 +375,6 @@ button.btn-primary:disabled {
 .seat.selected {
   background: var(--primary);
   color: white;
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);
-}
-
-.seat-legend {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 16px;
-  font-size: 0.75rem;
-  color: var(--text-light);
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.legend-color {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
 }
 
 /* BOARDING PASS WALLET STYLE */
@@ -462,7 +474,6 @@ button.btn-primary:disabled {
   background-size: 10px 10px;
   background-position: 0 0, 5px 5px;
   border: 8px solid white;
-  outline: 1px solid #cbd5e1;
 }
 
 /* MAP SCREEN */
@@ -534,42 +545,118 @@ button.btn-primary:disabled {
   font-weight: 700;
 }
 
-/* NEW: TRANSIT SCREEN (LHR to High Wycombe) */
-.transit-visual {
-  height: 160px;
-  background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 100%);
-  border-radius: 20px;
+/* MINI AUTOPILOT GAME */
+.autopilot-widget {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 12px;
+  border: 1.5px solid #cbd5e1;
+  text-align: center;
+}
+
+.autopilot-game-track {
+  height: 12px;
+  background: #cbd5e1;
+  border-radius: 6px;
+  margin: 12px 0;
   position: relative;
   overflow: hidden;
-  border: 1px solid #93c5fd;
 }
 
-.transit-scenery {
+.autopilot-target-zone {
   position: absolute;
-  bottom: 0;
-  width: 200%;
-  height: 40px;
-  background: repeating-linear-gradient(90deg, #22c55e, #22c55e 40px, #16a34a 40px, #16a34a 80px);
-  animation: scrollScenery 6s linear infinite;
+  width: 25%;
+  height: 100%;
+  background: var(--success);
+  left: 45%;
 }
 
-@keyframes scrollScenery {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.transit-car {
+.autopilot-pointer {
   position: absolute;
-  bottom: 20px;
-  left: 30px;
-  font-size: 2rem;
-  animation: carBounce 0.4s infinite alternate;
-  z-index: 5;
+  width: 10px;
+  height: 100%;
+  background: var(--accent);
+  left: 0%;
+  transition: left 0.05s linear;
 }
 
-@keyframes carBounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-3px); }
+/* BORDER CONTROL SCREEN */
+.border-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1.5px solid #cbd5e1;
+}
+
+.border-dialogue {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-left: 4px solid var(--primary);
+  font-size: 0.9rem;
+}
+
+.border-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.border-option {
+  width: 100%;
+  text-align: left;
+  background: white;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.border-option:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.border-option.wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.border-option.correct {
+  border-color: var(--success);
+  background: #hn;
+  background-color: #f0fdf4;
+}
+
+/* HIGH WYCOMBE MAP & MAZE */
+.maze-widget {
+  background: #f1f5f9;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  border: 1.5px solid #e2e8f0;
+}
+
+.maze-scenery {
+  height: 120px;
+  background: linear-gradient(180deg, #bae6fd 0%, #f0fdf4 100%);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.maze-landmark {
+  font-size: 3rem;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .scenic-image-container {
@@ -591,24 +678,7 @@ button.btn-primary:disabled {
   border: 2px solid #3b82f6;
 }
 
-.scenic-details {
-  flex: 1;
-}
-
-.scenic-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: #0f172a;
-}
-
-.scenic-text {
-  font-size: 0.8rem;
-  color: var(--text-light);
-  margin-top: 4px;
-  line-height: 1.3;
-}
-
-/* NEW: HOUSE ARRIVAL SCREEN (Knock Knock Door Interaction) */
+/* HOUSE DOOR KNOCK */
 .door-scene {
   background: #f1f5f9;
   border-radius: 20px;
@@ -621,7 +691,7 @@ button.btn-primary:disabled {
   position: relative;
   width: 170px;
   height: 260px;
-  background: #1e293b; /* Door frame / interior dark look */
+  background: #1e293b;
   margin: 0 auto 20px;
   border-radius: 8px;
   perspective: 800px;
@@ -632,7 +702,7 @@ button.btn-primary:disabled {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #991b1b; /* Vibrant Red English Door */
+  background: #991b1b;
   border: 5px solid #7f1d1d;
   border-radius: 6px;
   transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -649,9 +719,8 @@ button.btn-primary:disabled {
 .door-knob {
   width: 14px;
   height: 14px;
-  background: #f59e0b; /* Golden knob */
+  background: #f59e0b;
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .door-interior {
@@ -883,19 +952,25 @@ button.btn-primary:disabled {
 
 <div class="app">
 
-  <!-- HEADER -->
-  <div class="header">
-    <span>✈️ Sky Travel</span>
-    <button id="audioBtn" class="audio-toggle" onclick="toggleMute()" title="Mute/Unmute sound">🔊</button>
+  <!-- HEADER & PROGRESS BAR -->
+  <div class="header-container">
+    <div class="header">
+      <span>✈️ Sky Travel</span>
+      <button id="audioBtn" class="audio-toggle" onclick="toggleMute()" title="Mute/Unmute sound">🔊</button>
+    </div>
+    <div class="quest-status-bar">
+      <span id="questBadge" class="quest-badge">Ready</span>
+      <span id="questDescription">Start the adventure</span>
+    </div>
   </div>
 
   <!-- MAIN WRAPPER -->
   <div class="content-wrapper">
 
-    <!-- SCREEN 1: SEARCH -->
+    <!-- SCREEN 1: SEARCH / ENTER INFO -->
     <div id="s1" class="screen active">
-      <h3>Search Flights</h3>
-      <p class="subtitle">Book a journey from India to the United Kingdom</p>
+      <h3>Enter Passenger Details</h3>
+      <p class="subtitle">Set up the traveler parameters to begin the quest</p>
 
       <div class="form-group">
         <label>Passenger Name</label>
@@ -917,25 +992,63 @@ button.btn-primary:disabled {
         <input id="dateInput" type="date">
       </div>
 
-      <button class="btn-primary" onclick="search()">Find Flights</button>
+      <button class="btn-primary" onclick="goToPacking()">Start Quest Line</button>
+    </div>
+
+    <!-- SCREEN 1.5: PACKING CHALLENGE -->
+    <div id="s1_pack" class="screen">
+      <h3>Quest 1: The Packing Puzzle</h3>
+      <p class="subtitle">Haridhra needs to find her three must-pack items before she can receive her flight boarding pass!</p>
+
+      <div class="task-container">
+        <div class="task-title">💼 Pack her suitcase:</div>
+        <div class="packing-grid">
+          <div class="packing-item" id="pack_pass" onclick="togglePackItem('pass')">
+            <span class="packing-emoji">🛂</span>
+            <span class="packing-label">Passport</span>
+          </div>
+          <div class="packing-item" id="pack_book" onclick="togglePackItem('book')">
+            <span class="packing-emoji">📖</span>
+            <span class="packing-label">Novels</span>
+          </div>
+          <div class="packing-item" id="pack_coat" onclick="togglePackItem('coat')">
+            <span class="packing-emoji">🧥</span>
+            <span class="packing-label">Warm UK Coat</span>
+          </div>
+          <div class="packing-item" id="pack_camera" onclick="togglePackItem('camera')">
+            <span class="packing-emoji">📷</span>
+            <span class="packing-label">Camera</span>
+          </div>
+          <div class="packing-item" id="pack_crown" onclick="togglePackItem('crown')">
+            <span class="packing-emoji">👑</span>
+            <span class="packing-label">B-day Crown</span>
+          </div>
+          <div class="packing-item" id="pack_shoe" onclick="togglePackItem('shoe')">
+            <span class="packing-emoji">👠</span>
+            <span class="packing-label">Heels</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="packingBtn" onclick="search()" disabled>Proceed to Flight Selection</button>
     </div>
 
     <!-- SCREEN 2: CHOOSE FLIGHT -->
     <div id="s2" class="screen">
       <h3>Available Flights</h3>
-      <p class="subtitle">Select the best itinerary for your special day</p>
+      <p class="subtitle">Select the premium direct routing to London Heathrow</p>
 
       <div id="flightList" class="flight-list">
         <!-- Dynamic Flights Injected Here -->
       </div>
 
-      <button class="btn-primary" id="selectFlightBtn" onclick="goToSeats()" disabled>Choose Seat</button>
+      <button class="btn-primary" id="selectFlightBtn" onclick="goToSeats()" disabled>Choose Cabin Seat</button>
     </div>
 
     <!-- SCREEN 2.5: SEAT SELECTOR -->
     <div id="s2_seat" class="screen">
-      <h3>Choose Your Seat</h3>
-      <p class="subtitle">Window seats offer the most majestic sunrise views</p>
+      <h3>Select Your Cabin Seat</h3>
+      <p class="subtitle">Choose a window row to enjoy the sunrise over European landscapes</p>
 
       <div class="seat-map-container">
         <div class="seat-grid" id="seatGrid">
@@ -948,19 +1061,19 @@ button.btn-primary:disabled {
         </div>
       </div>
 
-      <button class="btn-primary" id="confirmSeatBtn" onclick="goToPass()" disabled>Confirm Seat</button>
+      <button class="btn-primary" id="confirmSeatBtn" onclick="goToPass()" disabled>Generate Boarding Ticket</button>
     </div>
 
     <!-- SCREEN 3: BOARDING PASS -->
     <div id="s3" class="screen">
-      <h3>Your Boarding Pass</h3>
-      <p class="subtitle">Check-in complete. Have a comfortable flight!</p>
+      <h3>Gate Pass Confirmed</h3>
+      <p class="subtitle">Present this ticket at the gate to begin boarding</p>
 
       <div class="boarding-pass-ticket">
         <div class="ticket-header">
           <span style="font-weight: 700; letter-spacing: 0.5px;" id="ticketAirline">SKY AIRWAYS</span>
           <!-- Passport Photo: Haridhra 1.jpg -->
-          <img class="passenger-avatar" src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Passenger Photo">
+          <img class="passenger-avatar" src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridhra Passport">
         </div>
 
         <div class="ticket-flight-info">
@@ -1011,13 +1124,13 @@ button.btn-primary:disabled {
         </div>
       </div>
 
-      <button class="btn-primary" onclick="startFlight()">Take Off</button>
+      <button class="btn-primary" onclick="startFlight()">Board and Take Off</button>
     </div>
 
     <!-- SCREEN 4: FLIGHT TRACKER -->
     <div id="s4" class="screen">
       <h3>In-Flight Tracker</h3>
-      <p class="subtitle" id="flightStatusText">Cruising above the clouds...</p>
+      <p class="subtitle" id="flightStatusText">Cruising smoothly over oceans...</p>
 
       <div class="live-map" id="liveMap">
         <!-- Stars injected dynamically -->
@@ -1026,7 +1139,23 @@ button.btn-primary:disabled {
           <path id="flightProgressCurve" d="M 40 100 Q 180 20 320 100" fill="none" stroke="var(--primary)" stroke-width="3" stroke-dasharray="1000" stroke-dashoffset="1000" />
         </svg>
         <div class="live-plane" id="livePlane">✈️</div>
-        <div class="progress-text" id="progressPercent">0% Journey Complete</div>
+        <div class="progress-text" id="progressPercent">0% Flight Complete</div>
+      </div>
+
+      <!-- IN-FLIGHT TASK: JETSTREAM STABILIZATION -->
+      <div class="task-container" id="flightTaskContainer" style="margin-top: 15px;">
+        <div class="task-title">⚡ Quest 2: Jetstream Stabilization</div>
+        <p style="font-size: 0.8rem; color: var(--text-light); line-height: 1.3; margin-bottom: 8px;">
+          Strong winds encountered over Europe. Assist the captain by tapping <strong>"Engage Glide Autopilot"</strong> when the slider lands inside the green safety target!
+        </p>
+        
+        <div class="autopilot-widget">
+          <div class="autopilot-game-track">
+            <div class="autopilot-target-zone"></div>
+            <div class="autopilot-pointer" id="planePointer"></div>
+          </div>
+          <button class="btn-primary" onclick="tryStabilize()" style="padding: 10px; font-size: 0.85rem;">Engage Glide Autopilot</button>
+        </div>
       </div>
 
       <div class="flight-stats-card">
@@ -1040,50 +1169,79 @@ button.btn-primary:disabled {
             <div class="stat-val" id="liveAltitude">36,000 ft</div>
           </div>
         </div>
-        <div class="stat-row" style="margin-top: 14px;">
-          <div class="stat-item">
-            <div class="ticket-label">Distance to destination</div>
-            <div class="stat-val" id="liveDistance">Calculated...</div>
-          </div>
-          <div class="stat-item">
-            <div class="ticket-label">Est. Temp Outside</div>
-            <div class="stat-val">-54°F</div>
-          </div>
-        </div>
       </div>
     </div>
 
-    <!-- SCREEN 4.1: TRANSIT (Onwards to High Wycombe) -->
-    <div id="s4_transit" class="screen">
-      <h3>Onwards to High Wycombe</h3>
-      <p class="subtitle">Traveling from London Heathrow through the UK countryside</p>
+    <!-- SCREEN 4.05: BORDER CONTROL RIDDLE -->
+    <div id="s4_border" class="screen">
+      <h3>Quest 3: Heathrow Border Control</h3>
+      <p class="subtitle">To enter the United Kingdom, Haridhra must satisfy the Customs Officer regarding her true itinerary.</p>
 
-      <div class="transit-visual">
-        <div class="transit-scenery"></div>
-        <div class="transit-car">🚕</div>
-      </div>
+      <div class="border-card">
+        <div style="text-align: center; font-size: 3rem; margin-bottom: 12px;">👮‍♂️</div>
+        <div class="border-dialogue">
+          "Welcome to London Heathrow, Haridhra. State the primary purpose of your trip to the UK."
+        </div>
 
-      <!-- Transit details displaying Haridhra 2.jpg -->
-      <div class="scenic-image-container">
-        <img class="scenic-photo" src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridhra on the road">
-        <div class="scenic-details">
-          <div class="scenic-title" id="transitHeading">Traveling to your home</div>
-          <div class="scenic-text">Transferring from London Heathrow (LHR) to High Wycombe. Beautiful green valleys and rolling hills passing by...</div>
+        <div class="border-options">
+          <button class="border-option" id="border_opt_1" onclick="submitBorderAns(1)">
+            "I'm here to write a boring, lengthy report on British architecture."
+          </button>
+          <button class="border-option" id="border_opt_2" onclick="submitBorderAns(2)">
+            "To travel to High Wycombe for a highly classified birthday celebration!"
+          </button>
+          <button class="border-option" id="border_opt_3" onclick="submitBorderAns(3)">
+            "I have come exclusively to inspect local rain and eat cold beans on toast."
+          </button>
         </div>
       </div>
 
-      <button style="margin-top:20px" class="btn-primary" onclick="arriveAtHouse()">Arrive at House</button>
+      <button class="btn-primary" id="borderNextBtn" style="margin-top: 20px; display: none;" onclick="showTransitScreen()">Pass Border Control</button>
+    </div>
+
+    <!-- SCREEN 4.1: TRANSIT / NAVIGATION QUEST -->
+    <div id="s4_transit" class="screen">
+      <h3>Quest 4: Lost in the Chilterns</h3>
+      <p class="subtitle">The taxi departs Heathrow heading North. But the driver gets confused by the winding country lanes in Buckinghamshire!</p>
+
+      <div class="maze-widget">
+        <div class="maze-scenery">
+          <div class="maze-landmark" id="mazeEmoji">🚕</div>
+        </div>
+        <div class="border-dialogue" id="mazeText" style="font-size: 0.85rem; margin-bottom: 12px; border-left-color: var(--accent);">
+          "We're lost near High Wycombe! Which historic route should we follow to find the house?"
+        </div>
+
+        <div class="border-options" id="mazeOptions">
+          <button class="border-option" onclick="chooseMazeRoute('caves')">
+            "Navigate the dark, winding path past West Wycombe Hellfire Caves!"
+          </button>
+          <button class="border-option" onclick="chooseMazeRoute('manor')">
+            "Route past the beautiful, historic Hughenden Manor parklands!"
+          </button>
+        </div>
+      </div>
+
+      <!-- Displays Haridhra 2.jpg during the overland quest -->
+      <div class="scenic-image-container">
+        <img class="scenic-photo" src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridhra travelling">
+        <div style="flex:1">
+          <div class="scenic-title" style="font-size:0.9rem" id="transitHeading">Buckinghamshire Countryside</div>
+          <div class="scenic-text" style="font-size:0.75rem" id="transitDesc">Help her select the correct navigation options so she can reach your home in High Wycombe.</div>
+        </div>
+      </div>
+
+      <button style="margin-top:20px; display:none;" id="transitNextBtn" class="btn-primary" onclick="arriveAtHouse()">Approach Front Door</button>
     </div>
 
     <!-- SCREEN 4.2: HOUSE ARRIVAL (Knock & Open Door) -->
     <div id="s4_house" class="screen">
-      <h3>Welcome to My House!</h3>
-      <p class="subtitle">Tap the door to knock and welcome her inside</p>
+      <h3>Quest 5: The Secret Knock</h3>
+      <p class="subtitle">She has successfully arrived at your house in High Wycombe! Tap the red door exactly <strong>three times</strong> to execute the secret birthday knock and alert the host.</p>
 
       <div class="door-scene">
         <div class="door-container">
-          <!-- Clicking the door triggers openDoor() -->
-          <div class="door" id="mainDoor" onclick="openDoor()">
+          <div class="door" id="mainDoor" onclick="knockDoor()">
             <div class="door-knob"></div>
           </div>
           <div class="door-interior">
@@ -1091,17 +1249,18 @@ button.btn-primary:disabled {
             <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=300'" alt="Welcome Haridhra">
           </div>
         </div>
-        <div class="welcome-label" id="doorHint">🚪 Tap to open the door!</div>
+        <div class="welcome-label" id="doorHint">🚪 Tap the door to knock!</div>
+        <div style="margin-top: 10px; font-weight: 800; font-size: 1.1rem; color: var(--accent);" id="knockCounter">Knocks: 0 / 3</div>
       </div>
 
-      <button id="afterDoorBtn" style="margin-top:20px; display:none;" class="btn-primary" onclick="goToCake()">Enter the Living Room</button>
+      <button id="afterDoorBtn" style="margin-top:20px; display:none;" class="btn-primary" onclick="goToCake()">Step inside the Living Room</button>
     </div>
 
     <!-- SCREEN 5: ARRIVAL & CAKE -->
     <div id="s5" class="screen">
       <div class="arrival-header" style="text-align: center; margin-bottom: 20px;">
-        <div class="welcome-msg" style="font-size: 1.25rem; font-weight: 800; color: var(--accent);">Surprise! 🎁</div>
-        <p class="subtitle" style="margin-top: 4px;">Let's blow out the birthday candles!</p>
+        <div class="welcome-msg" style="font-size: 1.25rem; font-weight: 800; color: var(--accent);">Happy Birthday Surprise! 🎁</div>
+        <p class="subtitle" style="margin-top: 4px;">Tap the birthday candles to make a wish and blow them out!</p>
       </div>
 
       <div class="cake-box">
@@ -1126,7 +1285,7 @@ button.btn-primary:disabled {
         <div class="cake-plate"></div>
       </div>
 
-      <p class="instruction-text" style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-top: 16px;">🎂 Click or tap the candles to blow them out!</p>
+      <p class="instruction-text" style="text-align: center; color: var(--text-light); font-size: 0.9rem; margin-top: 16px;">🎂 Extinguish all 3 flames!</p>
     </div>
 
     <!-- SCREEN 6: CELEBRATION -->
@@ -1158,7 +1317,7 @@ button.btn-primary:disabled {
 </div>
 
 <script>
-// Application State
+// State Store
 let appState = {
   passengerName: "Haridhra",
   origin: "MAA",
@@ -1169,11 +1328,27 @@ let appState = {
   flights: [],
   selectedFlight: null,
   selectedSeat: null,
-  soundMuted: false
+  soundMuted: false,
+  packedItems: {
+    pass: false,
+    book: false,
+    coat: false,
+    camera: false,
+    crown: false,
+    shoe: false
+  },
+  knocksCount: 0,
+  autopilotLevel: 0,
+  stabilized: false
 };
 
-// Default setup
+// Default Date
 document.getElementById('dateInput').valueAsDate = new Date();
+
+function updateQuestBar(level, desc) {
+  document.getElementById('questBadge').innerText = level;
+  document.getElementById('questDescription').innerText = desc;
+}
 
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -1181,19 +1356,48 @@ function showScreen(id) {
   document.querySelector('.content-wrapper').scrollTop = 0;
 }
 
-// Search Flight Input Parsing
-function search() {
+// Q1: Packing logic
+function goToPacking() {
   const pName = document.getElementById('passengerName').value.trim();
+  if (!pName) {
+    alert("Please enter a passenger name to begin.");
+    return;
+  }
+  appState.passengerName = pName;
+  updateQuestBar("Quest 1", "Pack Haridhra's suitcase");
+  showScreen("s1_pack");
+}
+
+function togglePackItem(itemKey) {
+  appState.packedItems[itemKey] = !appState.packedItems[itemKey];
+  const itemEl = document.getElementById(`pack_${itemKey}`);
+  
+  if (appState.packedItems[itemKey]) {
+    itemEl.classList.add('selected');
+  } else {
+    itemEl.classList.remove('selected');
+  }
+  playBeep();
+
+  // Check if target items are packed: pass, coat, crown
+  const isTargetPacked = appState.packedItems.pass && appState.packedItems.coat && appState.packedItems.crown;
+  const btn = document.getElementById('packingBtn');
+  
+  if (isTargetPacked) {
+    btn.disabled = false;
+    btn.innerText = " suitcase Packed! Go to Flights";
+  } else {
+    btn.disabled = true;
+    btn.innerText = "Find: Passport, Coat & Crown";
+  }
+}
+
+// Generate dynamic flight offers
+function search() {
   const rawOrigin = document.getElementById('originInput').value.trim();
   const rawDest = document.getElementById('destinationInput').value.trim();
   const rawDate = document.getElementById('dateInput').value;
 
-  if (!pName || !rawOrigin || !rawDest) {
-    alert("Please fill in all details to proceed.");
-    return;
-  }
-
-  appState.passengerName = pName;
   appState.origin = extractCode(rawOrigin, "MAA");
   appState.destination = extractCode(rawDest, "LHR");
   appState.originFull = cleanCityName(rawOrigin);
@@ -1228,6 +1432,7 @@ function search() {
   ];
 
   renderFlights();
+  updateQuestBar("Setup", "Select your flight");
   showScreen("s2");
 }
 
@@ -1251,10 +1456,10 @@ function renderFlights() {
     card.innerHTML = `
       <div class="card-top">
         <div class="airline-info">
-          <span class="airline-logo">${f.logo}</span>
+          <span style="font-size:1.3rem">${f.logo}</span>
           <div>
             <span class="airline-name">${f.airline}</span>
-            <span class="flight-number">${f.code}</span>
+            <span style="display:block; font-size:0.75rem; color:var(--text-light);">${f.code}</span>
           </div>
         </div>
         <div class="card-price">${f.price}</div>
@@ -1267,7 +1472,7 @@ function renderFlights() {
         <div class="path-line">
           <span class="plane-icon">✈️</span>
           <div class="dots"></div>
-          <span class="duration">${f.duration}</span>
+          <span style="font-size:0.75rem; color:var(--text-light); margin-top:4px;">${f.duration}</span>
         </div>
         <div class="time-block right">
           <div class="time">${f.arrTime}</div>
@@ -1289,11 +1494,9 @@ function selectFlight(idx, element) {
   playBeep();
 }
 
-// Seat Selector map
 function goToSeats() {
   const seatGrid = document.getElementById('seatGrid');
   seatGrid.innerHTML = '';
-  
   const cols = ['A', 'B', 'C', '', 'D', 'E', 'F'];
   const rows = 5;
 
@@ -1318,6 +1521,7 @@ function goToSeats() {
 
   appState.selectedSeat = null;
   document.getElementById('confirmSeatBtn').disabled = true;
+  updateQuestBar("Setup", "Reserve cabin seat");
   showScreen("s2_seat");
 }
 
@@ -1341,13 +1545,17 @@ function goToPass() {
   document.getElementById('passSeat').innerText = appState.selectedSeat;
   document.getElementById('passDate').innerText = appState.date.substring(0, 6);
 
+  updateQuestBar("Quest 2 Ready", "Present Boarding Pass");
   showScreen("s3");
 }
 
-// Flight Map tracker progress
+// Flight Map & Progress Loop
+let pointerInterval = null;
 function startFlight() {
+  updateQuestBar("Quest 2", "In-Flight Stabilization");
   showScreen("s4");
   
+  // Build dynamic stars
   const map = document.getElementById("liveMap");
   document.querySelectorAll('.star').forEach(el => el.remove());
   for(let i=0; i<15; i++) {
@@ -1359,11 +1567,21 @@ function startFlight() {
     map.appendChild(star);
   }
 
+  // Active pointer game loop
+  const pointer = document.getElementById('planePointer');
+  let pPos = 0;
+  let dir = 1;
+  pointerInterval = setInterval(() => {
+    pPos += dir * 4;
+    if (pPos >= 95) dir = -1;
+    if (pPos <= 0) dir = 1;
+    pointer.style.left = `${pPos}%`;
+  }, 40);
+
   const plane = document.getElementById("livePlane");
   const progressText = document.getElementById("progressPercent");
   const liveSpeed = document.getElementById("liveSpeed");
   const liveAltitude = document.getElementById("liveAltitude");
-  const liveDistance = document.getElementById("liveDistance");
   const path = document.getElementById("flightCurve");
   const progressPath = document.getElementById("flightProgressCurve");
   const statusText = document.getElementById("flightStatusText");
@@ -1372,14 +1590,18 @@ function startFlight() {
   progressPath.style.strokeDasharray = totalLength;
   progressPath.style.strokeDashoffset = totalLength;
 
-  const duration = 4000; 
-  const start = performance.now();
-
+  let duration = 5000; 
+  let start = performance.now();
   playJetSound();
 
   function update(time) {
+    if (!appState.stabilized) {
+      // Pause plane visual movement if they haven't stabilized
+      start = time - (ratioTracked * duration);
+    }
     let elapsed = time - start;
     let ratio = Math.min(elapsed / duration, 1);
+    ratioTracked = ratio;
     
     let point = path.getPointAtLength(ratio * totalLength);
     plane.style.left = `${point.x}px`;
@@ -1392,64 +1614,158 @@ function startFlight() {
     
     let currentAlt = Math.floor(28000 + Math.sin(ratio * Math.PI) * 10000);
     let currentSpeed = Math.floor(520 + Math.sin(ratio * Math.PI * 1.5) * 40);
-    let currentDist = Math.floor((1 - ratio) * 4500);
 
     liveAltitude.innerText = `${currentAlt.toLocaleString()} ft`;
     liveSpeed.innerText = `${currentSpeed} mph`;
-    liveDistance.innerText = `${currentDist.toLocaleString()} miles`;
 
-    if (pct < 20) {
-      statusText.innerText = "🛫 Taking off from " + appState.originFull + "...";
-    } else if (pct < 80) {
-      statusText.innerText = "☁️ Cruising over continents...";
+    if (!appState.stabilized) {
+      statusText.innerText = "⚠️ Jetstream encountered over Europe! Complete Quest 2.";
     } else {
-      statusText.innerText = "🛬 Landing at " + appState.destinationFull + "...";
+      if (pct < 40) {
+        statusText.innerText = "🛫 Gliding effortlessly through direct route...";
+      } else if (pct < 85) {
+        statusText.innerText = "☁️ Approaching British airspace safely...";
+      } else {
+        statusText.innerText = "🛬 Descent initiated towards Heathrow...";
+      }
     }
 
-    if (ratio < 1) {
+    if (ratio < 1 || !appState.stabilized) {
       requestAnimationFrame(update);
     } else {
+      clearInterval(pointerInterval);
       setTimeout(() => {
-        showTransitScreen();
+        enterBorderControl();
       }, 800);
     }
   }
 
+  let ratioTracked = 0;
+  appState.stabilized = false;
   requestAnimationFrame(update);
 }
 
-// Transit to High Wycombe Screen
+// In-Flight Task execution
+function tryStabilize() {
+  const pointer = document.getElementById('planePointer');
+  const posVal = parseFloat(pointer.style.left);
+  
+  // Target range 40% to 70% represent green zone
+  if (posVal >= 40 && posVal <= 70) {
+    appState.stabilized = true;
+    clearInterval(pointerInterval);
+    document.getElementById('flightTaskContainer').innerHTML = `
+      <div class="task-title" style="color: var(--success)">💚 Quest 2 Cleared!</div>
+      <p style="font-size: 0.8rem; color: var(--text-light)">The jet has stabilized on the optimal flight glide path. Smooth flight ahead!</p>
+    `;
+    playSuccessChime();
+  } else {
+    // Fail flash effect
+    const widget = document.querySelector('.autopilot-widget');
+    widget.style.borderColor = "#ef4444";
+    setTimeout(() => {
+      widget.style.borderColor = "#cbd5e1";
+    }, 300);
+    playFailBeep();
+  }
+}
+
+// Q3: Border Control Interaction
+function enterBorderControl() {
+  updateQuestBar("Quest 3", "LHR Border Control Control");
+  
+  // Reset buttons
+  for(let i=1; i<=3; i++){
+    const opt = document.getElementById(`border_opt_${i}`);
+    opt.classList.remove('correct', 'wrong');
+    opt.disabled = false;
+  }
+  document.getElementById('borderNextBtn').style.display = 'none';
+  showScreen("s4_border");
+}
+
+function submitBorderAns(ansId) {
+  if (ansId === 2) {
+    document.getElementById('border_opt_2').classList.add('correct');
+    document.getElementById('borderNextBtn').style.display = 'block';
+    playSuccessChime();
+    // Disable others
+    document.getElementById('border_opt_1').disabled = true;
+    document.getElementById('border_opt_3').disabled = true;
+  } else {
+    document.getElementById(`border_opt_${ansId}`).classList.add('wrong');
+    playFailBeep();
+  }
+}
+
+// Q4: High Wycombe Maze
 function showTransitScreen() {
-  document.getElementById('transitHeading').innerText = `${appState.passengerName} On the Way!`;
+  updateQuestBar("Quest 4", "Buckinghamshire Taxi Quest");
+  document.getElementById('mazeEmoji').innerText = "🚕";
+  document.getElementById('mazeText').innerText = `"We're lost in the Buckinghamshire countryside! Which scenic path should we take to reach High Wycombe?"`;
+  document.getElementById('mazeOptions').style.display = 'flex';
+  document.getElementById('transitNextBtn').style.display = 'none';
+  document.getElementById('transitHeading').innerText = `${appState.passengerName} Overland Travel`;
+  document.getElementById('transitDesc').innerText = "Help the driver find the fastest route to High Wycombe.";
+
   showScreen("s4_transit");
 }
 
+function chooseMazeRoute(choice) {
+  const optPanel = document.getElementById('mazeOptions');
+  const txt = document.getElementById('mazeText');
+  const mapEmoji = document.getElementById('mazeEmoji');
+  
+  if (choice === 'caves') {
+    txt.innerText = `"Ah, the driver got frightened by spooky sounds near the West Wycombe Hellfire Caves! Let's choose another turn!"`;
+    mapEmoji.innerText = "👻";
+    playFailBeep();
+  } else {
+    txt.innerText = `"Brilliant route choice! We drove past the stunning Victorian Hughenden Manor parklands and are safely in High Wycombe town center."`;
+    mapEmoji.innerText = "🏡";
+    optPanel.style.display = 'none';
+    document.getElementById('transitNextBtn').style.display = 'block';
+    document.getElementById('transitHeading').innerText = "Arriving at High Wycombe";
+    document.getElementById('transitDesc').innerText = "You've successfully guided the taxi straight to the front door of my house!";
+    playSuccessChime();
+  }
+}
+
+// Q5: Knock Door Challenge
 function arriveAtHouse() {
-  // Reset Door State
+  updateQuestBar("Quest 5", "The Secret Door Knock");
+  appState.knocksCount = 0;
+  
   const door = document.getElementById('mainDoor');
   door.classList.remove('open');
-  document.getElementById('doorHint').innerText = "🚪 Tap to open the door!";
+  document.getElementById('doorHint').innerText = "🚪 Perform the Secret Birthday Knock!";
+  document.getElementById('knockCounter').innerText = "Knocks: 0 / 3";
   document.getElementById('afterDoorBtn').style.display = 'none';
 
   showScreen("s4_house");
 }
 
-// Door Open Interaction
-function openDoor() {
-  const door = document.getElementById('mainDoor');
-  if (!door.classList.contains('open')) {
-    door.classList.add('open');
-    playDoorCreak();
-    document.getElementById('doorHint').innerText = `✨ Welcome Home, ${appState.passengerName}!`;
-    
-    setTimeout(() => {
-      document.getElementById('afterDoorBtn').style.display = 'block';
-    }, 500);
+function knockDoor() {
+  if (appState.knocksCount < 3) {
+    appState.knocksCount++;
+    document.getElementById('knockCounter').innerText = `Knocks: ${appState.knocksCount} / 3`;
+    playKnockSound();
+
+    if (appState.knocksCount === 3) {
+      setTimeout(() => {
+        const door = document.getElementById('mainDoor');
+        door.classList.add('open');
+        playDoorCreak();
+        document.getElementById('doorHint').innerText = `✨ Door Unlocked! Welcome, ${appState.passengerName}!`;
+        document.getElementById('afterDoorBtn').style.display = 'block';
+        playSuccessChime();
+      }, 400);
+    }
   }
 }
 
 function goToCake() {
-  // Reset Candles
+  updateQuestBar("Final Milestone", "Blow out the Candles");
   document.querySelectorAll('.candle').forEach(c => {
     c.classList.remove('blown');
   });
@@ -1457,7 +1773,7 @@ function goToCake() {
   showScreen("s5");
 }
 
-// Candle blowing game
+// Cake blown out trigger
 let blownOutCandles = 0;
 function blowCandle(candleEl) {
   if (candleEl.classList.contains('blown')) return;
@@ -1473,14 +1789,15 @@ function blowCandle(candleEl) {
   }
 }
 
-// Final celebration screen
 function triggerCelebration() {
+  updateQuestBar("🎉 Completed!", "Happy Birthday, Haridhra!");
   showScreen("s6");
   
   document.getElementById('finalWishesTitle').innerText = `Happy Birthday, ${appState.passengerName}! 🎂`;
   document.getElementById('finalCardMsg').innerHTML = `
-    Your special journey from <strong>${appState.originFull}</strong> to <strong>High Wycombe, UK</strong> is complete! <br><br>
-    May this birthday be filled with unforgettable happiness, cozy warm tea, and wonderful achievements in your lovely home. Cheers to fabulous new horizons! ✈️🇬🇧
+    Your epic quest from <strong>${appState.originFull}</strong> to <strong>High Wycombe, UK</strong> is complete! <br><br>
+    You packed her bag, navigated through turbulence, cleared Heathrow Border Patrol, found your way through the Buckinghamshire Hills, and solved the secret door knock! <br><br>
+    May your year be filled with amazing direct routes, safe landings, and beautiful memories in the United Kingdom. ✈️🇬🇧💛
   `;
 
   initConfetti();
@@ -1489,10 +1806,18 @@ function triggerCelebration() {
 
 function restartJourney() {
   stopConfetti();
+  appState.packedItems = { pass: false, book: false, coat: false, camera: false, crown: false, shoe: false };
+  
+  // Reset first screen packing items classes
+  document.querySelectorAll('.packing-item').forEach(el => el.classList.remove('selected'));
+  const btn = document.getElementById('packingBtn');
+  btn.disabled = true;
+  btn.innerText = "Find: Passport, Coat & Crown";
+
   showScreen("s1");
 }
 
-/* WEB AUDIO UTILITIES */
+/* AUDIO HELPER SYNTH (PURE SYNTHESIS - NO LINKS REQUIRED) */
 let audioCtx = null;
 
 function getAudioContext() {
@@ -1520,6 +1845,57 @@ function playBeep() {
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
     osc.start();
     osc.stop(ctx.currentTime + 0.1);
+  } catch(e) {}
+}
+
+function playKnockSound() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(100, ctx.currentTime);
+    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.15);
+  } catch(e) {}
+}
+
+function playSuccessChime() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+    osc.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2); // G5
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.4);
+  } catch(e) {}
+}
+
+function playFailBeep() {
+  if (appState.soundMuted) return;
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.frequency.setValueAtTime(180, ctx.currentTime);
+    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.3);
   } catch(e) {}
 }
 
@@ -1619,7 +1995,7 @@ function playBirthdayTune() {
   } catch(e) {}
 }
 
-/* CONFETTI CANVAS UTILITY */
+/* CONFETTI SYSTEM */
 let confettiAnimationId = null;
 function initConfetti() {
   const canvas = document.getElementById('confetti-canvas');
