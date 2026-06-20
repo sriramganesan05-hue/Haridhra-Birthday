@@ -1020,13 +1020,22 @@ button.btn-primary:disabled {
   cursor: pointer;
 }
 
+.candle-wick {
+  position: absolute;
+  width: 2px;
+  height: 6px;
+  background: #475569;
+  top: -6px;
+  left: 4px;
+}
+
 .candle-flame {
   width: 12px;
   height: 18px;
   background: radial-gradient(ellipse at bottom, #f59e0b, #ef4444);
   border-radius: 50% 50% 20% 20%;
   position: absolute;
-  top: -16px;
+  top: -18px;
   left: -1px;
   animation: flicker 0.15s infinite alternate;
   transform-origin: center bottom;
@@ -1042,25 +1051,23 @@ button.btn-primary:disabled {
   display: none;
 }
 
-.candle-smoke {
+/* REALISTIC SMOKE trail Ring elements */
+.smoke-ring {
   position: absolute;
-  width: 4px;
-  height: 15px;
-  background: rgba(226, 232, 240, 0.8);
-  top: -15px;
-  left: 3px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  opacity: 0;
+  background: rgba(226, 232, 240, 0.45);
+  filter: blur(4px);
   pointer-events: none;
+  z-index: 10;
+  animation: riseAndFade 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.candle.blown .candle-smoke {
-  animation: smokeRise 1.5s ease-out forwards;
-}
-
-@keyframes smokeRise {
-  0% { opacity: 0.8; transform: translateY(0) scale(1); filter: blur(1px); }
-  100% { opacity: 0; transform: translateY(-30px) scale(2.5); filter: blur(3px); }
+@keyframes riseAndFade {
+  0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.6; filter: blur(3px); }
+  50% { opacity: 0.3; filter: blur(5px); }
+  100% { transform: translateY(-70px) scale(2.8) rotate(60deg); opacity: 0; filter: blur(8px); }
 }
 
 .cake-plate {
@@ -1454,7 +1461,7 @@ button.btn-primary:disabled {
           <path id="flightCurve" d="M 40 100 Q 180 20 320 100" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3" stroke-dasharray="6,6" />
           <path id="flightProgressCurve" d="M 40 100 Q 180 20 320 100" fill="none" stroke="var(--primary)" stroke-width="3" stroke-dasharray="1000" stroke-dashoffset="1000" />
         </svg>
-        <div class="live-plane" id="livePlane">✈️</div>
+        <div class="live-plane" id="live_plane">✈️</div>
         <div class="progress-text" id="progressPercent">0% Flight Complete</div>
       </div>
 
@@ -1629,7 +1636,7 @@ button.btn-primary:disabled {
 
       <!-- Displays Haridra 2.jpg during the overland quest -->
       <div class="scenic-image-container">
-        <img class="scenic-photo" src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra travelling">
+        <img class="scenic-photo" src="Haridra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra travelling">
         <div style="flex:1">
           <div class="scenic-title" style="font-size:0.9rem" id="transitHeading">Buckinghamshire Countryside</div>
           <div class="scenic-text" style="font-size:0.75rem" id="transitDesc">Help her select the correct navigation options so she can reach your home in High Wycombe.</div>
@@ -1651,7 +1658,7 @@ button.btn-primary:disabled {
           </div>
           <div class="door-interior">
             <!-- Reveals Haridra 3.jpg standing at the doorway -->
-            <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=300'" alt="Welcome Haridra">
+            <img src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=300'" alt="Welcome Haridra">
           </div>
         </div>
         <div class="welcome-label" id="doorHint">🚪 Tap the door to knock!</div>
@@ -1670,15 +1677,19 @@ button.btn-primary:disabled {
 
       <div class="cake-box" id="cakeBox">
         <div class="candles-container">
+          <!-- IMPROVED CANDLES WITH WICKS -->
           <div class="candle" onclick="blowCandle(this, event)">
+            <div class="candle-wick"></div>
             <div class="candle-flame"></div>
             <div class="candle-smoke"></div>
           </div>
           <div class="candle" onclick="blowCandle(this, event)">
+            <div class="candle-wick"></div>
             <div class="candle-flame"></div>
             <div class="candle-smoke"></div>
           </div>
           <div class="candle" onclick="blowCandle(this, event)">
+            <div class="candle-wick"></div>
             <div class="candle-flame"></div>
             <div class="candle-smoke"></div>
           </div>
@@ -1701,17 +1712,17 @@ button.btn-primary:disabled {
       <div class="slideshow-container">
         <!-- Slide 1 -->
         <div class="slide" id="slide_0">
-          <img src="Haridhra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 1">
+          <img src="Haridra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 1">
           <div class="slide-caption">Beginning of an amazing adventure... 🛫</div>
         </div>
         <!-- Slide 2 -->
         <div class="slide" id="slide_1">
-          <img src="Haridhra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 2">
+          <img src="Haridra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 2">
           <div class="slide-caption">Exploring beautiful landscapes & city horizons... 🗺️</div>
         </div>
         <!-- Slide 3 -->
         <div class="slide" id="slide_2">
-          <img src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 3">
+          <img src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 3">
           <div class="slide-caption">Arrived at the cozy destination in High Wycombe! 🏡</div>
         </div>
 
@@ -1731,7 +1742,7 @@ button.btn-primary:disabled {
         <div class="avatar-large-container">
           <span class="crown">👑</span>
           <!-- Celebratory Photo: Haridra 3.jpg -->
-          <img class="avatar-large" src="Haridhra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240'" alt="Haridra Celebration">
+          <img class="avatar-large" src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240'" alt="Haridra Celebration">
         </div>
 
         <h2 class="wishes-title" id="finalWishesTitle">Happy Birthday, Haridra!</h2>
@@ -2018,7 +2029,7 @@ function startFlight() {
     pointer.style.left = `${pPos}%`;
   }, 40);
 
-  const plane = document.getElementById("livePlane");
+  const plane = document.getElementById("live_plane");
   const progressText = document.getElementById("progressPercent");
   const liveSpeed = document.getElementById("liveSpeed");
   const liveAltitude = document.getElementById("liveAltitude");
@@ -2367,13 +2378,45 @@ function blowCandle(candleEl, event) {
   
   candleEl.classList.add('blown');
   playBlowSound();
-  createSparks(event.clientX, event.clientY);
+  
+  // Real coordinates of click inside the app
+  const rect = candleEl.getBoundingClientRect();
+  const x = rect.left + rect.width/2;
+  const y = rect.top;
+  
+  // Spark explosion
+  createSparks(x, y);
+  
+  // SMOKE TRAIL PHYSICS
+  spawnSmoke(x, y);
+  
   blownOutCandles++;
   
   if (blownOutCandles >= 3) {
     setTimeout(() => {
       startSlideshow();
-    }, 1200);
+    }, 1800); // Wait a moment for smoke to drift nicely
+  }
+}
+
+// Rising Smoke Rings generator
+function spawnSmoke(x, y) {
+  const container = document.getElementById('cakeBox');
+  const boxRect = container.getBoundingClientRect();
+  const smokeX = x - boxRect.left;
+  const smokeY = y - boxRect.top;
+  
+  for(let i=0; i<8; i++) {
+    setTimeout(() => {
+      if (document.getElementById('s5').classList.contains('active')) {
+        const ring = document.createElement('div');
+        ring.className = 'smoke-ring';
+        ring.style.left = `${smokeX - 5 + (Math.random() * 10 - 5)}px`;
+        ring.style.top = `${smokeY - 10}px`;
+        container.appendChild(ring);
+        setTimeout(() => ring.remove(), 1600);
+      }
+    }, i * 150);
   }
 }
 
@@ -2384,7 +2427,7 @@ function createSparks(x, y) {
   const sparkX = x - boxRect.left;
   const sparkY = y - boxRect.top;
   
-  const numSparks = 15;
+  const numSparks = 18;
   for (let i = 0; i < numSparks; i++) {
     const spark = document.createElement('div');
     spark.className = 'spark';
@@ -2394,9 +2437,9 @@ function createSparks(x, y) {
     container.appendChild(spark);
     
     const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * 80 + 30;
+    const distance = Math.random() * 90 + 30;
     const tx = Math.cos(angle) * distance;
-    const ty = Math.sin(angle) * distance;
+    const ty = Math.sin(angle) * distance + 20; // Slight drop down weight
     
     requestAnimationFrame(() => {
       spark.style.transform = `translate(${tx}px, ${ty}px) scale(0)`;
