@@ -35,55 +35,82 @@ body {
   z-index:3;
 }
 
-/* FINAL SCREEN */
-#finalScreen {
+/* CANDLE SCREEN */
+#candleScreen {
   position:fixed;
   top:0; left:0;
   width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  color:white;
+  background:#000000d0;
   display:none;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:5;
+  color:white;
+  z-index:4;
   text-align:center;
 }
 
-#finalScreen img {
+#cake {
   width:220px;
-  height:220px;
-  border-radius:50%;
-  object-fit:cover;
   margin-bottom:20px;
-  box-shadow:0 0 25px gold;
 }
 
-#finalScreen h1 {
-  font-size:40px;
-  margin-bottom:10px;
-}
-
-#finalScreen p {
+#blowBtn {
+  padding:15px 30px;
   font-size:20px;
-  width:80%;
-  max-width:500px;
-  line-height:1.6;
-}
-
-/* POP TEXT */
-.popText {
-  position:absolute;
-  font-size:28px;
+  border:none;
+  border-radius:12px;
+  background:#ffcc00;
+  color:black;
+  cursor:pointer;
   font-weight:700;
-  color:#ff3b3b;
-  pointer-events:none;
-  animation:popFade 1s ease forwards;
 }
 
-@keyframes popFade {
-  0% { opacity:1; transform:translateY(0); }
-  100% { opacity:0; transform:translateY(-40px); }
+/* FINAL POLAROID FLOAT */
+#photoReveal {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:#000;
+  display:none;
+  overflow:hidden;
+  z-index:5;
+}
+
+.polaroid {
+  position:absolute;
+  width:180px;
+  padding:10px;
+  background:white;
+  border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+  transform:rotate(-5deg);
+  animation:float 12s infinite ease-in-out;
+}
+
+.polaroid img {
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+@keyframes float {
+  0% { transform:translateY(0) rotate(-5deg); }
+  50% { transform:translateY(-40px) rotate(5deg); }
+  100% { transform:translateY(0) rotate(-5deg); }
+}
+
+/* MESSAGE */
+#finalMessage {
+  position:fixed;
+  bottom:40px;
+  width:100%;
+  text-align:center;
+  color:white;
+  font-size:26px;
+  font-weight:600;
+  text-shadow:0 0 15px gold;
 }
 </style>
 </head>
@@ -94,17 +121,16 @@ body {
 
 <div id="scoreBox">Balloons popped: <span id="score">0</span>/15</div>
 
-<div id="finalScreen">
-  <img src="Haridhra1.jpg">
-  <h1>🎉 YOU DID IT! 🎉</h1>
-  <p>
-    Happy Birthday Haridhra!  
-    You popped every balloon like an absolute legend.  
-    You’re fun, chaotic, adorable, and today is YOUR day 💛  
-  </p>
-  <p style="margin-top:20px; font-weight:bold;">
-    — From your favourite chaos machine, Sriram 😎
-  </p>
+<!-- CANDLE SCREEN -->
+<div id="candleScreen">
+  <img id="cake" src="https://i.imgur.com/8bZQZQp.png">
+  <h2>Make a wish, Haridhra…</h2>
+  <button id="blowBtn" onclick="blowCandles()">Blow the candles 🎂</button>
+</div>
+
+<!-- PHOTO REVEAL -->
+<div id="photoReveal">
+  <div id="finalMessage">Happy Birthday, Haridhra 💛</div>
 </div>
 
 <script>
@@ -119,15 +145,13 @@ function resize(){
 resize();
 window.onresize = resize;
 
-/* BALLOON OBJECTS */
+/* BALLOONS */
 let balloons = [];
 let score = 0;
 const target = 15;
 
-/* RANDOM HELPERS */
 function rand(min,max){ return Math.random()*(max-min)+min; }
 
-/* CREATE BALLOONS */
 function spawnBalloon(){
   balloons.push({
     x: rand(50, canvas.width-50),
@@ -137,10 +161,8 @@ function spawnBalloon(){
     color: `hsl(${rand(0,360)},100%,60%)`
   });
 }
-
 setInterval(spawnBalloon, 700);
 
-/* DRAW LOOP */
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -182,29 +204,36 @@ canvas.addEventListener("click", function(e){
       score++;
       document.getElementById("score").innerText = score;
 
-      showPopText(mx,my);
-
       if(score >= target){
-        setTimeout(showFinal, 500);
+        setTimeout(()=>document.getElementById("candleScreen").style.display="flex", 500);
       }
     }
   });
 });
 
-/* POP TEXT */
-function showPopText(x,y){
-  const t = document.createElement("div");
-  t.className = "popText";
-  t.style.left = x + "px";
-  t.style.top = y + "px";
-  t.innerText = "POP!";
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),1000);
+/* CANDLE BLOW */
+function blowCandles(){
+  document.getElementById("candleScreen").style.display="none";
+  startPhotoReveal();
 }
 
-/* FINAL SCREEN */
-function showFinal(){
-  document.getElementById("finalScreen").style.display = "flex";
+/* PHOTO REVEAL WITH HARIDHRA1–3.JPG */
+function startPhotoReveal(){
+  const container = document.getElementById("photoReveal");
+  container.style.display = "block";
+
+  const files = ["Haridhra1.jpg","Haridhra2.jpg","Haridhra3.jpg"];
+
+  files.forEach((file,i)=>{
+    const p = document.createElement("div");
+    p.className = "polaroid";
+    p.style.left = rand(0, window.innerWidth-200) + "px";
+    p.style.top = rand(0, window.innerHeight-300) + "px";
+    p.style.animationDelay = (i * 0.7) + "s";
+
+    p.innerHTML = `<img src="${file}">`;
+    container.appendChild(p);
+  });
 }
 </script>
 
