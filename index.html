@@ -10,19 +10,43 @@ body {
   margin:0;
   padding:0;
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ffcf33,#ff914d,#ff4d6d,#ff6f91,#ff9671);
-  background-size:400% 400%;
-  animation:bgShift 10s ease infinite;
+  background:#000;
   color:#fff;
   text-align:center;
-  transition:1.5s ease;
   overflow-x:hidden;
 }
 
+/* Animated gradient overlay */
+.bg-gradient {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#ffcf33,#ff914d,#ff4d6d,#ff6f91,#ff9671);
+  background-size:400% 400%;
+  animation:bgShift 12s ease infinite;
+  z-index:-2;
+}
 @keyframes bgShift {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
+}
+
+/* Photo background slideshow for game */
+.bg-photo {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  opacity:0.25;
+  filter:blur(6px);
+  transition:opacity 1s ease, background-image 1s ease;
+  z-index:-1;
 }
 
 h1 {
@@ -36,10 +60,10 @@ h1 {
   max-width:600px;
   margin:40px auto;
   padding:25px;
-  background:rgba(255,255,255,0.15);
+  background:rgba(0,0,0,0.45);
   border-radius:20px;
   backdrop-filter:blur(10px);
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+  box-shadow:0 5px 20px rgba(0,0,0,0.6);
 }
 
 .question {
@@ -62,13 +86,12 @@ h1 {
   transition:0.3s;
   font-weight:600;
 }
-
 .choice-btn:hover {
   transform:scale(1.05);
   background:#ffe6e6;
 }
 
-/* Surprise Mode */
+/* Surprise section */
 #surprise-content {
   opacity:0;
   pointer-events:none;
@@ -76,35 +99,47 @@ h1 {
 }
 
 .card {
-  background:rgba(255,255,255,0.2);
+  background:rgba(0,0,0,0.55);
   padding:30px;
   border-radius:25px;
   width:85%;
   max-width:800px;
-  margin:auto;
+  margin:40px auto;
   backdrop-filter:blur(10px);
-  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+  box-shadow:0 10px 40px rgba(0,0,0,0.8);
 }
 
-.card img {
+/* Slideshow images */
+.slideshow {
+  position:relative;
   width:260px;
   height:260px;
+  margin:0 auto;
   border-radius:50%;
-  object-fit:cover;
-  opacity:0;
-  animation:fadeIn 2s ease forwards, glow 3s ease-in-out infinite alternate;
+  overflow:hidden;
   border:4px solid #fff;
   box-shadow:0 0 25px rgba(255,255,255,0.7);
 }
-
-@keyframes fadeIn {
-  from{opacity:0;transform:scale(0.8);}
-  to{opacity:1;transform:scale(1);}
+.slideshow img {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  animation:fadeCycle 9s infinite;
 }
+.slideshow img:nth-child(1){animation-delay:0s;}
+.slideshow img:nth-child(2){animation-delay:3s;}
+.slideshow img:nth-child(3){animation-delay:6s;}
 
-@keyframes glow {
-  from{box-shadow:0 0 15px rgba(255,255,255,0.4);}
-  to{box-shadow:0 0 35px rgba(255,255,255,1);}
+@keyframes fadeCycle {
+  0%{opacity:0;}
+  10%{opacity:1;}
+  30%{opacity:1;}
+  40%{opacity:0;}
+  100%{opacity:0;}
 }
 
 #message {
@@ -119,7 +154,7 @@ h1 {
   margin-top:15px;
   font-style:italic;
   font-weight:bold;
-  color:#fff;
+  color:#ffe6e6;
 }
 
 /* Fireworks */
@@ -128,12 +163,15 @@ canvas {
   top:0;
   left:0;
   pointer-events:none;
-  z-index:0;
+  z-index:-1;
 }
 </style>
 </head>
 
 <body>
+
+<div class="bg-gradient"></div>
+<div class="bg-photo" id="bg-photo"></div>
 
 <h1 id="title">Would You Rather?</h1>
 
@@ -148,7 +186,11 @@ canvas {
   <h1>🎉 Happy Birthday Haridhra 🎉</h1>
 
   <div class="card">
-    <img src="Haridhra.jpg">
+    <div class="slideshow">
+      <img src="Haridhra1.jpg" alt="Haridhra 1">
+      <img src="Haridhra2.jpg" alt="Haridhra 2">
+      <img src="Haridhra3.jpg" alt="Haridhra 3">
+    </div>
     <p id="message"></p>
     <p class="signature">— With all my love, Your Big Brother, Sriram</p>
   </div>
@@ -157,34 +199,36 @@ canvas {
 </div>
 
 <script>
-/* FUN WOULD YOU RATHER QUESTIONS */
+/* Would You Rather questions */
 const questions = [
   {
     q: "Would you rather…",
-    a: ["Have unlimited snacks", "Have unlimited holidays"]
+    a: ["Eat unlimited chocolate", "Eat unlimited pizza"]
   },
   {
     q: "Would you rather…",
-    a: ["Be the funniest person in the room", "Be the smartest person in the room"]
+    a: ["Travel to space", "Travel to every country"]
   },
   {
     q: "Would you rather…",
-    a: ["Travel the world", "Stay home with comfort and peace"]
+    a: ["Talk to animals", "Read minds"]
   },
   {
     q: "Would you rather…",
-    a: ["Have a perfect day", "Have a perfect year"]
+    a: ["Have perfect luck", "Have perfect timing"]
   },
   {
-    q: "Final one… Would you rather choose…",
-    a: ["Anyone else", "Haridhra ❤️"]
+    q: "Final one…",
+    a: ["See normal results", "Unlock a special surprise made just for you ❤️"]
   }
 ];
 
+const bgImages = ["Haridhra1.jpg","Haridhra2.jpg","Haridhra3.jpg"];
 let current = 0;
 
 function loadQuestion(){
   const qBox = document.getElementById("question-container");
+  const bg = document.getElementById("bg-photo");
 
   if(current >= questions.length){
     revealSurprise();
@@ -192,6 +236,7 @@ function loadQuestion(){
   }
 
   const q = questions[current];
+  bg.style.backgroundImage = `url('${bgImages[current % bgImages.length]}')`;
 
   qBox.innerHTML = `
     <div class="question">${q.q}</div>
@@ -200,7 +245,7 @@ function loadQuestion(){
 }
 
 function nextQuestion(choice){
-  if(choice.includes("Haridhra")){
+  if(choice.includes("special surprise")){
     revealSurprise();
     return;
   }
@@ -210,7 +255,7 @@ function nextQuestion(choice){
 
 loadQuestion();
 
-/* SURPRISE REVEAL */
+/* Surprise reveal */
 function revealSurprise(){
   document.getElementById("game-box").style.display="none";
   document.getElementById("title").style.display="none";
@@ -222,19 +267,19 @@ function revealSurprise(){
   startShow();
 }
 
-/* TYPEWRITER MESSAGE */
-const text = `Looks like no matter what the choices were…
+/* Typewriter message */
+const text = `You chose the surprise…
 
-The answer was always going to be you.
+And honestly, that makes sense.
 
-Because you ARE the joy.
-You ARE the comfort.
-You ARE the brightness.
-You ARE the favourite choice.
+Because YOU are the surprise.
+You are the joy.
+You are the brightness.
+You are the reason today is special.
 
-And today…
+So here it is…
 
-You deserve the happiest birthday ever.
+A birthday message made just for you.
 
 Happy Birthday, Haridhra ❤️`;
 
@@ -248,7 +293,7 @@ function typeWriter(){
   }
 }
 
-/* FIREWORKS */
+/* Fireworks */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
@@ -278,7 +323,7 @@ function createFirework(){
 }
 
 function animateFireworks(){
-  ctx.fillStyle="rgba(0,0,0,0.1)";
+  ctx.fillStyle="rgba(0,0,0,0.15)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
   fireworks.forEach((f,index)=>{
     f.x+=Math.cos(f.angle)*f.speed;
