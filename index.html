@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Daily Personality Quiz</title>
+<title>Quick Personality Check</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 <style>
@@ -10,17 +10,17 @@ body {
   margin:0;
   padding:0;
   font-family:'Poppins',sans-serif;
-  background:#ffffff;
-  color:#333;
+  background:#eef2f7;
+  color:#222;
   text-align:center;
-  transition:all 1.5s ease;
+  transition:1.5s ease;
 }
 
 h1 {
   margin-top:40px;
   font-size:40px;
-  color:#444;
-  transition:all 1.5s ease;
+  color:#1a3d7c;
+  transition:1.5s ease;
 }
 
 .quiz-box {
@@ -28,10 +28,9 @@ h1 {
   max-width:600px;
   margin:30px auto;
   padding:25px;
-  background:#f7f7f7;
+  background:#ffffff;
   border-radius:20px;
   box-shadow:0 5px 20px rgba(0,0,0,0.1);
-  transition:all 1.5s ease;
 }
 
 .question {
@@ -54,4 +53,242 @@ button {
   margin-top:20px;
   border:none;
   border-radius:40px;
-  background
+  background:#1a3d7c;
+  color:#fff;
+  cursor:pointer;
+  transition:0.4s;
+}
+
+button:hover {
+  background:#0f2a55;
+}
+
+/* Surprise Mode */
+.surprise {
+  background:linear-gradient(135deg,#1a3d7c,#3a7bd5,#00d2ff,#f7b733,#fc4a1a);
+  background-size:500% 500%;
+  animation:bgShift 10s ease infinite;
+  color:#fff;
+}
+
+@keyframes bgShift {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+#surprise-content {
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 2s ease;
+}
+
+.card {
+  background:rgba(255,255,255,0.15);
+  padding:30px;
+  border-radius:25px;
+  width:85%;
+  max-width:800px;
+  margin:auto;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.3);
+}
+
+.card img {
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  object-fit:cover;
+  opacity:0;
+  animation:fadeIn 2s ease forwards, glow 3s ease-in-out infinite alternate;
+  border:4px solid #fff;
+  box-shadow:0 0 25px rgba(255,255,255,0.7);
+}
+
+@keyframes fadeIn {
+  from{opacity:0;transform:scale(0.8);}
+  to{opacity:1;transform:scale(1);}
+}
+
+@keyframes glow {
+  from{box-shadow:0 0 15px rgba(255,255,255,0.4);}
+  to{box-shadow:0 0 35px rgba(255,255,255,1);}
+}
+
+#message {
+  font-size:20px;
+  line-height:1.8;
+  margin-top:20px;
+  min-height:200px;
+  white-space:pre-wrap;
+}
+
+.signature {
+  margin-top:15px;
+  font-style:italic;
+  font-weight:bold;
+  color:#fff;
+}
+
+/* Fireworks */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+  z-index:0;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">Quick Personality Check</h1>
+
+<div class="quiz-box" id="quiz-box">
+
+  <div class="question">1. When someone needs help, what do you usually do?</div>
+  <select>
+    <option>Help immediately</option>
+    <option>Drop everything and help</option>
+    <option>Help even if I'm busy</option>
+  </select>
+
+  <div class="question">2. How do people describe your presence?</div>
+  <select>
+    <option>Comforting</option>
+    <option>Positive energy</option>
+    <option>Brightens the room</option>
+  </select>
+
+  <div class="question">3. How do you treat people you care about?</div>
+  <select>
+    <option>With loyalty</option>
+    <option>With kindness</option>
+    <option>With genuine love</option>
+  </select>
+
+  <div class="question">4. What do you think is your strongest quality?</div>
+  <select>
+    <option>Your heart</option>
+    <option>Your personality</option>
+    <option>Your kindness</option>
+  </select>
+
+  <div class="question">5. How often do you make others smile?</div>
+  <select>
+    <option>Very often</option>
+    <option>More than you realise</option>
+    <option>Every time you talk</option>
+  </select>
+
+  <button onclick="revealSurprise()">Submit</button>
+</div>
+
+<!-- Surprise Content -->
+<div id="surprise-content">
+  <canvas id="fireworks"></canvas>
+
+  <h1>🎉 Happy Birthday Haridhra 🎉</h1>
+
+  <div class="card">
+    <img src="Haridhra.jpg">
+    <p id="message"></p>
+    <p class="signature">— With all my love, Your Big Brother, Sriram</p>
+  </div>
+
+  <audio id="voice" src="https://www.soundjay.com/human/sounds/happy-birthday-01.mp3"></audio>
+</div>
+
+<script>
+function revealSurprise(){
+  document.body.classList.add("surprise");
+  document.getElementById("quiz-box").style.display="none";
+  document.getElementById("title").style.display="none";
+
+  const sc = document.getElementById("surprise-content");
+  sc.style.opacity = 1;
+  sc.style.pointerEvents = "auto";
+
+  startShow();
+}
+
+/* Typewriter Message */
+const text = `Your answers were perfect…
+
+Because you ARE the person who helps others.
+You ARE the person who brings comfort.
+You ARE the person who brightens rooms.
+You ARE the person with a beautiful heart.
+You ARE the reason people smile.
+
+And today…  
+You deserve all the love in the world.
+
+Happy Birthday, Haridhra ❤️`;
+
+let i = 0;
+function typeWriter(){
+  if(i < text.length){
+    const char = text.charAt(i);
+    document.getElementById("message").innerHTML += char === "\n" ? "<br>" : char;
+    i++;
+    setTimeout(typeWriter, 25);
+  }
+}
+
+/* Fireworks */
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.onresize = resizeCanvas;
+
+let fireworks = [];
+
+function createFirework(){
+  const x = Math.random()*canvas.width;
+  const y = Math.random()*canvas.height/2;
+  const colors = ["#ffffff","#ffe066","#00d2ff","#3a7bd5","#f7b733"];
+  for(let i=0;i<40;i++){
+    fireworks.push({
+      x,y,
+      radius:2,
+      angle:Math.random()*2*Math.PI,
+      speed:Math.random()*3+1,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      life:60
+    });
+  }
+}
+
+function animateFireworks(){
+  ctx.fillStyle="rgba(0,0,0,0.1)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  fireworks.forEach((f,index)=>{
+    f.x+=Math.cos(f.angle)*f.speed;
+    f.y+=Math.sin(f.angle)*f.speed;
+    f.life--;
+    ctx.beginPath();
+    ctx.arc(f.x,f.y,f.radius,0,Math.PI*2);
+    ctx.fillStyle=f.color;
+    ctx.fill();
+    if(f.life<=0) fireworks.splice(index,1);
+  });
+  requestAnimationFrame(animateFireworks);
+}
+
+function startShow(){
+  typeWriter();
+  document.getElementById("voice").play().catch(()=>{});
+  animateFireworks();
+  setInterval(createFirework,800);
+}
+</script>
+
+</body>
+</html>
