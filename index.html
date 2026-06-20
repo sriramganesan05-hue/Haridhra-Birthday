@@ -2,353 +2,148 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Haridhra</title>
+<title>Happy Birthday Haridhra 🎉💛</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin:0;
   padding:0;
+  background:#fffbf0;
   font-family:'Poppins',sans-serif;
-  background:#000;
-  color:#fff;
   overflow:hidden;
   text-align:center;
 }
 
-/* INTRO SCREEN */
-#intro {
+/* CONFETTI CANVAS */
+#confetti {
   position:fixed;
   top:0; left:0;
   width:100%; height:100%;
-  background:#000;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  opacity:1;
-  transition:opacity 1.5s ease;
-  z-index:10;
+  pointer-events:none;
+  z-index:5;
 }
 
-#intro h1 {
-  font-size:42px;
-  color:#ffcc00;
-  text-shadow:0 0 20px #ffcc00;
-  margin-bottom:20px;
+/* CENTER BOX */
+#box {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.15);
+  width:85%;
+  max-width:500px;
+  animation:pop 0.7s ease;
 }
 
-#start-btn {
-  padding:15px 35px;
-  font-size:20px;
+@keyframes pop {
+  0% { transform:translate(-50%,-50%) scale(0); }
+  70% { transform:translate(-50%,-50%) scale(1.15); }
+  100% { transform:translate(-50%,-50%) scale(1); }
+}
+
+/* BOUNCE EMOJIS */
+.bounce {
+  display:inline-block;
+  animation:bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-12px); }
+}
+
+/* BUTTON */
+button {
+  margin-top:20px;
+  padding:15px 30px;
+  font-size:18px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
   background:#ffcc00;
   color:#000;
   cursor:pointer;
   font-weight:600;
   transition:0.3s;
 }
-#start-btn:hover {
-  transform:scale(1.1);
+button:hover {
+  transform:scale(1.1) rotate(2deg);
 }
 
-/* BACKGROUND FOR QUESTIONS — CLEAN, NO COLOUR OVERLAY */
-.bg-photo {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background-size:cover;
-  background-position:center;
-  opacity:1;
-  filter:none;
-  transition:background-image 1s ease;
-  z-index:-1;
-}
-
-/* QUESTION BOX */
-#game-box {
-  width:90%;
-  max-width:600px;
-  margin:80px auto;
-  padding:25px;
-  background:rgba(0,0,0,0.55);
-  border-radius:20px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 5px 20px rgba(0,0,0,0.6);
-  opacity:0;
-  transition:opacity 1s ease;
-}
-
-.question {
-  font-size:26px;
-  font-weight:600;
-  margin-bottom:25px;
-}
-
-.choice-btn {
-  display:block;
-  width:90%;
-  margin:12px auto;
-  padding:18px;
-  font-size:20px;
-  border:none;
-  border-radius:15px;
-  background:#fff;
-  color:#333;
-  cursor:pointer;
-  transition:0.3s;
-  font-weight:600;
-}
-.choice-btn:hover {
-  transform:scale(1.05);
-  background:#ffe08a;
-}
-
-/* FADE TRANSITION */
-.fade-out {
-  opacity:0 !important;
-}
-.fade-in {
-  opacity:1 !important;
-}
-
-/* CINEMATIC BLACK FADE */
-#blackout {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:#000;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 2s ease;
-  z-index:9;
-}
-
-/* BIRTHDAY SECTION */
-#birthday {
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 2s ease;
-}
-
-.card {
-  background:rgba(0,0,0,0.55);
-  padding:30px;
-  border-radius:25px;
-  width:85%;
-  max-width:800px;
-  margin:40px auto;
-  backdrop-filter:blur(10px);
-  box-shadow:0 10px 40px rgba(0,0,0,0.8);
-}
-
-/* SLIDESHOW */
-.slideshow {
-  position:relative;
-  width:260px;
-  height:260px;
-  margin:0 auto;
-  border-radius:50%;
-  overflow:hidden;
-  border:4px solid #ffcc00;
-  box-shadow:0 0 25px rgba(255,204,0,0.7);
-}
-
-.slideshow img {
+/* HIDDEN SURPRISE */
+#surprise {
   position:absolute;
-  width:100%;
-  height:100%;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:85%;
+  max-width:550px;
+  background:white;
+  padding:40px;
+  border-radius:25px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.2);
+  display:none;
+  animation:pop 0.7s ease;
+}
+
+#surprise img {
+  width:200px;
+  height:200px;
+  border-radius:50%;
   object-fit:cover;
-  opacity:0;
-  animation:fade 12s infinite;
+  margin-bottom:20px;
+  box-shadow:0 0 20px rgba(255,204,0,0.7);
 }
 
-.slideshow img:nth-child(1){animation-delay:0s;}
-.slideshow img:nth-child(2){animation-delay:4s;}
-.slideshow img:nth-child(3){animation-delay:8s;}
-
-.slideshow img:first-child {
-  opacity:1;
+#surprise h2 {
+  font-size:28px;
+  margin-bottom:10px;
 }
 
-/* Fade animation for slideshow */
-@keyframes fade {
-  0%{opacity:0;}
-  10%{opacity:1;}
-  30%{opacity:1;}
-  40%{opacity:0;}
-  100%{opacity:0;}
-}
-
-/* TYPEWRITER */
-#message {
-  font-size:20px;
-  line-height:1.8;
-  margin-top:20px;
-  min-height:200px;
-  white-space:pre-wrap;
-  color:#fff;
-}
-
-/* SIGNATURE */
-.signature {
-  margin-top:15px;
-  font-style:italic;
-  font-weight:bold;
-  color:#ffcc00;
-}
-
-/* FIREWORKS */
-canvas {
-  position:fixed;
-  top:0; left:0;
-  pointer-events:none;
-  z-index:-1;
+#surprise p {
+  font-size:18px;
+  line-height:1.6;
 }
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-  <h1>A Special Experience for Haridhra</h1>
-  <button id="start-btn">Click to Begin</button>
-</div>
+<canvas id="confetti"></canvas>
 
-<div id="blackout"></div>
-
-<div class="bg-photo" id="bg-photo"></div>
-
-<!-- GAME -->
-<div id="game-box"></div>
-
-<!-- BIRTHDAY SECTION -->
-<div id="birthday">
-  <canvas id="fireworks"></canvas>
-
-  <h1 style="color:#ffcc00; text-shadow:0 0 20px #ffcc00; margin-top:40px;">
-    🎉 Happy Birthday Haridhra 🎉
+<div id="box">
+  <h1>
+    <span class="bounce">🎉</span>
+    Happy Birthday Haridhra
+    <span class="bounce">🎉</span>
   </h1>
 
-  <div class="card">
-    <div class="slideshow">
-      <img src="Haridhra1.jpg">
-      <img src="Haridhra2.jpg">
-      <img src="Haridhra3.jpg">
-    </div>
+  <p style="font-size:20px;">
+    Ready for your chaotic surprise?
+  </p>
 
-    <p id="message"></p>
+  <button onclick="showSurprise()">YES, SHOW ME 😆</button>
+</div>
 
-    <p class="signature">— With all my love, Your Big Brother, Sriram</p>
-  </div>
+<div id="surprise">
+  <img src="Haridhra1.jpg">
+  <h2>🎂 You amazing human 🎂</h2>
+  <p>
+    You are cute.  
+    You are chaotic.  
+    You are sunshine in human form.  
+    And today is YOUR day 💛  
+  </p>
 
-  <audio id="voice" src="https://www.soundjay.com/human/sounds/happy-birthday-01.mp3"></audio>
+  <p style="font-weight:bold; margin-top:10px;">
+    — From your favourite chaos machine, Sriram 😎
+  </p>
 </div>
 
 <script>
-/* INTRO → GAME */
-document.getElementById("start-btn").onclick = () => {
-  document.getElementById("intro").style.opacity = 0;
-  setTimeout(() => {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("game-box").classList.add("fade-in");
-    loadQuestion();
-  }, 1500);
-};
-
-/* QUESTIONS */
-const questions = [
-  { q:"Would you rather…", a:["Eat only pizza for a year","Never eat pizza again"] },
-  { q:"Would you rather…", a:["Travel anywhere instantly","Read minds"] },
-  { q:"Would you rather…", a:["Fight one horse sized duck","Fight 50 duck sized horses"] },
-  { q:"Would you rather…", a:["Have perfect luck","Have perfect timing"] },
-  { q:"Would you rather…", a:["Be invisible","Be able to fly"] },
-  { q:"Would you rather…", a:["Always win arguments","Always make people laugh"] },
-  { q:"Final one…", a:["End game normally","Unlock the special surprise"] }
-];
-
-const bgImages = [
-  "food.jpg","travel.jpg","animals.jpg","luck.jpg","surprise.jpg",
-  "travel.jpg","surprise.jpg"
-];
-
-let current = 0;
-
-function loadQuestion(){
-  const box = document.getElementById("game-box");
-  const bg = document.getElementById("bg-photo");
-
-  bg.style.backgroundImage = `url('${bgImages[current]}')`;
-
-  box.innerHTML = `
-    <div class="question">${questions[current].q}</div>
-    ${questions[current].a.map(ans =>
-      `<button class="choice-btn" onclick="nextQuestion('${ans}')">${ans}</button>`
-    ).join("")}
-  `;
-}
-
-function nextQuestion(choice){
-  const box = document.getElementById("game-box");
-
-  box.classList.remove("fade-in");
-  box.classList.add("fade-out");
-
-  setTimeout(() => {
-    if(choice.includes("special surprise")){
-      startBirthday();
-      return;
-    }
-    current++;
-    if(current >= questions.length){
-      startBirthday();
-      return;
-    }
-    loadQuestion();
-    box.classList.remove("fade-out");
-    box.classList.add("fade-in");
-  }, 800);
-}
-
-/* CINEMATIC BLACK FADE → BIRTHDAY */
-function startBirthday(){
-  const blackout = document.getElementById("blackout");
-  blackout.style.opacity = 1;
-
-  setTimeout(() => {
-    document.getElementById("game-box").style.display = "none";
-    document.getElementById("birthday").style.opacity = 1;
-    document.getElementById("birthday").style.pointerEvents = "auto";
-    blackout.style.opacity = 0;
-    startShow();
-  }, 2000);
-}
-
-/* TYPEWRITER */
-const text = `Happy Birthday, Haridhra ❤️
-
-You are joy.
-You are light.
-You are the reason today feels special.
-
-Never forget how loved you are.
-
-Happy Birthday, superstar ✨`;
-
-let i = 0;
-function typeWriter(){
-  if(i < text.length){
-    const char = text.charAt(i);
-    document.getElementById("message").innerHTML += char === "\n" ? "<br>" : char;
-    i++;
-    setTimeout(typeWriter, 35);
-  }
-}
-
-/* FIREWORKS */
-const canvas = document.getElementById("fireworks");
+/* CONFETTI */
+const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 
 function resize(){
@@ -358,45 +153,40 @@ function resize(){
 resize();
 window.onresize = resize;
 
-let fw = [];
+let confetti = [];
 
-function create(){
-  const x = Math.random()*canvas.width;
-  const y = Math.random()*canvas.height/2;
-  const colors = ["#ffffff","#ffcc00","#ff9900","#ff6600"];
-  for(let i=0;i<40;i++){
-    fw.push({
-      x,y,
-      radius:2,
-      angle:Math.random()*2*Math.PI,
-      speed:Math.random()*3+1,
-      color:colors[Math.floor(Math.random()*colors.length)],
-      life:60
+function createConfetti(){
+  for(let i=0;i<10;i++){
+    confetti.push({
+      x:Math.random()*canvas.width,
+      y:-10,
+      size:Math.random()*8+4,
+      speed:Math.random()*3+2,
+      color:`hsl(${Math.random()*360},100%,60%)`,
+      angle:Math.random()*2*Math.PI
     });
   }
 }
 
 function animate(){
-  ctx.fillStyle="rgba(0,0,0,0.15)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  fw.forEach((p,i)=>{
-    p.x+=Math.cos(p.angle)*p.speed;
-    p.y+=Math.sin(p.angle)*p.speed;
-    p.life--;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  confetti.forEach((p,i)=>{
+    p.y+=p.speed;
+    p.x+=Math.sin(p.angle)*1.5;
     ctx.fillStyle=p.color;
-    ctx.fill();
-    if(p.life<=0) fw.splice(i,1);
+    ctx.fillRect(p.x,p.y,p.size,p.size);
+    if(p.y>canvas.height) confetti.splice(i,1);
   });
   requestAnimationFrame(animate);
 }
 
-function startShow(){
-  typeWriter();
-  document.getElementById("voice").play().catch(()=>{});
-  animate();
-  setInterval(create,800);
+setInterval(createConfetti,200);
+animate();
+
+/* SURPRISE POP-IN */
+function showSurprise(){
+  document.getElementById("box").style.display="none";
+  document.getElementById("surprise").style.display="block";
 }
 </script>
 
