@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flight Booking</title>
+<title>Realistic Flight Booking</title>
 
 <style>
 
@@ -67,13 +67,34 @@ border-radius:12px;
 padding:14px;
 margin:10px 0;
 display:flex;
+flex-direction: column; /* Changed to column for better detail layout */
 justify-content:space-between;
-align-items:center;
+align-items:flex-start; /* Align text to start */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.card-details {
+    width: 100%;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+}
+
+.card-details small {
+    display: block;
+    margin-top: 3px;
 }
 
 .price{
 color:#16a34a;
 font-weight:700;
+font-size: 1.2em;
 }
 
 /* BOARDING PASS */
@@ -91,6 +112,16 @@ border-radius:50%;
 object-fit:cover;
 margin:10px 0;
 border:2px solid #2563eb;
+}
+
+.pass-detail {
+    text-align: left;
+    margin: 8px 0;
+    font-size: 0.95em;
+}
+.pass-detail strong {
+    display: inline-block;
+    width: 100px;
 }
 
 /* MAP */
@@ -165,8 +196,11 @@ font-weight:600;
 
 <h3>Search Flights</h3>
 
-<input value="India (MAA)">
-<input value="London (LHR)">
+<input id="originInput" value="India (MAA)" placeholder="Origin (e.g., Chennai, MAA)">
+<input id="destinationInput" value="London (LHR)" placeholder="Destination (e.g., London, LHR)">
+<input type="date" id="dateInput" value="2024-08-15">
+<input type="number" id="passengersInput" value="1" min="1" placeholder="Number of Passengers">
+
 
 <button onclick="search()">Search</button>
 
@@ -178,19 +212,31 @@ font-weight:600;
 <h3>Available Flights</h3>
 
 <div class="card">
-<div>
-Direct Flight<br>
-<small>9h 10m</small>
-</div>
-<div class="price">£240</div>
+    <div class="card-header">
+        <div>
+            <strong>Air India</strong> - AI 150 <br>
+            <small>02:00 PM MAA → 10:30 PM LHR</small>
+        </div>
+        <div class="price">£240</div>
+    </div>
+    <div class="card-details">
+        Direct Flight <br>
+        <small>Duration: 9h 10m</small>
+    </div>
 </div>
 
 <div class="card">
-<div>
-1 Stop Flight<br>
-<small>11h 30m</small>
-</div>
-<div class="price">£180</div>
+    <div class="card-header">
+        <div>
+            <strong>Emirates</strong> - EK 545 <br>
+            <small>04:00 PM MAA → 07:00 AM LHR (+1 day)</small>
+        </div>
+        <div class="price">£180</div>
+    </div>
+    <div class="card-details">
+        1 Stop (DXB)<br>
+        <small>Duration: 11h 30m</small>
+    </div>
 </div>
 
 <button onclick="book()">Book Selected</button>
@@ -204,11 +250,18 @@ Direct Flight<br>
 
 <h3>Boarding Pass</h3>
 
-<p>India → London</p>
+<p>India (MAA) → London (LHR)</p>
 
-<img class="face" src="Haridhra1.jpg">
+<img class="face" src="https://via.placeholder.com/70" alt="Passenger Photo">
 
-<p>Passenger: Haridhra</p>
+<div class="pass-detail"><strong>Passenger:</strong> Haridhra</div>
+<div class="pass-detail"><strong>Flight:</strong> AI 150</div>
+<div class="pass-detail"><strong>Date:</strong> 15 Aug 2024</div>
+<div class="pass-detail"><strong>Seat:</strong> 23A</div>
+<div class="pass-detail"><strong>Gate:</strong> B12</div>
+<div class="pass-detail"><strong>Boarding:</strong> 01:20 PM</div>
+<div class="pass-detail"><strong>Class:</strong> Economy</div>
+
 
 <button onclick="fly()">Check In</button>
 
