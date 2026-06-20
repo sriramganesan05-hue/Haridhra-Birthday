@@ -2,148 +2,114 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Haridhra 🎉💛</title>
+<title>Birthday Balloon Pop Game 🎈</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin:0;
   padding:0;
-  background:#fffbf0;
-  font-family:'Poppins',sans-serif;
   overflow:hidden;
-  text-align:center;
+  background:#fef6e4;
+  font-family:'Poppins',sans-serif;
 }
 
-/* CONFETTI CANVAS */
-#confetti {
+/* BALLOON CANVAS */
+#gameCanvas {
   position:fixed;
   top:0; left:0;
   width:100%; height:100%;
-  pointer-events:none;
-  z-index:5;
+  z-index:1;
 }
 
-/* CENTER BOX */
-#box {
-  position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%);
+/* SCORE */
+#scoreBox {
+  position:fixed;
+  top:20px; left:20px;
   background:white;
-  padding:40px;
-  border-radius:25px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.15);
-  width:85%;
-  max-width:500px;
-  animation:pop 0.7s ease;
+  padding:15px 25px;
+  border-radius:15px;
+  font-size:22px;
+  font-weight:700;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+  z-index:3;
 }
 
-@keyframes pop {
-  0% { transform:translate(-50%,-50%) scale(0); }
-  70% { transform:translate(-50%,-50%) scale(1.15); }
-  100% { transform:translate(-50%,-50%) scale(1); }
-}
-
-/* BOUNCE EMOJIS */
-.bounce {
-  display:inline-block;
-  animation:bounce 1s infinite;
-}
-
-@keyframes bounce {
-  0%,100% { transform:translateY(0); }
-  50% { transform:translateY(-12px); }
-}
-
-/* BUTTON */
-button {
-  margin-top:20px;
-  padding:15px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:12px;
-  background:#ffcc00;
-  color:#000;
-  cursor:pointer;
-  font-weight:600;
-  transition:0.3s;
-}
-button:hover {
-  transform:scale(1.1) rotate(2deg);
-}
-
-/* HIDDEN SURPRISE */
-#surprise {
-  position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%);
-  width:85%;
-  max-width:550px;
-  background:white;
-  padding:40px;
-  border-radius:25px;
-  box-shadow:0 10px 40px rgba(0,0,0,0.2);
+/* FINAL SCREEN */
+#finalScreen {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.85);
+  color:white;
   display:none;
-  animation:pop 0.7s ease;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:5;
+  text-align:center;
 }
 
-#surprise img {
-  width:200px;
-  height:200px;
+#finalScreen img {
+  width:220px;
+  height:220px;
   border-radius:50%;
   object-fit:cover;
   margin-bottom:20px;
-  box-shadow:0 0 20px rgba(255,204,0,0.7);
+  box-shadow:0 0 25px gold;
 }
 
-#surprise h2 {
-  font-size:28px;
+#finalScreen h1 {
+  font-size:40px;
   margin-bottom:10px;
 }
 
-#surprise p {
-  font-size:18px;
+#finalScreen p {
+  font-size:20px;
+  width:80%;
+  max-width:500px;
   line-height:1.6;
+}
+
+/* POP TEXT */
+.popText {
+  position:absolute;
+  font-size:28px;
+  font-weight:700;
+  color:#ff3b3b;
+  pointer-events:none;
+  animation:popFade 1s ease forwards;
+}
+
+@keyframes popFade {
+  0% { opacity:1; transform:translateY(0); }
+  100% { opacity:0; transform:translateY(-40px); }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="confetti"></canvas>
+<canvas id="gameCanvas"></canvas>
 
-<div id="box">
-  <h1>
-    <span class="bounce">🎉</span>
-    Happy Birthday Haridhra
-    <span class="bounce">🎉</span>
-  </h1>
+<div id="scoreBox">Balloons popped: <span id="score">0</span>/15</div>
 
-  <p style="font-size:20px;">
-    Ready for your chaotic surprise?
-  </p>
-
-  <button onclick="showSurprise()">YES, SHOW ME 😆</button>
-</div>
-
-<div id="surprise">
+<div id="finalScreen">
   <img src="Haridhra1.jpg">
-  <h2>🎂 You amazing human 🎂</h2>
+  <h1>🎉 YOU DID IT! 🎉</h1>
   <p>
-    You are cute.  
-    You are chaotic.  
-    You are sunshine in human form.  
-    And today is YOUR day 💛  
+    Happy Birthday Haridhra!  
+    You popped every balloon like an absolute legend.  
+    You’re fun, chaotic, adorable, and today is YOUR day 💛  
   </p>
-
-  <p style="font-weight:bold; margin-top:10px;">
+  <p style="margin-top:20px; font-weight:bold;">
     — From your favourite chaos machine, Sriram 😎
   </p>
 </div>
 
 <script>
-/* CONFETTI */
-const canvas = document.getElementById("confetti");
+/* CANVAS SETUP */
+const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 function resize(){
@@ -153,40 +119,92 @@ function resize(){
 resize();
 window.onresize = resize;
 
-let confetti = [];
+/* BALLOON OBJECTS */
+let balloons = [];
+let score = 0;
+const target = 15;
 
-function createConfetti(){
-  for(let i=0;i<10;i++){
-    confetti.push({
-      x:Math.random()*canvas.width,
-      y:-10,
-      size:Math.random()*8+4,
-      speed:Math.random()*3+2,
-      color:`hsl(${Math.random()*360},100%,60%)`,
-      angle:Math.random()*2*Math.PI
-    });
-  }
-}
+/* RANDOM HELPERS */
+function rand(min,max){ return Math.random()*(max-min)+min; }
 
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  confetti.forEach((p,i)=>{
-    p.y+=p.speed;
-    p.x+=Math.sin(p.angle)*1.5;
-    ctx.fillStyle=p.color;
-    ctx.fillRect(p.x,p.y,p.size,p.size);
-    if(p.y>canvas.height) confetti.splice(i,1);
+/* CREATE BALLOONS */
+function spawnBalloon(){
+  balloons.push({
+    x: rand(50, canvas.width-50),
+    y: canvas.height + 50,
+    size: rand(40,70),
+    speed: rand(1.2,2.5),
+    color: `hsl(${rand(0,360)},100%,60%)`
   });
-  requestAnimationFrame(animate);
 }
 
-setInterval(createConfetti,200);
-animate();
+setInterval(spawnBalloon, 700);
 
-/* SURPRISE POP-IN */
-function showSurprise(){
-  document.getElementById("box").style.display="none";
-  document.getElementById("surprise").style.display="block";
+/* DRAW LOOP */
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  balloons.forEach((b,i)=>{
+    b.y -= b.speed;
+
+    ctx.beginPath();
+    ctx.fillStyle = b.color;
+    ctx.ellipse(b.x, b.y, b.size*0.7, b.size, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(b.x, b.y + b.size);
+    ctx.lineTo(b.x, b.y + b.size + 40);
+    ctx.strokeStyle = "#555";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    if(b.y < -100){
+      balloons.splice(i,1);
+    }
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* POP BALLOONS */
+canvas.addEventListener("click", function(e){
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  balloons.forEach((b,i)=>{
+    const dx = mx - b.x;
+    const dy = my - b.y;
+    if(Math.sqrt(dx*dx + dy*dy) < b.size){
+      balloons.splice(i,1);
+      score++;
+      document.getElementById("score").innerText = score;
+
+      showPopText(mx,my);
+
+      if(score >= target){
+        setTimeout(showFinal, 500);
+      }
+    }
+  });
+});
+
+/* POP TEXT */
+function showPopText(x,y){
+  const t = document.createElement("div");
+  t.className = "popText";
+  t.style.left = x + "px";
+  t.style.top = y + "px";
+  t.innerText = "POP!";
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),1000);
+}
+
+/* FINAL SCREEN */
+function showFinal(){
+  document.getElementById("finalScreen").style.display = "flex";
 }
 </script>
 
