@@ -965,16 +965,43 @@ button.btn-primary:disabled {
   letter-spacing: 1px;
 }
 
-/* CAKE SCREEN */
+/* CAKE SCREEN INTEGRATION WITH PIC */
 .cake-box {
   width: 220px;
-  height: 220px;
-  margin: 20px auto;
+  height: 260px;
+  margin: 10px auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   position: relative;
+}
+
+.cake-passenger-photo-container {
+  position: absolute;
+  top: 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.4);
+  z-index: 1;
+}
+
+.cake-passenger-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cake-passenger-photo-container .birthday-hat {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-10deg);
+  font-size: 1.8rem;
+  animation: floatCrown 2s ease-in-out infinite alternate;
 }
 
 .cake {
@@ -984,6 +1011,7 @@ button.btn-primary:disabled {
   border-radius: 12px 12px 4px 4px;
   position: relative;
   box-shadow: 0 4px 25px rgba(236, 72, 153, 0.4);
+  z-index: 3;
 }
 
 .cake-layer {
@@ -1008,7 +1036,8 @@ button.btn-primary:disabled {
   justify-content: space-around;
   width: 120px;
   position: absolute;
-  top: -24px;
+  bottom: 90px;
+  z-index: 4;
 }
 
 .candle {
@@ -1076,6 +1105,7 @@ button.btn-primary:disabled {
   background: #1e293b;
   border-radius: 50%;
   box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+  z-index: 2;
 }
 
 /* SPARK EXPLOSION EFFECT */
@@ -1092,61 +1122,65 @@ button.btn-primary:disabled {
   transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
 }
 
-/* SLIDESHOW SCREEN */
+/* POLAROID BIRTHDAY SLIDESHOW */
 .slideshow-container {
   position: relative;
   width: 100%;
-  height: 310px;
+  height: 350px;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.2);
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.25);
+  background: #0f172a;
 }
 
 .slide {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
+  top: 16px;
+  left: 16px;
   opacity: 0;
   transition: opacity 1s ease-in-out, transform 4s linear;
   transform: scale(1.0);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  background: white;
+  border-radius: 8px;
+  padding: 10px 10px 32px 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  box-sizing: border-box;
 }
 
 .slide img {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 32px);
   object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .slide.active {
   opacity: 1;
-  transform: scale(1.08); /* Ken burns zoom */
+  transform: scale(1.02);
   z-index: 2;
 }
 
 .slide-caption {
-  position: relative;
-  z-index: 3;
-  background: linear-gradient(to top, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0));
-  padding: 24px 16px 14px;
-  color: white;
+  color: #1e293b;
+  font-family: 'Georgia', serif;
+  font-style: italic;
   font-weight: 700;
-  font-size: 0.95rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  font-size: 0.85rem;
   text-align: center;
+  margin-top: 10px;
+  text-shadow: none;
 }
 
 .slide-dots {
   position: absolute;
-  bottom: 12px;
+  bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -1167,7 +1201,7 @@ button.btn-primary:disabled {
   box-shadow: 0 0 6px var(--portal-color);
 }
 
-/* FINAL SCREEN */
+/* FINAL SCREEN & COLLAGE GRID */
 .birthday-card {
   text-align: center;
 }
@@ -1219,15 +1253,50 @@ button.btn-primary:disabled {
 }
 
 .card-message {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.5;
   color: var(--text);
   background: var(--card-bg);
-  padding: 20px;
+  padding: 16px;
   border-radius: 18px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.04);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.album-collage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.album-item {
+  background: #1e293b;
+  padding: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.album-item:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+.album-item img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.album-item span {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--text-light);
+  margin-top: 4px;
+  font-weight: 600;
 }
 
 /* CONFETTI CANVAS */
@@ -1675,7 +1744,14 @@ button.btn-primary:disabled {
         <p class="subtitle" style="margin-top: 4px;">Tap the birthday candles to make a wish and blow them out!</p>
       </div>
 
+      <!-- Integrated Birthday Photo with Cake Box -->
       <div class="cake-box" id="cakeBox">
+        <div class="cake-passenger-photo-container">
+          <!-- Passport Photo: Haridra 3.jpg -->
+          <img class="cake-passenger-photo" src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra Portrait">
+          <div class="birthday-hat">👑</div>
+        </div>
+
         <div class="candles-container">
           <!-- IMPROVED CANDLES WITH WICKS -->
           <div class="candle" onclick="blowCandle(this, event)">
@@ -1751,6 +1827,22 @@ button.btn-primary:disabled {
           <p id="finalCardMsg">
             Your special journey from Chennai to High Wycombe is complete! May this birthday be filled with endless smiles, warmth, and wonderful achievements in the United Kingdom.
           </p>
+        </div>
+
+        <!-- Custom Birthday Collage Show -->
+        <div class="album-collage">
+          <div class="album-item">
+            <img src="Haridra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra MAA Departure">
+            <span>MAA Departure 🛫</span>
+          </div>
+          <div class="album-item">
+            <img src="Haridra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra UK Transit">
+            <span>UK Transit 🗺️</span>
+          </div>
+          <div class="album-item">
+            <img src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra Arrival">
+            <span>High Wycombe 🏡</span>
+          </div>
         </div>
 
         <button class="btn-primary" onclick="restartJourney()">Plan Another Trip</button>
