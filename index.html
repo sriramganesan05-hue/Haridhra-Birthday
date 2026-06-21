@@ -1122,7 +1122,7 @@ button.btn-primary:disabled {
   transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-out;
 }
 
-/* INTERACTIVE POLAROID BIRTHDAY SLIDESHOW */
+/* POLAROID BIRTHDAY SLIDESHOW */
 .slideshow-container {
   position: relative;
   width: 100%;
@@ -1137,110 +1137,53 @@ button.btn-primary:disabled {
 
 .slide {
   position: absolute;
-  width: calc(100% - 50px);
-  height: calc(100% - 50px);
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
   top: 16px;
-  left: 25px;
+  left: 16px;
   opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: scale(0.9) rotate(-3deg);
+  transition: opacity 1s ease-in-out, transform 4s linear;
+  transform: scale(1.0);
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 12px 12px 36px 12px;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+  background: white;
+  border-radius: 8px;
+  padding: 10px 10px 32px 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
   box-sizing: border-box;
-  pointer-events: none;
 }
 
 .slide img {
   width: 100%;
-  height: 78%;
+  height: calc(100% - 32px);
   object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .slide.active {
   opacity: 1;
-  transform: scale(1.0) rotate(0deg);
-  z-index: 10;
-  pointer-events: auto;
-}
-
-/* Pile deck aesthetics for visual realism */
-.slide:nth-child(even) {
-  transform: scale(0.9) rotate(3deg);
-}
-
-.slide:nth-child(even).active {
-  transform: scale(1.0) rotate(1deg);
+  transform: scale(1.02);
+  z-index: 2;
 }
 
 .slide-caption {
   color: #1e293b;
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Georgia', serif;
   font-style: italic;
   font-weight: 700;
   font-size: 0.85rem;
   text-align: center;
-  margin-top: 12px;
+  margin-top: 10px;
   text-shadow: none;
-}
-
-/* SLIDESHOW NAVIGATION BUTTONS */
-.slide-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: white;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  transition: all 0.2s;
-}
-
-.slide-nav:hover {
-  background: var(--portal-color);
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-}
-
-.slide-nav.prev { left: 8px; }
-.slide-nav.next { right: 8px; }
-
-/* DYNAMIC SLIDESHOW PROGRESS BAR */
-.slide-progress-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 15;
-}
-
-.slide-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(to right, var(--primary), var(--portal-color));
-  transition: width 4s linear;
 }
 
 .slide-dots {
   position: absolute;
-  bottom: 12px;
+  bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20;
+  z-index: 10;
   display: flex;
   gap: 6px;
 }
@@ -1249,9 +1192,8 @@ button.btn-primary:disabled {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.4);
   transition: background 0.3s;
-  cursor: pointer;
 }
 
 .dot.active {
@@ -1522,7 +1464,7 @@ button.btn-primary:disabled {
       <div class="boarding-pass-ticket">
         <div class="ticket-header">
           <span style="font-weight: 700; letter-spacing: 0.5px;" id="ticketAirline">SKY AIRWAYS</span>
-          <!-- Passport Photo: Haridra 1.jpg -->
+          <!-- Passenger Photo 1 -->
           <img class="passenger-avatar" src="Haridra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra Passport">
         </div>
 
@@ -1761,7 +1703,7 @@ button.btn-primary:disabled {
         </div>
       </div>
 
-      <!-- Displays Haridra 2.jpg during the overland quest -->
+      <!-- Displays Passenger Photo 2 during the overland quest -->
       <div class="scenic-image-container">
         <img class="scenic-photo" src="Haridra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra travelling">
         <div style="flex:1">
@@ -1784,7 +1726,7 @@ button.btn-primary:disabled {
             <div class="door-knob"></div>
           </div>
           <div class="door-interior">
-            <!-- Reveals Haridra 3.jpg standing at the doorway -->
+            <!-- Reveals Passenger Photo 3 standing at the doorway -->
             <img src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=300'" alt="Welcome Haridra">
           </div>
         </div>
@@ -1802,16 +1744,16 @@ button.btn-primary:disabled {
         <p class="subtitle" style="margin-top: 4px;">Tap the birthday candles to make a wish and blow them out!</p>
       </div>
 
-      <!-- Integrated Birthday Photo with Cake Box -->
+      <!-- Integrated Birthday Photo 3 with Cake Box -->
       <div class="cake-box" id="cakeBox">
         <div class="cake-passenger-photo-container">
-          <!-- Passport Photo: Haridra 3.jpg -->
+          <!-- Passenger Photo 3 -->
           <img class="cake-passenger-photo" src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra Portrait">
           <div class="birthday-hat">👑</div>
         </div>
 
         <div class="candles-container">
-          <!-- IMPROVED CANDLES WITH WICKS -->
+          <!-- UPGRADED CANDLES -->
           <div class="candle" onclick="blowCandle(this, event)">
             <div class="candle-wick"></div>
             <div class="candle-flame"></div>
@@ -1852,28 +1794,18 @@ button.btn-primary:disabled {
         <!-- Slide 2 -->
         <div class="slide" id="slide_1">
           <img src="Haridra 2.jpg" onerror="this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 2">
-          <div class="slide-caption">Exploring beautiful landscapes & horizons... 🗺️</div>
+          <div class="slide-caption">Exploring beautiful landscapes & city horizons... 🗺️</div>
         </div>
         <!-- Slide 3 -->
         <div class="slide" id="slide_2">
           <img src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400&h=400'" alt="Haridra 3">
-          <div class="slide-caption">Arrived at the destination in High Wycombe! 🏡</div>
+          <div class="slide-caption">Arrived at the cozy destination in High Wycombe! 🏡</div>
         </div>
 
-        <!-- Manual Navigation Controls -->
-        <button class="slide-nav prev" onclick="changeSlide(-1, event)" aria-label="Previous Slide">‹</button>
-        <button class="slide-nav next" onclick="changeSlide(1, event)" aria-label="Next Slide">›</button>
-
-        <!-- Progress bar filling visual -->
-        <div class="slide-progress-bar">
-          <div class="slide-progress-fill" id="slideProgress"></div>
-        </div>
-
-        <!-- Bottom dots navigation list -->
         <div class="slide-dots">
-          <span class="dot" id="dot_0" onclick="jumpToSlide(0, event)"></span>
-          <span class="dot" id="dot_1" onclick="jumpToSlide(1, event)"></span>
-          <span class="dot" id="dot_2" onclick="jumpToSlide(2, event)"></span>
+          <span class="dot" id="dot_0"></span>
+          <span class="dot" id="dot_1"></span>
+          <span class="dot" id="dot_2"></span>
         </div>
       </div>
 
@@ -1885,7 +1817,7 @@ button.btn-primary:disabled {
       <div class="birthday-card">
         <div class="avatar-large-container">
           <span class="crown">👑</span>
-          <!-- Celebratory Photo: Haridra 3.jpg -->
+          <!-- Celebratory Photo 3 -->
           <img class="avatar-large" src="Haridra 3.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=240&h=240'" alt="Haridra Celebration">
         </div>
 
@@ -1897,7 +1829,7 @@ button.btn-primary:disabled {
           </p>
         </div>
 
-        <!-- Custom Birthday Collage Show -->
+        <!-- Custom Birthday Collage Show using all three images -->
         <div class="album-collage">
           <div class="album-item">
             <img src="Haridra 1.jpg" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'" alt="Haridra MAA Departure">
@@ -2555,7 +2487,7 @@ function blowCandle(candleEl, event) {
   if (blownOutCandles >= 3) {
     setTimeout(() => {
       startSlideshow();
-    }, 1800); // Wait a moment for smoke to drift nicely
+    }, 1800); // Wait a moment for smoke to drift
   }
 }
 
@@ -2612,66 +2544,32 @@ function createSparks(x, y) {
   }
 }
 
-// Slideshow sequencer & UI handlers
+// Slideshow sequencer
 let slideshowInterval = null;
 let currentSlide = 0;
-
-function updateSlideshowView() {
-  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-  
-  const slideEl = document.getElementById(`slide_${currentSlide}`);
-  const dotEl = document.getElementById(`dot_${currentSlide}`);
-  if (slideEl) slideEl.classList.add('active');
-  if (dotEl) dotEl.classList.add('active');
-
-  // Reset progress bar CSS transition
-  const prog = document.getElementById('slideProgress');
-  if (prog) {
-    prog.style.transition = 'none';
-    prog.style.width = '0%';
-    // Force DOM reflow to allow transition to register properly
-    void prog.offsetWidth;
-    prog.style.transition = 'width 4s linear';
-    prog.style.width = '100%';
-  }
-}
-
-function changeSlide(direction, event) {
-  if (event) event.stopPropagation();
-  resetSlideshowTimer();
-  currentSlide = (currentSlide + direction + 3) % 3;
-  updateSlideshowView();
-  playBeep();
-}
-
-function jumpToSlide(index, event) {
-  if (event) event.stopPropagation();
-  resetSlideshowTimer();
-  currentSlide = index;
-  updateSlideshowView();
-  playBeep();
-}
-
-function resetSlideshowTimer() {
-  if (slideshowInterval) {
-    clearInterval(slideshowInterval);
-  }
-  slideshowInterval = setInterval(() => {
-    currentSlide = (currentSlide + 1) % 3;
-    updateSlideshowView();
-  }, 4000);
-}
-
 function startSlideshow() {
   updateQuestBar("Story Slideshow", "Reliving the journey...");
   stopConfetti();
   
   currentSlide = 0;
-  updateSlideshowView();
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  
+  document.getElementById(`slide_${currentSlide}`).classList.add('active');
+  document.getElementById(`dot_${currentSlide}`).classList.add('active');
+  
   showScreen("s5_slideshow");
   playSlideshowMusic();
-  resetSlideshowTimer();
+  
+  slideshowInterval = setInterval(() => {
+    document.getElementById(`slide_${currentSlide}`).classList.remove('active');
+    document.getElementById(`dot_${currentSlide}`).classList.remove('active');
+    
+    currentSlide = (currentSlide + 1) % 3;
+    
+    document.getElementById(`slide_${currentSlide}`).classList.add('active');
+    document.getElementById(`dot_${currentSlide}`).classList.add('active');
+  }, 4000);
 }
 
 function stopSlideshow() {
